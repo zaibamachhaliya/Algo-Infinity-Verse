@@ -16,7 +16,7 @@
     />
   </head>
   <body>
-<!-- Loading Screen -->
+    <!-- Loading Screen -->
     <div id="loading-screen">
       <div class="loader">
         <div class="infinity-loader">∞</div>
@@ -26,6 +26,10 @@
         </div>
       </div>
     </div>
+
+    <!-- Background Animations -->
+    <div class="space-background"></div>
+    <div id="particles-js"></div>
 
     <!-- Scroll to Top Button -->
     <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Scroll to top">
@@ -58,10 +62,9 @@
             <a href="cplusplus-learning.html" class="dropdown-item" role="menuitem">Learn C++</a>
             <a href="c-learning.html" class="dropdown-item" role="menuitem">Learn C</a>
             <a href="dbms-learning.html" class="dropdown-item" role="menuitem">Learn DBMS</a>
-            <a href="sliding-window-learning.html" class="dropdown-item active" role="menuitem">Learn Sliding Window</a>
-            <a href="bit-manipulation-learning.html" class="dropdown-item active" role="menuitem">Learn Bit Manipulation</a>
             <a href="powerbi-learning.html" class="dropdown-item" role="menuitem">Learn Power BI</a>
             <a href="sorting-visualizer.html" class="dropdown-item" role="menuitem">Sorting Visualizer</a>
+            <a href="prefix-sum-learning.html" class="dropdown-item" role="menuitem">Learn Prefix Sum</a>
           </div>
         </li>
         <li class="nav-item has-dropdown">
@@ -144,11 +147,11 @@
       <div class="hero-content">
         <h1 class="hero-title">
           <span class="title-line">Master the</span>
-          <span class="main-title gradient-text">Bit Manipulation</span>
-          <span class="subtitle">Binary Operations & Optimization Techniques</span>
+          <span class="main-title gradient-text">Bit Manipulation Pattern</span>
+          <span class="subtitle">Optimize performance with binary operations</span>
         </h1>
         <div class="typing-container">
-          <span class="typing-text_bit_manipulation" id="typingTextBitManipulation"></span>
+          <span class="typing-text_bit" id="typingTextBit"></span>
           <span class="typing-cursor">|</span>
         </div>
         <div class="hero-buttons">
@@ -156,20 +159,20 @@
             <i class="fas fa-play"></i> Start Learning
           </a>
           <a href="#practice-exercises" class="btn btn-secondary">
-            <i class="fas fa-pen"></i> Practice Problems
+            <i class="fas fa-pen"></i> Practice Exercises
           </a>
         </div>
         <div class="hero-stats">
           <div class="stat-box">
-            <span class="stat-number" data-target="5">0</span>
+            <span class="stat-number" data-target="4">0</span>
             <span class="stat-label">Topics</span>
           </div>
           <div class="stat-box">
-            <span class="stat-number" data-target="10">0</span>
+            <span class="stat-number" data-target="15">0</span>
             <span class="stat-label">Examples</span>
           </div>
           <div class="stat-box">
-            <span class="stat-number" data-target="2">0</span>
+            <span class="stat-number" data-target="6">0</span>
             <span class="stat-label">Exercises</span>
           </div>
         </div>
@@ -180,14 +183,28 @@
     </section>
 
     <!-- Bit Manipulation Learning Section -->
-    <section id="bit-manipulation-learning" class="section">
+    <section id="bit-learning" class="section">
       <div class="container">
-        <div class="bit-manipulation-layout">
+        <h2 class="section-title">
+          <span class="title-icon">⚡</span>
+          Learn Bit Manipulation
+        </h2>
+        <p class="section-subtitle">
+          Optimize performance with binary operations
+        </p>
+        
+        <div class="bit-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Learning progress">
+          <span class="bit-progress-text"><span id="progressCount">0</span> / 5 topics completed</span>
+          <div class="bit-progress-track">
+            <div class="bit-progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+      <div class="bit-layout">
         
         <!-- Sidebar Navigation -->
-        <aside class="bit-manipulation-sidebar">
-          <div class="bit-manipulation-sidebar-title">Lesson Modules</div>
-          <ul class="bit-manipulation-sidebar-nav">
+        <aside class="bit-sidebar">
+          <div class="bit-sidebar-title">Lesson Modules</div>
+          <ul class="bit-sidebar-nav">
             <li>
               <a href="#intro" class="active">
                 <div class="nav-icon"><i class="fa-solid fa-microchip"></i></div>
@@ -222,65 +239,65 @@
         </aside>
 
         <!-- Main Content Area -->
-        <div class="bit-manipulation-main-content">
+        <div class="bit-main-content">
           
           <!-- Lesson 1: Intro -->
-          <section id="intro" class="bit-manipulation-lesson">
-            <div class="bit-manipulation-lesson-header">
-              <div class="bit-manipulation-lesson-number">01</div>
+          <section id="intro" class="bit-lesson">
+            <div class="bit-lesson-header">
+              <div class="bit-lesson-number">01</div>
               <h3>Binary Basics</h3>
             </div>
             <p>At the lowest level, all data in a computer is represented as sequences of 0s and 1s, called <strong>bits</strong>. Bit manipulation is the act of algorithmically manipulating bits or other pieces of data shorter than a word.</p>
             
-            <div class="bit-manipulation-concept-card">
+            <div class="bit-concept-card">
               <h4>Binary Representation</h4>
               <p>A decimal number is converted to binary by dividing it by 2 repeatedly and taking the remainders. For example, the decimal number <code>5</code> is <code>101</code> in binary.</p>
             </div>
             
             <p>Bit manipulation can be extremely fast because it is directly supported by the processor. It is often used in low-level systems programming, cryptography, and competitive programming to optimize code execution speed and reduce memory consumption.</p>
 
-            <div class="bit-manipulation-svg-container">
-              <svg class="bit-manipulation-svg-diagram" width="300" height="120" viewBox="0 0 300 120">
+            <div class="bit-svg-container">
+              <svg class="bit-svg-diagram" width="300" height="120" viewBox="0 0 300 120">
                 <!-- Example of 8-bit binary representation -->
-                <rect x="20" y="40" width="30" height="40" class="bit-manipulation-svg-node" />
-                <rect x="52" y="40" width="30" height="40" class="bit-manipulation-svg-node" />
-                <rect x="84" y="40" width="30" height="40" class="bit-manipulation-svg-node" />
-                <rect x="116" y="40" width="30" height="40" class="bit-manipulation-svg-node" />
-                <rect x="148" y="40" width="30" height="40" class="bit-manipulation-svg-node" />
-                <rect x="180" y="40" width="30" height="40" class="bit-manipulation-svg-node-alt" />
-                <rect x="212" y="40" width="30" height="40" class="bit-manipulation-svg-node" />
-                <rect x="244" y="40" width="30" height="40" class="bit-manipulation-svg-node-alt" />
+                <rect x="20" y="40" width="30" height="40" class="bit-svg-node" />
+                <rect x="52" y="40" width="30" height="40" class="bit-svg-node" />
+                <rect x="84" y="40" width="30" height="40" class="bit-svg-node" />
+                <rect x="116" y="40" width="30" height="40" class="bit-svg-node" />
+                <rect x="148" y="40" width="30" height="40" class="bit-svg-node" />
+                <rect x="180" y="40" width="30" height="40" class="bit-svg-node-alt" />
+                <rect x="212" y="40" width="30" height="40" class="bit-svg-node" />
+                <rect x="244" y="40" width="30" height="40" class="bit-svg-node-alt" />
                 
-                <text x="35" y="65" class="bit-manipulation-svg-text">0</text>
-                <text x="67" y="65" class="bit-manipulation-svg-text">0</text>
-                <text x="99" y="65" class="bit-manipulation-svg-text">0</text>
-                <text x="131" y="65" class="bit-manipulation-svg-text">0</text>
-                <text x="163" y="65" class="bit-manipulation-svg-text">0</text>
-                <text x="195" y="65" class="bit-manipulation-svg-text">1</text>
-                <text x="227" y="65" class="bit-manipulation-svg-text">0</text>
-                <text x="259" y="65" class="bit-manipulation-svg-text">1</text>
+                <text x="35" y="65" class="bit-svg-text">0</text>
+                <text x="67" y="65" class="bit-svg-text">0</text>
+                <text x="99" y="65" class="bit-svg-text">0</text>
+                <text x="131" y="65" class="bit-svg-text">0</text>
+                <text x="163" y="65" class="bit-svg-text">0</text>
+                <text x="195" y="65" class="bit-svg-text">1</text>
+                <text x="227" y="65" class="bit-svg-text">0</text>
+                <text x="259" y="65" class="bit-svg-text">1</text>
                 
-                <text x="150" y="25" class="bit-manipulation-svg-text-title">Decimal 5 in 8-bit Binary</text>
+                <text x="150" y="25" class="bit-svg-text-title">Decimal 5 in 8-bit Binary</text>
                 
-                <text x="35" y="100" class="bit-manipulation-svg-text" style="font-size: 10px; fill: #aaa">2^7</text>
-                <text x="67" y="100" class="bit-manipulation-svg-text" style="font-size: 10px; fill: #aaa">2^6</text>
-                <text x="195" y="100" class="bit-manipulation-svg-text" style="font-size: 10px; fill: #aaa">2^2</text>
-                <text x="259" y="100" class="bit-manipulation-svg-text" style="font-size: 10px; fill: #aaa">2^0</text>
+                <text x="35" y="100" class="bit-svg-text" style="font-size: 10px; fill: #aaa">2^7</text>
+                <text x="67" y="100" class="bit-svg-text" style="font-size: 10px; fill: #aaa">2^6</text>
+                <text x="195" y="100" class="bit-svg-text" style="font-size: 10px; fill: #aaa">2^2</text>
+                <text x="259" y="100" class="bit-svg-text" style="font-size: 10px; fill: #aaa">2^0</text>
               </svg>
             </div>
             
-          </section>
+          </article>
 
           <!-- Lesson 2: Operators -->
-          <section id="operators" class="bit-manipulation-lesson">
-            <div class="bit-manipulation-lesson-header">
-              <div class="bit-manipulation-lesson-number">02</div>
+          <section id="operators" class="bit-lesson">
+            <div class="bit-lesson-header">
+              <div class="bit-lesson-number">02</div>
               <h3>Bitwise Operators</h3>
             </div>
             <p>Programming languages provide bitwise operators to interact with binary representations directly. Here are the core operators in C++/Java/Python:</p>
             
-            <div class="bit-manipulation-table-wrap">
-              <table class="bit-manipulation-table">
+            <div class="bit-table-wrap">
+              <table class="bit-table">
                 <thead>
                   <tr>
                     <th>Operator</th>
@@ -330,26 +347,26 @@
               </table>
             </div>
 
-            <div class="bit-manipulation-callout">
-              <div class="bit-manipulation-callout-icon">💡</div>
+            <div class="bit-callout">
+              <div class="bit-callout-icon">💡</div>
               <p><strong>XOR Property:</strong> The XOR operator has a very special property: <code>A ^ A = 0</code> and <code>A ^ 0 = A</code>. This is widely used in finding missing or unique elements in an array!</p>
             </div>
-          </section>
+          </article>
 
           <!-- Lesson 3: Common Tricks -->
-          <section id="common-tricks" class="bit-manipulation-lesson">
-            <div class="bit-manipulation-lesson-header">
-              <div class="bit-manipulation-lesson-number">03</div>
+          <section id="common-tricks" class="bit-lesson">
+            <div class="bit-lesson-header">
+              <div class="bit-lesson-number">03</div>
               <h3>Common Tricks</h3>
             </div>
             <p>Bitwise operators allow for elegant and fast solutions to common problems.</p>
             
             <h4>1. Check if a number is even or odd</h4>
             <p>Instead of using modulo (<code>n % 2 == 0</code>), we can check the least significant bit. If it's 1, the number is odd. If it's 0, it's even.</p>
-            <div class="bit-manipulation-code-block">
-              <div class="bit-manipulation-code-header">
-                <span class="bit-manipulation-code-lang">cpp</span>
-                <button class="bit-manipulation-code-copy" data-target="code-trick-1">
+            <div class="bit-code-block">
+              <div class="bit-code-header">
+                <span class="bit-code-lang">cpp</span>
+                <button class="bit-code-copy" data-target="code-trick-1">
                   <i class="fa-regular fa-copy"></i> Copy
                 </button>
               </div>
@@ -360,10 +377,10 @@
 
             <h4>2. Check if a number is a power of 2</h4>
             <p>Powers of 2 have exactly one bit set to <code>1</code> in their binary representation. If we subtract 1 from a power of 2, all bits after the set bit become 1, and the set bit becomes 0. Doing an AND operation between <code>n</code> and <code>n - 1</code> will result in 0.</p>
-            <div class="bit-manipulation-code-block">
-              <div class="bit-manipulation-code-header">
-                <span class="bit-manipulation-code-lang">python</span>
-                <button class="bit-manipulation-code-copy" data-target="code-trick-2">
+            <div class="bit-code-block">
+              <div class="bit-code-header">
+                <span class="bit-code-lang">python</span>
+                <button class="bit-code-copy" data-target="code-trick-2">
                   <i class="fa-regular fa-copy"></i> Copy
                 </button>
               </div>
@@ -374,10 +391,10 @@
 
             <h4>3. Counting set bits (Brian Kernighan's Algorithm)</h4>
             <p>To count how many <code>1</code>s are in a binary representation, we can repeatedly clear the lowest set bit using <code>n &amp; (n - 1)</code> until the number becomes 0.</p>
-            <div class="bit-manipulation-code-block">
-              <div class="bit-manipulation-code-header">
-                <span class="bit-manipulation-code-lang">java</span>
-                <button class="bit-manipulation-code-copy" data-target="code-trick-3">
+            <div class="bit-code-block">
+              <div class="bit-code-header">
+                <span class="bit-code-lang">java</span>
+                <button class="bit-code-copy" data-target="code-trick-3">
                   <i class="fa-regular fa-copy"></i> Copy
                 </button>
               </div>
@@ -391,12 +408,12 @@
 }</code></pre>
             </div>
             
-          </section>
+          </article>
 
           <!-- Lesson 4: Applications -->
-          <section id="applications" class="bit-manipulation-lesson">
-            <div class="bit-manipulation-lesson-header">
-              <div class="bit-manipulation-lesson-number">04</div>
+          <section id="applications" class="bit-lesson">
+            <div class="bit-lesson-header">
+              <div class="bit-lesson-number">04</div>
               <h3>Applications</h3>
             </div>
             <p>Where are bitwise operations used in real-world scenarios?</p>
@@ -406,31 +423,31 @@
               <li><strong>Data Compression:</strong> Packing multiple boolean or small integer values into a single integer.</li>
               <li><strong>Competitive Programming:</strong> Solving subset generation problems using bit sequences from <code>0</code> to <code>2^N - 1</code>.</li>
             </ul>
-          </section>
+          </article>
 
           <!-- Lesson 5: Practice Exercises -->
-          <section id="practice-exercises" class="bit-manipulation-lesson">
-            <div class="bit-manipulation-lesson-header">
-              <div class="bit-manipulation-lesson-number">05</div>
+          <section id="practice-exercises" class="bit-lesson">
+            <div class="bit-lesson-header">
+              <div class="bit-lesson-number">05</div>
               <h3>Practice Exercises</h3>
             </div>
             <p>Test your knowledge with these standard bit manipulation problems!</p>
 
-            <div class="bit-manipulation-exercise">
-              <div class="bit-manipulation-exercise-title">
+            <div class="bit-exercise">
+              <div class="bit-exercise-title">
                 <i class="fa-solid fa-code"></i> Find the Single Number
               </div>
               <p>Given an array of integers where every element appears twice except for one, find that single one. You must implement a solution with a linear runtime complexity and use only constant extra space.</p>
               
-              <button class="bit-manipulation-exercise-toggle" data-target="sol-1">
+              <button class="bit-exercise-toggle" data-target="sol-1">
                 <i class="fa-solid fa-eye"></i> View Solution
               </button>
               
-              <div id="sol-1" class="bit-manipulation-exercise-solution">
+              <div id="sol-1" class="bit-exercise-solution">
                 <p>We can use the XOR property: <code>A ^ A = 0</code>. If we XOR all elements in the array, the duplicates will cancel each other out, leaving only the single number.</p>
-                <div class="bit-manipulation-code-block">
-                  <div class="bit-manipulation-code-header">
-                    <span class="bit-manipulation-code-lang">cpp</span>
+                <div class="bit-code-block">
+                  <div class="bit-code-header">
+                    <span class="bit-code-lang">cpp</span>
                   </div>
                   <pre><code><span class="tok-kw">int</span> <span class="tok-fn">singleNumber</span>(<span class="tok-var">vector</span>&lt;<span class="tok-kw">int</span>&gt;&amp; <span class="tok-var">nums</span>) {
     <span class="tok-kw">int</span> <span class="tok-var">result</span> <span class="tok-op">=</span> <span class="tok-num">0</span>;
@@ -443,167 +460,87 @@
               </div>
             </div>
 
-            <div class="bit-manipulation-exercise">
-              <div class="bit-manipulation-exercise-title">
+            <div class="bit-exercise">
+              <div class="bit-exercise-title">
                 <i class="fa-solid fa-code"></i> Reverse Bits
               </div>
               <p>Reverse the bits of a given 32 bits unsigned integer.</p>
               
-              <button class="bit-manipulation-exercise-toggle" data-target="sol-2">
+              <button class="bit-exercise-toggle" data-target="sol-2">
                 <i class="fa-solid fa-eye"></i> View Solution
               </button>
               
-              <div id="sol-2" class="bit-manipulation-exercise-solution">
+              <div id="sol-2" class="bit-exercise-solution">
                 <p>We can extract the lowest bit of <code>n</code> using <code>n &amp; 1</code>, add it to our <code>result</code> using left shift, then shift <code>n</code> to the right by 1 to get the next bit.</p>
-<div class="bit-manipulation-code-block">
-                   <div class="bit-manipulation-code-header">
-                     <span class="bit-manipulation-code-lang">python</span>
-                   </div>
-                   <pre><code><span class="tok-kw">def</span> <span class="tok-fn">reverseBits</span>(<span class="tok-var">n</span>):
-     <span class="tok-var">res</span> <span class="tok-op">=</span> <span class="tok-num">0</span>
-     <span class="tok-kw">for</span> <span class="tok-var">_</span> <span class="tok-kw">in</span> <span class="tok-bi">range</span>(<span class="tok-num">32</span>):
-         <span class="tok-var">res</span> <span class="tok-op">=</span> (<span class="tok-var">res</span> <span class="tok-op">&lt;&lt;</span> <span class="tok-num">1</span>) <span class="tok-op">|</span> (<span class="tok-var">n</span> <span class="tok-op">&amp;</span> <span class="tok-num">1</span>)
-         <span class="tok-var">n</span> <span class="tok-op">&gt;&gt;=</span> <span class="tok-num">1</span>
-     <span class="tok-kw">return</span> <span class="tok-var">res</span></code></pre>
-                 </div>
-               </div>
-             </div>
-             
-           </section>
-
-          <!-- Overall Progress -->
-          <div class="bit-manipulation-progress-bar">
-            <span class="bit-manipulation-progress-text" id="bit-manipulation-progress-text">0% Completed</span>
-            <div class="bit-manipulation-progress-track">
-              <div class="bit-manipulation-progress-fill" id="bit-manipulation-progress-fill"></div>
+                <div class="bit-code-block">
+                  <div class="bit-code-header">
+                    <span class="bit-code-lang">python</span>
+                  </div>
+                  <pre><code><span class="tok-kw">def</span> <span class="tok-fn">reverseBits</span>(<span class="tok-var">n</span>):
+    <span class="tok-var">res</span> <span class="tok-op">=</span> <span class="tok-num">0</span>
+    <span class="tok-kw">for</span> <span class="tok-var">_</span> <span class="tok-kw">in</span> <span class="tok-bi">range</span>(<span class="tok-num">32</span>):
+        <span class="tok-var">res</span> <span class="tok-op">=</span> (<span class="tok-var">res</span> <span class="tok-op">&lt;&lt;</span> <span class="tok-num">1</span>) <span class="tok-op">|</span> (<span class="tok-var">n</span> <span class="tok-op">&amp;</span> <span class="tok-num">1</span>)
+        <span class="tok-var">n</span> <span class="tok-op">&gt;&gt;=</span> <span class="tok-num">1</span>
+    <span class="tok-kw">return</span> <span class="tok-var">res</span></code></pre>
+                </div>
+              </div>
             </div>
-          </div>
+            
+          </article>
+
+          
           
         </div>
       </div>
+          </div>
     </section>
-
-    <!-- Back To Top Button -->
-    <button id="backToTopBtn" class="back-to-top" aria-label="Back to Top">
-      <i class="fas fa-arrow-up"></i>
-    </button>
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-section">
-            <h3>∞ Algo Infinity Verse</h3>
-            <p>
-              Your ultimate destination for mastering Data Structures &amp;
-              Algorithms and acing technical interviews.
-            </p>
-            <div class="social-links">
-              <a href="#"><i class="fa-brands fa-github"></i></a>
-              <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-              <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-              <a href="#"><i class="fa-brands fa-youtube"></i></a>
-            </div>
-          </div>
-          <div class="footer-section">
-            <h4>Quick Links</h4>
-            <ul>
-              <li><a href="#topics">DSA Topics</a></li>
-              <li><a href="#practice">Practice Problems</a></li>
-              <li><a href="#roadmap">Learning Roadmap</a></li>
-              <li><a href="#interview">Interview Prep</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Resources</h4>
-            <ul>
-              <li><a href="#">Documentation</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="community.html">Community</a></li>
-              <li><a href="cheat-sheets.html">DSA Cheat Sheets</a></li>
-              <li><a href="python-learning.html">Learn Python</a></li>
-              <li><a href="javascript-learning.html">Learn JavaScript</a></li>
-              <li><a href="java-learning.html">Learn Java</a></li>
-              <li><a href="cplusplus-learning.html">Learn C++</a></li>
-              <li><a href="c-learning.html">Learn C</a></li>
-              <li><a href="dbms-learning.html">Learn DBMS</a></li>
-              <li><a href="bit-manipulation-learning.html">Learn Bit Manipulation</a></li>
-              <li><a href="php-learning.html">Learn PHP</a>
-            <a href="oop-learning.html">Learn OOP</a>
-            <a href="computer-architecture.html">Learn Architecture</a>
-            <a href="tree-traversal.html">Tree Traversal</a></li>
-              <li><a href="resume.html">Coding Resume</a></li>
-              <li><a href="support-page/index.html">Support</a></li>
-              <li><a href="feedback.html">Feedback</a></li>
-              <li><a href="about-us.html">About us</a></li>
-              <li><a href="privacy-policy.html">Privacy</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Quick Questions</h4>
-            <div class="footer-questions">
-              <button
-                class="footer-question"
-                data-question="What is the time complexity of this problem?"
-              >
-                Time Complexity
-              </button>
-              <button
-                class="footer-question"
-                data-question="Can you give me a hint for this problem?"
-              >
-                Hint
-              </button>
-              <button
-                class="footer-question"
-                data-question="What approach should I use?"
-              >
-                Approach
-              </button>
-              <button
-                class="footer-question"
-                data-question="Are there any edge cases I should consider?"
-              >
-                Edge Cases
-              </button>
-            </div>
-          </div>
-          <div class="footer-section">
-            <h4>Newsletter</h4>
-            <p>Subscribe to get weekly problem sets and tips</p>
-            <form class="newsletter-form">
-              <label class="sr-only" for="newsletterEmail">Email address</label>
-              <input
-                type="email"
-                id="newsletterEmail"
-                placeholder="Your email"
-                autocomplete="email"
-                aria-describedby="newsletter-error"
-                aria-invalid="false"
-              />
-              <button type="submit"><i class="fas fa-paper-plane"></i></button>
-              <span
-                class="newsletter-error"
-                id="newsletter-error"
-                role="alert"
-                aria-live="polite"
-              ></span>
-            </form>
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h2>Algo Infinity Verse</h2>
+          <p>Your gateway to mastering algorithms and data structures.</p>
+        </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#roadmaps">Roadmaps</a></li>
+            <li><a href="index.html#practice">Practice</a></li>
+            <li><a href="cheat-sheets.html">Cheat Sheets</a></li>
+            <li><a href="community.html">Community</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Learning Tracks</h3>
+          <ul>
+            <li><a href="python-learning.html">Learn Python</a></li>
+            <li><a href="java-learning.html">Learn Java</a></li>
+            <li><a href="cplusplus-learning.html">Learn C++</a></li>
+            <li><a href="prefix-sum-learning.html">Learn Prefix Sum</a></li>
+            <li><a href="sliding-window-learning.html">Learn Sliding Window</a></li>
+            <li><a href="bit-manipulation-learning.html">Learn Bit Manipulation</a></li>
+            <li><a href="graph-visualizer.html">Graph Visualizer</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h3>Connect</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-github"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-discord"></i></a>
           </div>
         </div>
-        <div class="footer-bottom">
-            <p>
-              <span>&copy; <span id="footer-current-year"></span> Algo Infinity Verse. Crafted with 💜 for learners worldwide.</span>
-              <br />
-              <span class="footer-current-date" id="footer-current-date"></span>
-            </p>
-        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Algo Infinity Verse. All rights reserved.</p>
       </div>
     </footer>
 
-    <!-- Scripts -->
+    <script src="particles.js"></script>
     <script src="script.js"></script>
-    <script src="auth.js"></script>
     <script src="bit-manipulation-learning.js"></script>
-   </body>
-  </html>
+  </body>
+</html>

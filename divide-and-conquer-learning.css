@@ -1,21 +1,21 @@
 /* ─────────────────────────────────────────────
-   Bit Manipulation Learning Page – Reusable Component Styles
+   Divide and Conquer Learning Page – Reusable Component Styles
    ───────────────────────────────────────────── */
 
 /* Hero typing text */
-.typing-text_bit_manipulation {
+.typing-text_dc {
   color: var(--primary-light);
   font-weight: 600;
 }
 
 /* ── Topic Navigation Sidebar ── */
-.bit-layout {
+.dc-layout {
   display: flex;
   gap: 2rem;
   align-items: flex-start;
 }
 
-.bit-sidebar {
+.dc-sidebar {
   position: sticky;
   top: 100px;
   width: 240px;
@@ -27,7 +27,7 @@
   backdrop-filter: blur(10px);
 }
 
-.bit-sidebar-title {
+.dc-sidebar-title {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -38,13 +38,13 @@
   margin-bottom: 0.5rem;
 }
 
-.bit-sidebar-nav {
+.dc-sidebar-nav {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.bit-sidebar-nav li a {
+.dc-sidebar-nav li a {
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -56,26 +56,26 @@
   border-left: 3px solid transparent;
 }
 
-.bit-sidebar-nav li a:hover,
-.bit-sidebar-nav li a.active {
+.dc-sidebar-nav li a:hover,
+.dc-sidebar-nav li a.active {
   color: var(--primary-light);
   background: rgba(139, 92, 246, 0.08);
   border-left-color: var(--primary);
 }
 
-.bit-sidebar-nav li a .nav-icon {
+.dc-sidebar-nav li a .nav-icon {
   width: 20px;
   text-align: center;
   font-size: 0.9rem;
 }
 
-.bit-main-content {
+.dc-main-content {
   flex: 1;
   min-width: 0;
 }
 
 /* ── Lesson Section Card ── */
-.bit-lesson {
+.dc-lesson {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 16px;
@@ -85,18 +85,18 @@
   transition: border-color 0.3s ease;
 }
 
-.bit-lesson:target {
+.dc-lesson:target {
   border-color: var(--primary);
 }
 
-.bit-lesson-header {
+.dc-lesson-header {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
-.bit-lesson-number {
+.dc-lesson-number {
   font-family: Orbitron, sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
@@ -106,37 +106,37 @@
   flex-shrink: 0;
 }
 
-.bit-lesson-header h3 {
+.dc-lesson-header h3 {
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-primary);
   margin: 0;
 }
 
-.bit-lesson p,
-.bit-lesson li {
+.dc-lesson p,
+.dc-lesson li {
   color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.75;
   margin-bottom: 0.75rem;
 }
 
-.bit-lesson ul,
-.bit-lesson ol {
+.dc-lesson ul,
+.dc-lesson ol {
   padding-left: 1.5rem;
   margin-bottom: 1rem;
 }
 
-.bit-lesson li {
+.dc-lesson li {
   margin-bottom: 0.4rem;
 }
 
-.bit-lesson strong {
+.dc-lesson strong {
   color: var(--text-primary);
 }
 
 /* ── Concept Card (inline sub-card) ── */
-.bit-concept-card {
+.dc-concept-card {
   background: var(--dark-surface);
   border: 1px solid var(--glass-border);
   border-radius: 12px;
@@ -144,19 +144,19 @@
   margin: 1rem 0;
 }
 
-.bit-concept-card h4 {
+.dc-concept-card h4 {
   font-size: 1rem;
   font-weight: 600;
   color: var(--accent);
   margin: 0 0 0.5rem;
 }
 
-.bit-concept-card p {
+.dc-concept-card p {
   margin-bottom: 0;
 }
 
 /* ── Syntax-highlighted Code Block ── */
-.bit-code-block {
+.dc-code-block {
   position: relative;
   margin: 1rem 0 1.5rem;
   border-radius: 12px;
@@ -164,7 +164,7 @@
   border: 1px solid var(--glass-border);
 }
 
-.bit-code-header {
+.dc-code-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -173,7 +173,7 @@
   border-bottom: 1px solid var(--glass-border);
 }
 
-.bit-code-lang {
+.dc-code-lang {
   font-family: Fira Code, monospace;
   font-size: 0.75rem;
   font-weight: 500;
@@ -182,7 +182,7 @@
   letter-spacing: 0.05em;
 }
 
-.bit-code-copy {
+.dc-code-copy {
   background: none;
   border: 1px solid var(--glass-border);
   color: var(--text-secondary);
@@ -194,24 +194,24 @@
   transition: all 0.2s ease;
 }
 
-.bit-code-copy:hover {
+.dc-code-copy:hover {
   color: var(--text-primary);
   border-color: var(--primary-light);
 }
 
-.bit-code-copy.copied {
+.dc-code-copy.copied {
   color: #22c55e;
   border-color: #22c55e;
 }
 
-.bit-code-block pre {
+.dc-code-block pre {
   margin: 0;
   padding: 1.25rem 1.5rem;
   background: #0d1117;
   overflow-x: auto;
 }
 
-.bit-code-block code {
+.dc-code-block code {
   font-family: Fira Code, Consolas, Monaco, monospace;
   font-size: 0.85rem;
   line-height: 1.7;
@@ -219,17 +219,17 @@
 }
 
 /* Token colors for syntax highlighting */
-.bit-code-block .tok-kw { color: #c792ea; font-weight: bold; }
-.bit-code-block .tok-fn { color: #82aaff; }
-.bit-code-block .tok-str { color: #c3e88d; }
-.bit-code-block .tok-num { color: #f78c6c; }
-.bit-code-block .tok-cmt { color: #546e7a; font-style: italic; }
-.bit-code-block .tok-op { color: #89ddff; }
-.bit-code-block .tok-bi { color: #ffcb6b; }
-.bit-code-block .tok-var { color: #f07178; }
+.dc-code-block .tok-kw { color: #c792ea; font-weight: bold; }
+.dc-code-block .tok-fn { color: #82aaff; }
+.dc-code-block .tok-str { color: #c3e88d; }
+.dc-code-block .tok-num { color: #f78c6c; }
+.dc-code-block .tok-cmt { color: #546e7a; font-style: italic; }
+.dc-code-block .tok-op { color: #89ddff; }
+.dc-code-block .tok-bi { color: #ffcb6b; }
+.dc-code-block .tok-var { color: #f07178; }
 
 /* ── Exercise Box ── */
-.bit-exercise {
+.dc-exercise {
   background: rgba(34, 197, 94, 0.06);
   border: 1px solid rgba(34, 197, 94, 0.25);
   border-radius: 12px;
@@ -237,7 +237,7 @@
   margin: 1.5rem 0;
 }
 
-.bit-exercise-title {
+.dc-exercise-title {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -247,16 +247,16 @@
   margin-bottom: 0.75rem;
 }
 
-.bit-exercise-title i {
+.dc-exercise-title i {
   font-size: 1.1rem;
 }
 
-.bit-exercise ol,
-.bit-exercise ul {
+.dc-exercise ol,
+.dc-exercise ul {
   margin-bottom: 0.75rem;
 }
 
-.bit-exercise-toggle {
+.dc-exercise-toggle {
   background: rgba(34, 197, 94, 0.15);
   border: 1px solid rgba(34, 197, 94, 0.3);
   color: #22c55e;
@@ -269,29 +269,29 @@
   transition: all 0.2s ease;
 }
 
-.bit-exercise-toggle:hover {
+.dc-exercise-toggle:hover {
   background: rgba(34, 197, 94, 0.25);
 }
 
-.bit-exercise-solution {
+.dc-exercise-solution {
   display: none;
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(34, 197, 94, 0.2);
 }
 
-.bit-exercise-solution.visible {
+.dc-exercise-solution.visible {
   display: block;
 }
 
-.bit-exercise-solution p {
+.dc-exercise-solution p {
   font-size: 0.85rem;
   color: var(--text-secondary);
   margin-bottom: 0.5rem;
 }
 
 /* ── Output / Result Block ── */
-.bit-output {
+.dc-output {
   background: rgba(6, 182, 212, 0.06);
   border: 1px solid rgba(6, 182, 212, 0.25);
   border-radius: 10px;
@@ -299,7 +299,7 @@
   margin: 0.75rem 0 1.25rem;
 }
 
-.bit-output-label {
+.dc-output-label {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -308,7 +308,7 @@
   margin-bottom: 0.4rem;
 }
 
-.bit-output pre {
+.dc-output pre {
   margin: 0;
   font-family: Fira Code, monospace;
   font-size: 0.82rem;
@@ -317,7 +317,7 @@
 }
 
 /* ── Progress Tracker ── */
-.bit-progress-bar {
+.dc-progress-bar {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -329,7 +329,7 @@
   backdrop-filter: blur(10px);
 }
 
-.bit-progress-track {
+.dc-progress-track {
   flex: 1;
   height: 8px;
   background: var(--dark-surface);
@@ -337,7 +337,7 @@
   overflow: hidden;
 }
 
-.bit-progress-fill {
+.dc-progress-fill {
   height: 100%;
   width: 0%;
   background: var(--gradient-4);
@@ -345,7 +345,7 @@
   transition: width 0.5s ease;
 }
 
-.bit-progress-text {
+.dc-progress-text {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-primary);
@@ -353,7 +353,7 @@
 }
 
 /* ── Key Takeaway / Tip Callout ── */
-.bit-callout {
+.dc-callout {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
@@ -364,53 +364,20 @@
   margin: 1.25rem 0;
 }
 
-.bit-callout-icon {
+.dc-callout-icon {
   font-size: 1.3rem;
   flex-shrink: 0;
   line-height: 1.4;
 }
 
-.bit-callout p {
+.dc-callout p {
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.6;
 }
 
-/* ── Table Styling ── */
-.bit-table-wrap {
-  overflow-x: auto;
-  margin: 1.25rem 0 1.75rem;
-  border-radius: 12px;
-  border: 1px solid var(--glass-border);
-}
-
-.bit-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.88rem;
-}
-
-.bit-table th {
-  background: rgba(139, 92, 246, 0.15);
-  color: var(--primary-light);
-  font-weight: 600;
-  text-align: left;
-  padding: 0.75rem 1rem;
-  white-space: nowrap;
-}
-
-.bit-table td {
-  padding: 0.65rem 1rem;
-  border-top: 1px solid var(--glass-border);
-  color: var(--text-secondary);
-}
-
-.bit-table tr:hover td {
-  background: rgba(255, 255, 255, 0.02);
-}
-
 /* ── SVG Diagrams ── */
-.bit-svg-container {
+.dc-svg-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -422,27 +389,27 @@
   overflow-x: auto;
 }
 
-.bit-svg-diagram {
+.dc-svg-diagram {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-.bit-svg-text {
+.dc-svg-text {
   font-family: Poppins, sans-serif;
   font-size: 12px;
   fill: #ffffff;
   text-anchor: middle;
 }
 
-.bit-svg-text-title {
+.dc-svg-text-title {
   font-family: Orbitron, sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
   fill: var(--primary-light);
 }
 
-.bit-svg-node {
+.dc-svg-node {
   fill: rgba(139, 92, 246, 0.15);
   stroke: var(--primary);
   stroke-width: 2px;
@@ -451,38 +418,32 @@
   transition: all 0.3s ease;
 }
 
-.bit-svg-node:hover {
+.dc-svg-node:hover {
   fill: rgba(139, 92, 246, 0.3);
   stroke: var(--accent);
 }
 
-.bit-svg-node-alt {
-  fill: rgba(236, 72, 153, 0.1);
-  stroke: var(--accent);
+.dc-svg-node-alt {
+  fill: rgba(6, 182, 212, 0.15);
+  stroke: var(--secondary, #06b6d4);
   stroke-width: 2px;
   rx: 8px;
   ry: 8px;
+  transition: all 0.3s ease;
 }
 
-.bit-svg-node-alt:hover {
-  fill: rgba(236, 72, 153, 0.2);
+.dc-svg-node-alt:hover {
+  fill: rgba(6, 182, 212, 0.3);
+  stroke: var(--primary-light, #c084fc);
 }
 
-.bit-svg-node-green {
-  fill: rgba(34, 197, 94, 0.1);
-  stroke: #22c55e;
-  stroke-width: 2px;
-  rx: 8px;
-  ry: 8px;
-}
-
-.bit-svg-line {
+.dc-svg-line {
   stroke: var(--glass-border);
   stroke-width: 2px;
   fill: none;
 }
 
-.bit-svg-line-active {
+.dc-svg-line-active {
   stroke: var(--primary-light);
   stroke-width: 2px;
   stroke-dasharray: 4;
@@ -497,86 +458,86 @@
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-  .bit-sidebar {
+  .dc-sidebar {
     display: none;
   }
 }
 
 @media (max-width: 768px) {
-  .bit-lesson {
+  .dc-lesson {
     padding: 1.5rem;
   }
 
-  .bit-lesson-header h3 {
+  .dc-lesson-header h3 {
     font-size: 1.15rem;
   }
 
-  .bit-code-block pre {
+  .dc-code-block pre {
     padding: 1rem;
   }
 
-  .bit-code-block code {
+  .dc-code-block code {
     font-size: 0.78rem;
   }
 
-  .bit-progress-bar {
+  .dc-progress-bar {
     flex-direction: column;
     align-items: stretch;
     gap: 0.5rem;
   }
 
-  .bit-progress-text {
+  .dc-progress-text {
     text-align: center;
   }
 
-  .bit-callout {
+  .dc-callout {
     flex-direction: column;
     gap: 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .bit-lesson {
+  .dc-lesson {
     padding: 1.25rem;
     border-radius: 12px;
   }
 
-  .bit-lesson-header {
+  .dc-lesson-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
 
-  .bit-exercise {
+  .dc-exercise {
     padding: 1rem;
   }
 }
 
 /* ── Accessibility: focus-visible ── */
-.bit-sidebar-nav li a:focus-visible,
-.bit-code-copy:focus-visible,
-.bit-exercise-toggle:focus-visible {
+.dc-sidebar-nav li a:focus-visible,
+.dc-code-copy:focus-visible,
+.dc-exercise-toggle:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
 /* ── Print styles ── */
 @media print {
-  .bit-sidebar,
-  .bit-progress-bar,
-  .bit-exercise-toggle,
-  .bit-code-copy,
+  .dc-sidebar,
+  .dc-progress-bar,
+  .dc-exercise-toggle,
+  .dc-code-copy,
   .navbar,
   .footer {
     display: none !important;
   }
 
-  .bit-lesson {
+  .dc-lesson {
     break-inside: avoid;
     border: 1px solid #ccc;
   }
 
-  .bit-code-block pre {
+  .dc-code-block pre {
     background: #f5f5f5;
     color: #333;
   }

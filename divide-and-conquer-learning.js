@@ -1,5 +1,5 @@
 /**
- * bit-manipulation-learning.js
+ * divide-and-conquer-learning.js
  * Interactivity for the Prefix Sum Learning page:
  *  - Hero typing animation
  *  - Stats counter animation (uses global animateValue from script.js)
@@ -22,15 +22,15 @@ document.addEventListener("DOMContentLoaded", () => {
    Hero Typing Animation
    ───────────────────────────────────────────── */
 function initHeroTyping() {
-  const el = document.getElementById("typingTextBit");
+  const el = document.getElementById("typingTextDC");
   if (!el) return;
 
   const words = [
-    "XOR Swaps",
-    "Bit Masking",
-    "Power of Two",
-    "Shift Operators",
-    "O(1) Tricks"
+    "Merge Sort",
+    "Quick Sort",
+    "Binary Search",
+    "Master Theorem",
+    "Sub-problems"
 ];
 
   let wordIdx = 0;
@@ -102,7 +102,7 @@ function initStatsAnimation() {
    Exercise Show/Hide Toggle
    ───────────────────────────────────────────── */
 function initExerciseToggles() {
-  document.querySelectorAll(".bit-exercise-toggle").forEach((btn) => {
+  document.querySelectorAll(".dc-exercise-toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
       const targetId = btn.getAttribute("aria-controls") || btn.getAttribute("data-target");
       const solution = document.getElementById(targetId);
@@ -119,7 +119,7 @@ function initExerciseToggles() {
    Copy Code Button
    ───────────────────────────────────────────── */
 function initCopyButtons() {
-  document.querySelectorAll(".bit-code-copy").forEach((btn) => {
+  document.querySelectorAll(".dc-code-copy").forEach((btn) => {
     btn.addEventListener("click", async () => {
       let code = btn.getAttribute("data-code");
       if (!code) {
@@ -164,8 +164,8 @@ function initCopyButtons() {
    Sidebar Scroll-Spy
    ───────────────────────────────────────────── */
 function initSidebarSpy() {
-  const links = document.querySelectorAll(".bit-sidebar-nav a");
-  const lessons = document.querySelectorAll(".bit-lesson");
+  const links = document.querySelectorAll(".dc-sidebar-nav a");
+  const lessons = document.querySelectorAll(".dc-lesson");
   if (!links.length || !lessons.length) return;
 
   const NAV_HEIGHT = 100; // offset for fixed navbar
@@ -197,7 +197,7 @@ function initSidebarSpy() {
       if (id) {
         links.forEach((l) => l.classList.remove("active"));
         const active = document.querySelector(
-          `.bit-sidebar-nav a[href="#${id}"]`
+          `.dc-sidebar-nav a[href="#${id}"]`
         );
         if (active) active.classList.add("active");
       }
@@ -213,11 +213,11 @@ function initSidebarSpy() {
    Progress Tracker
    ───────────────────────────────────────────── */
 function initProgressTracker() {
-  const STORAGE_KEY = "bit-manipulation-learning-progress";
+  const STORAGE_KEY = "divide-and-conquer-learning-progress";
   const TOTAL_TOPICS = 5; // Adjust this if you change the number of topics
   const fill = document.getElementById("progressFill");
   const count = document.getElementById("progressCount");
-  const bar = document.querySelector(".bit-progress-bar");
+  const bar = document.querySelector(".dc-progress-bar");
 
   if (!fill || !count) return;
 
@@ -238,7 +238,7 @@ function initProgressTracker() {
 
   updateUI();
 
-  const lessons = document.querySelectorAll(".bit-lesson");
+  const lessons = document.querySelectorAll(".dc-lesson");
   const observer = new IntersectionObserver(
     (entries) => {
       let changed = false;
