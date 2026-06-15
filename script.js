@@ -1,3 +1,23 @@
+
+document.addEventListener("submit", function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+  return false;
+}, true);
+window.addEventListener("load", () => {
+  document.addEventListener("submit", (e) => {
+    e.preventDefault();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.ctrlKey) {
+      if (document.activeElement.tagName === "TEXTAREA") {
+        e.stopPropagation();
+      }
+    }
+  });
+});
+
 // ===== QUIZ DATA =====
 const quizQuestions = {
   arrays: [
@@ -1733,6 +1753,18 @@ const chatbotResponses = {
 
 // ===== STATE MANAGEMENT =====
 let userProgress = {
+
+    name: "Learner",
+    avatar: "🚀",
+    completedProblems: [],
+    xp: 0,
+    level: 1,
+    streak: 0,
+    badges: [],
+    lastActive: null,
+    joinDate: null, // Will be set on first load
+    quizScores: {}, // topic -> { bestScore, attempts, totalXP }
+
   name: "Learner",
   avatar: "🚀",
   completedProblems: [],
@@ -1752,6 +1784,7 @@ let userProgress = {
   quizScores: {}, // topic -> { bestScore, attempts, totalXP }
   bestQuizTimes: {},
   activityData: {}, // date-string -> count (e.g. "2026-06-05" -> 3)
+
 };
 
 
@@ -1767,6 +1800,40 @@ let currentProblem = null;
  * @see {@link https://github.com/Eshajha19/Algo-Infinity-Verse/issues/258}
  */
 // ===== INITIALIZATION =====
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded fired, initializing app...');
+    loadUserData();
+    initLoadingScreen();
+    initNavbar();
+    initHeroSection();
+    initTopicsSection();
+    initQuizSection();
+    initPracticeSection();
+    initRoadmap();
+    initDashboard();
+    initGamification();
+    initChatbot();
+    initProfile();
+    initScrollEffects();
+    initDarkMode();
+
+    // Update profile display after loading
+    
+    console.log('App initialization complete');
+
+    // Language change handler for code editor
+    const langSelect = document.getElementById('languageSelect');
+    if (langSelect) {
+        langSelect.addEventListener('change', () => {
+            if (currentProblem) {
+                const editor = document.getElementById('codeEditor');
+                editor.value = getDefaultCode(langSelect.value, currentProblem);
+                editor.dispatchEvent(new Event('input'));
+            }
+        });
+    }
+  });
 document.addEventListener("DOMContentLoaded", () => {
 
   // Apply saved theme only after DOM is ready to avoid touching document.body too early
@@ -1818,6 +1885,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
 
   const saveNotesBtn = document.getElementById("saveNotesBtn");
 
@@ -2417,6 +2485,54 @@ function startQuiz(topicKey) {
   const normalizedTopicKey = getQuizTopicKey(String(topicKey));
   const topicQuiz = quizQuestions[normalizedTopicKey];
 
+
+    progressFill.style.width = `${progressPercent}%`;
+    bestScoreEl.textContent = `${quizData.bestScore}%`;
+    attemptsEl.textContent = quizData.attempts;
+}
+function showQuizLoading(topicName) {
+    const loader = document.getElementById('quizLoadingScreen');
+    const topic = document.getElementById('quizLoadingTopic');
+
+    if (topic) {
+        topic.textContent = `Loading ${topicName} Quiz`;
+    }
+
+    if (loader) {
+        loader.classList.remove('hidden');
+    }
+
+    document.getElementById('topicQuizQuestionText').style.display = 'none';
+    document.getElementById('topicQuizOptions').style.display = 'none';
+    document.getElementById('topicQuizCounter').style.display = 'none';
+
+    const progress = document.querySelector('.quiz-progress-bar-container');
+    if (progress) progress.style.display = 'none';
+}
+
+function hideQuizLoading() {
+    const loader = document.getElementById('quizLoadingScreen');
+
+    if (loader) {
+        loader.classList.add('hidden');
+    }
+
+    document.getElementById('topicQuizQuestionText').style.display = '';
+    document.getElementById('topicQuizOptions').style.display = '';
+    document.getElementById('topicQuizCounter').style.display = '';
+
+    const progress = document.querySelector('.quiz-progress-bar-container');
+    if (progress) progress.style.display = '';
+}
+function startQuiz(topic) {
+    const topicKey = getQuizTopicKey(topic);
+    const questions = quizQuestions[topicKey];
+    
+    if (!questions || questions.length === 0) {
+        showNotification('No quiz questions available for this topic yet!', 'error');
+        return;
+    }
+
   if (!topicQuiz || topicQuiz.length === 0) {
     console.error("Quiz data not found for:", {
       rawTopicKey: topicKey,
@@ -2428,6 +2544,7 @@ function startQuiz(topicKey) {
 
   // Ensure we use the normalized key everywhere below.
   topicKey = normalizedTopicKey;
+
 
 
   const resultEl = document.getElementById("topicQuizResult");
@@ -3822,6 +3939,58 @@ window.openRoadmapStepModal = openRoadmapStepModal;
 
 // ===== PROFILE =====
 function initProfile() {
+
+    var profileName = document.getElementById("profileName");
+    if (profileName) {
+        profileName.textContent = userProgress.name;
+    }
+    
+    // Set joined date
+    var joinDate = document.getElementById("joinDate");
+    if (joinDate) {
+        let joinDateObj;
+        if (userProgress.joinDate) {
+            joinDateObj = new Date(userProgress.joinDate);
+        } else {
+            joinDateObj = new Date();
+            userProgress.joinDate = joinDateObj.toISOString();
+            saveUserData();
+        }
+        joinDate.textContent = joinDateObj.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+        });
+    }
+    
+    // Set current date in dashboard
+    var currentDateElement = document.getElementById("current-date");
+    if (currentDateElement) {
+        var today = new Date();
+        currentDateElement.textContent = "Today: " + today.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+        });
+    }
+    
+    // Set current date in dashboard card
+    var dashboardCurrentDateElement = document.getElementById("dashboard-current-date");
+    if (dashboardCurrentDateElement) {
+        var today = new Date();
+        dashboardCurrentDateElement.textContent = "Today: " + today.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+        });
+    }
+    
+    var avatarIcon = document.querySelector('.avatar-icon');
+    if (avatarIcon) {
+        avatarIcon.textContent = userProgress.avatar || '🚀';
+    }
+    updateProfile();
+
   var profileName = document.getElementById("profileName") || document.getElementById("profileDashboardName");
   if (profileName) {
     profileName.textContent = userProgress.name;
@@ -3858,6 +4027,7 @@ function initProfile() {
     avatarIcon.textContent = userProgress.avatar || "🚀";
   }
   updateProfile();
+
 }
 
 function updateProfile() {
@@ -4980,124 +5150,113 @@ async function getAuthenticatedSession() {
 }
 
 function loadUserData() {
-  try {
-    const saved = localStorage.getItem("algoInfinityVerse");
-    if (saved) {
-      const data = JSON.parse(saved);
-      userProgress = { ...userProgress, ...data };
 
-      // Ensure quizScores exists
-      if (!userProgress.quizScores) {
-        userProgress.quizScores = {};
-      }
+    try {
 
-      // Ensure completedRoadmapSteps exists
-      if (!userProgress.completedRoadmapSteps) {
-        userProgress.completedRoadmapSteps = [];
-      }
+        const saved = localStorage.getItem("algoInfinityVerse");
 
-      // Sanitize recently viewed problems (can be corrupted in localStorage)
-      const practiceProblemIds = new Set(practiceProblems.map((p) => p.id));
-      const rawRecent = Array.isArray(userProgress.recentProblems)
-        ? userProgress.recentProblems
-        : [];
+        if (saved) {
 
-      const sanitizedRecent = rawRecent
-        .map((id) => Number(id))
-        .filter((id) => Number.isFinite(id) && practiceProblemIds.has(id));
+            const data = JSON.parse(saved);
 
-      const hadCorruption =
-        !Array.isArray(userProgress.recentProblems) ||
-        sanitizedRecent.length !== rawRecent.length;
-
-      userProgress.recentProblems = sanitizedRecent.slice(0, 5);
-
-      if (hadCorruption) {
-        saveUserData();
-      }
-      if (!userProgress.activityData) {
-        userProgress.activityData = {};
-      }
-
-      // Backfill activity heatmap from existing completed problems
-      backfillActivityData();
-
-      // Update streak if user was active yesterday
-      if (userProgress.lastActive) {
-        const lastActive = new Date(userProgress.lastActive);
-        const today = new Date();
-        const diffDays = getDaysDifference(lastActive, today);
+            userProgress = {
+                ...userProgress,
+                ...data
+            };
 
 
-        if (diffDays === 0) {
-          // Already active today
-        } else {
-          let daysMissed = diffDays > 0 ? diffDays - 1 : 0;
-          while (daysMissed > 0 && userProgress.freezes > 0) {
-            userProgress.freezes -= 1;
-            daysMissed -= 1;
-            userProgress.freezeHistory.push({
-              date: new Date(today.getTime() - (daysMissed + 1) * 24 * 60 * 60 * 1000).toISOString(),
-              reason: "Missed day automatically frozen"
-            });
-          }
-          if (daysMissed > 0) {
-            userProgress.streak = 0;
-          } else {
-            userProgress.streak += 1;
-            if (userProgress.streak > 0 && userProgress.streak % 7 === 0) {
-              userProgress.freezes += 1;
-              showNotification("Milestone reached! You earned a Streak Freeze!", "success");
+            if (!userProgress.quizScores) {
+                userProgress.quizScores = {};
             }
-          }
+
+
+            if (!userProgress.completedRoadmapSteps) {
+                userProgress.completedRoadmapSteps = [];
+            }
+
+
+            if (!userProgress.activityData) {
+                userProgress.activityData = {};
+            }
+
+
+            backfillActivityData();
+
+
+        } else {
+
+
+            userProgress.name = "Learner";
+            userProgress.avatar = "🚀";
+            userProgress.completedProblems = [1,2,10];
+            userProgress.xp = 350;
+            userProgress.level = 2;
+            userProgress.streak = 3;
+            userProgress.badges = [1];
+            userProgress.quizScores = {};
+            userProgress.activityData = {};
+
+            saveUserData();
+
         }
+
+
+    } catch(error) {
+
+
+        console.error(
+            "Error loading user data:",
+            error
+        );
+
+
+        userProgress = {
+
+            name:"Learner",
+            avatar:"🚀",
+            completedProblems:[],
+            xp:0,
+            level:1,
+            streak:0,
+            badges:[],
+            lastActive:null,
+            quizScores:{},
+            activityData:{}
+
+        };
+
+
         saveUserData();
-      }
-    } else {
-      // Initialize with some demo data
-      userProgress.name = "Learner";
-      userProgress.avatar = "🚀";
-      userProgress.completedProblems = [1, 2, 10];
-      userProgress.xp = 350;
-      userProgress.level = 2;
-      userProgress.streak = 3;
-      userProgress.badges = [1];
-      userProgress.quizScores = {};
-      userProgress.activityData = {};
-      backfillActivityData();
-      saveUserData();
+
     }
-  } catch (error) {
-    console.error("Error loading user data, resetting to defaults:", error);
-    // Reset to defaults
-    userProgress = {
-      name: "Learner",
-      avatar: "🚀",
-      completedProblems: [],
-      xp: 0,
-      level: 1,
-      streak: 0,
-      favoriteProblems: [],
-      problemNotes: {},
-      badges: [],
-      lastActive: null,
-      quizScores: {},
-      bestQuizTimes: {},
-      activityData: {},
-    };
-    saveUserData();
-  }
-  // Update profile display after loading
-  updateProfile();
-  
-  // Also fetch session to get real name
-  getAuthenticatedSession().then(session => {
-    if (session && session.user && session.user.name) {
-      userProgress.name = session.user.name;
-      updateProfile();
-      saveUserData();
-    }
-  });
+
+
+    updateProfile();
+
+
+    getAuthenticatedSession()
+    .then(session=>{
+
+        if(
+          session &&
+          session.user &&
+          session.user.name
+        ){
+
+            userProgress.name =
+            session.user.name;
+
+            updateProfile();
+
+            saveUserData();
+
+        }
+
+
+        initProfile();
+
+    });
+
 }
 
 // ===== QUIZ EDITOR =====
@@ -6177,6 +6336,93 @@ if (document.readyState === 'loading') {
 // Initialize some animations after page load
 window.addEventListener("load", () => {
 });
+// ✅ FIX: Current Date feature for dashboard + profile
+
+function updateDate() {
+    const today = new Date();
+
+    const formattedDate = today.toLocaleDateString(undefined, {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
+
+    const dashboardDate = document.getElementById("dashboard-current-date");
+    const profileDate = document.getElementById("profile-current-date");
+
+    if (dashboardDate) {
+        dashboardDate.textContent = formattedDate;
+    }
+
+    if (profileDate) {
+        profileDate.textContent = formattedDate;
+    }
+}
+
+// run immediately
+updateDate();
+
+// optional: auto refresh every hour (safe for daily date change)
+setInterval(updateDate, 60 * 60 * 1000);
+let isRunning = false;
+
+document.addEventListener("DOMContentLoaded", () => {
+  const codeEl = document.getElementById("perlEditor");
+  const outputEl = document.getElementById("perlOutput");
+
+  document.getElementById("runBtn").addEventListener("click", runPerl);
+
+  document.getElementById("resetBtn").addEventListener("click", () => {
+    codeEl.value = "";
+    outputEl.textContent = "Run code to see output...";
+  });
+
+  document.getElementById("sampleBtn").addEventListener("click", () => {
+    codeEl.value =
+`print "Hello World\\n";
+
+my $name = "DSA Learner";
+print "Welcome $name\\n";`;
+  });
+});
+
+async function runPerl() {
+  if (isRunning) return;
+  isRunning = true;
+
+  const editor = document.getElementById("perlEditor");
+  const output = document.getElementById("perlOutput");
+
+  const code = editor ? editor.value.trim() : "";
+
+  console.log("DEBUG CODE:", code); // 👈 important debug
+
+  if (!code) {
+    output.textContent = "❌ No code provided";
+    isRunning = false;
+    return;
+  }
+
+  output.textContent = "Running... ⏳";
+
+  try {
+    const res = await fetch("http://localhost:5000/run", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code })
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    output.textContent = data.output || data.error || "No output";
+  } catch (err) {
+    output.textContent = "Error: " + err.message;
+  }
+
+
+  isRunning = false;
+}
 
 // ===== NEWSLETTER FORM VALIDATION =====
 function validateEmail(email) {
@@ -6604,3 +6850,4 @@ function resetGame() {
     total: 0, timer: null, timeLeft: 30, xpEarned: 0,
   };
 }
+
