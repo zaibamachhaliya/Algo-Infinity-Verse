@@ -560,6 +560,7 @@ function resolveStaticPath(pathname) {
     "/oop-learning": "oop-learning.html",
     "/feedback": "feedback.html",
     "/feedback.html": "feedback.html",
+    "/algorithm-timeline": "algorithm-timeline.html",
     "/support-page": "support-page/index.html",
     "/support-page/": "support-page/index.html",
   };

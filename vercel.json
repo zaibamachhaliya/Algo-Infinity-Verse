@@ -64,6 +64,10 @@
     {
       "source": "/tree-traversal",
       "destination": "/tree-traversal.html"
+    },
+    {
+      "source": "/algorithm-timeline",
+      "destination": "/algorithm-timeline.html"
     }
   ],
   "headers": [
