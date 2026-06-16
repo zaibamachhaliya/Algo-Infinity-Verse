@@ -7078,3 +7078,11 @@ body.light-mode .nav-auth-link:hover {
   background: rgba(108, 99, 255, 0.3);
   color: var(--primary);
 }
+
+.game-question-area {
+  margin-bottom: 1.5rem;
+}
+
+.code-game-area {
+  margin-bottom: 1.5rem;
+}
