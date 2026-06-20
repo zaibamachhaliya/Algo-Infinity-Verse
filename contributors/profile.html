@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contributor Profile - Algo-Infinity-Verse</title>
+    <link rel="stylesheet" href="contributors/style.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">🚀 Algo-Infinity-Verse</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="contributors/index.html">Contributors</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="contributors-container">
+        <div class="profile-container" id="profileContainer">
+            <!-- Rendered by JavaScript -->
+        </div>
+    </main>
+
+    <script src="contributors.js"></script>
+    <script>
+        // Get username from URL
+        const params = new URLSearchParams(window.location.search);
+        const username = params.get('username');
+
+        // Find contributor
+        const contributor = contributorsData.find(c => c.username === username);
+
+        if (contributor) {
+            document.getElementById('profileContainer').innerHTML = `
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar-large">
+                            <img src="${contributor.avatar}" alt="${contributor.name}">
+                        </div>
+                        <h1>${contributor.name}</h1>
+                        <p class="profile-username">@${contributor.username}</p>
+                        <p class="profile-joined">Joined: ${new Date(contributor.joined).toLocaleDateString()}</p>
+                    </div>
+                    
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-value">${contributor.contributions}</span>
+                            <span class="stat-label">Total Contributions</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">${contributor.prs}</span>
+                            <span class="stat-label">Merged PRs</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">${contributor.issues}</span>
+                            <span class="stat-label">Issues Assigned</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-badges">
+                        <h3>🏅 Achievements</h3>
+                        <div class="badges-container">
+                            ${contributor.badges.map(badge => `
+                                <span class="badge badge-${badge.toLowerCase()}">${badge}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <button onclick="window.location.href='contributors/index.html'" class="back-btn">
+                        ← Back to Contributors
+                    </button>
+                </div>
+            `;
+        } else {
+            document.getElementById('profileContainer').innerHTML = `
+                <div class="profile-card">
+                    <h2>Contributor not found</h2>
+                    <p>No contributor found with username: ${username}</p>
+                    <button onclick="window.location.href='contributors/index.html'">Back to Contributors</button>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

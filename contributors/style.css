@@ -1,0 +1,252 @@
+/* Contributors Page Styles */
+
+.contributors-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.contributors-header {
+    text-align: center;
+    padding: 3rem 0 2rem;
+}
+
+.contributors-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contributors-header p {
+    color: #6b7280;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+/* Leaderboard */
+.leaderboard-section {
+    margin: 2rem 0;
+}
+
+.leaderboard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.leaderboard-item:hover {
+    transform: translateX(5px);
+}
+
+.leaderboard-rank {
+    font-size: 1.5rem;
+    font-weight: 700;
+    min-width: 50px;
+    color: #6b7280;
+}
+
+.leaderboard-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    overflow: hidden;
+}
+
+.leaderboard-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.leaderboard-info {
+    flex: 1;
+}
+
+.leaderboard-name {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.leaderboard-stats {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.leaderboard-stats span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Contributors Grid */
+.contributors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.contributor-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+    text-align: center;
+    cursor: pointer;
+}
+
+.contributor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.contributor-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    background: #e5e7eb;
+    overflow: hidden;
+}
+
+.contributor-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contributor-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.contributor-username {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.contributor-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-gold {
+    background: #fbbf24;
+    color: #78350f;
+}
+
+.badge-silver {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.badge-bronze {
+    background: #f59e0b;
+    color: #78350f;
+}
+
+.badge-blue {
+    background: #93c5fd;
+    color: #1e3a5f;
+}
+
+.badge-green {
+    background: #6ee7b7;
+    color: #064e3b;
+}
+
+.badge-purple {
+    background: #c4b5fd;
+    color: #4c1d95;
+}
+
+.contributor-stats {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 0.75rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contributors-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    
+    .leaderboard-item {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .leaderboard-stats {
+        flex-wrap: wrap;
+    }
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .leaderboard {
+    background: #1f2937;
+}
+
+[data-theme="dark"] .leaderboard-item {
+    background: #374151;
+    color: #f9fafb;
+}
+
+[data-theme="dark"] .contributor-card {
+    background: #1f2937;
+    color: #f9fafb;
+}
+
+[data-theme="dark"] .contributors-header p {
+    color: #9ca3af;
+}

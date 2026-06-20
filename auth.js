@@ -302,10 +302,17 @@
         );
         return;
       }
-
-      const submitButton = form.querySelector("button[type='submit']");
-      submitButton.dataset.loading = "true";
-      setFormMessage(form, "Working...", "info");
+      
+      // Loading state ON
+const submitButton = form.querySelector("button[type='submit']");
+if (!submitButton) return; // Guard add karo
+submitButton.disabled = true;
+submitButton.dataset.loading = "true";
+submitButton.innerHTML = `
+  <span class="btn-spinner"></span>
+  <span>${mode === "login" ? "Logging in..." : "Signing up..."}</span>
+`;
+setFormMessage(form, "Working...", "info");
 
       try {
         const response = await fetch(`/api/${mode}`, {
@@ -324,9 +331,13 @@
       } catch (error) {
         setFormMessage(form, error.message, "error");
       } finally {
-        submitButton.disabled = false;
-        delete submitButton.dataset.loading;
-      }
+    submitButton.disabled = false;
+    delete submitButton.dataset.loading;
+    // Restore button text
+    submitButton.innerHTML = mode === "login"
+        ? `<i class="fas fa-right-to-bracket"></i><span>Log In</span>`
+        : `<i class="fas fa-user-plus"></i><span>Sign Up</span>`;
+}
     });
   }
 
