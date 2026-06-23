@@ -1613,11 +1613,22 @@ function addChatMessage(message, sender, { html = false } = {}) {
   const messagesContainer = document.getElementById("chatbotMessages");
   const messageEl = document.createElement("div");
   messageEl.className = `message ${sender}`;
-  if (html) messageEl.innerHTML = message;
-  else messageEl.textContent = message;
+
+  if (html) {
+    // Never trust user-influenced HTML. Sanitize before injecting.
+    if (typeof window !== 'undefined' && window.DOMSanitizer?.sanitizeHTML) {
+      messageEl.innerHTML = window.DOMSanitizer.sanitizeHTML(message);
+    } else {
+      messageEl.textContent = String(message ?? '');
+    }
+  } else {
+    messageEl.textContent = message;
+  }
+
   messagesContainer.appendChild(messageEl);
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
+
 
 function getBotResponse(question) {
   const q = question.toLowerCase();
@@ -2183,7 +2194,12 @@ function formatMistakeDate(dateStr) {
   try { const d = new Date(dateStr); const now = new Date(); const diffMs = now - d; const diffMins = Math.floor(diffMs / 60000); if (diffMins < 1) return "Just now"; if (diffMins < 60) return `${diffMins}m ago`; const diffHours = Math.floor(diffMins / 60); if (diffHours < 24) return `${diffHours}h ago`; return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); } catch (e) { return "Recently"; }
 }
 
-function escapeHtml(text) { const div = document.createElement("div"); div.textContent = text; return div.innerHTML; }
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
 
 // ============================================
 // NEWSLETTER
