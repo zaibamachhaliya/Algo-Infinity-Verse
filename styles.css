@@ -1277,7 +1277,6 @@ body[data-page="signup"] .auth-switch {
 .flashcard-inner {
   width: 100%;
   max-width: 760px;
-  min-height: 210px;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.6s ease;
