@@ -300,6 +300,7 @@ function handleQuizCompletionForRevision(topicId, scorePercentage) {
 
 function injectRevisionSchedulerUI(topicId) {
   if (!userProgress.revisionSchedule?.[topicId]) return;
+
   const targetHeader = document.querySelector(".arr-lesson-header") || document.querySelector("h3") || document.querySelector("h2");
   if (!targetHeader) { console.warn("[Scheduler] No target header found."); return; }
   const existing = document.getElementById("revision-scheduler-badge");
@@ -334,6 +335,8 @@ let currentProblem = null;
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOMContentLoaded fired, initializing app...');
   loadUserData();
+  initFlashcardsRevision();
+
   initLoadingScreen();
   initNavbar();
   initHeroSection();

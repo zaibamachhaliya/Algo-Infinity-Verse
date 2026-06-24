@@ -207,8 +207,62 @@
            </div>
       </div>
     </section>
+    <!-- DSA Flashcards Revision Section -->
+    <section id="flashcards" class="section flashcards-section">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="title-icon">🗂️</span>
+          DSA Flashcards Revision
+        </h2>
+        <p class="section-subtitle">
+          Reveal answers, navigate cards, and persist your revision progress.
+        </p>
+
+        <div class="flashcards-controls" role="group" aria-label="Flashcard category filters">
+          <button class="filter-btn active" data-flashcards-category="arrays" aria-pressed="true">Arrays</button>
+          <button class="filter-btn" data-flashcards-category="trees" aria-pressed="false">Trees</button>
+          <button class="filter-btn" data-flashcards-category="graphs" aria-pressed="false">Graphs</button>
+          <button class="filter-btn" data-flashcards-category="dp" aria-pressed="false">DP</button>
+        </div>
+
+        <div class="flashcards-shell">
+          <div class="flashcards-header">
+            <div class="flashcards-meta">
+              <div class="flashcards-progress" id="flashcardsProgressText">Reviewed 0 / 0</div>
+              <div class="flashcards-total" id="flashcardsTotalText"></div>
+            </div>
+            <div class="flashcards-nav">
+              <button id="flashcardsPrevBtn" class="pagination-btn" disabled>
+                <i class="fas fa-chevron-left"></i> Prev
+              </button>
+              <button id="flashcardsNextBtn" class="pagination-btn">
+                Next <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="flashcards-stage">
+            <div class="flashcard" id="flashcardRoot" aria-live="polite">
+              <div class="flashcard-inner">
+                <div class="flashcard-face flashcard-front" id="flashcardQuestion"></div>
+                <div class="flashcard-face flashcard-back" id="flashcardAnswer" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <div class="flashcards-actions">
+              <button id="flashcardsRevealBtn" class="btn btn-primary" aria-expanded="false" aria-controls="flashcardAnswer">
+                <i class="fas fa-eye"></i> Reveal Answer
+              </button>
+              <div class="flashcards-small muted" id="flashcardsSmallHint"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Rust Playground Section -->
     <section id="rust-playground" class="section rust-playground-section">
+
       <div class="container">
         <div class="rust-hero">
           <h2 class="section-title">

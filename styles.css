@@ -1205,8 +1205,165 @@ body[data-page="signup"] .auth-switch {
   }
 }
 
+/* ===== DSA FLASHCARDS REVISION ===== */
+.flashcards-section {
+  background: linear-gradient(
+    180deg,
+    var(--dark-bg) 0%,
+    var(--dark-surface) 100%
+  );
+}
+
+.flashcards-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.flashcards-shell {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.flashcards-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.flashcards-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.flashcards-progress {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.flashcards-total {
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.flashcards-stage {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 1.25rem;
+  backdrop-filter: blur(10px);
+}
+
+.flashcards-nav {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.flashcard {
+  perspective: 1200px;
+  min-height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flashcard-inner {
+  width: 100%;
+  max-width: 760px;
+  min-height: 210px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.flashcard.is-revealed .flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 10, 26, 0.35);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.flashcard-front {
+  transform: rotateY(0deg);
+}
+
+.flashcard-back {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face {
+  box-shadow: inset 0 0 0 1px rgba(124, 58, 237, 0.06);
+}
+
+#flashcardQuestion {
+  color: var(--text-primary);
+  font-weight: 650;
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+#flashcardAnswer {
+  color: var(--text-secondary);
+  font-weight: 550;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.flashcards-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.flashcards-small.muted {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ===== DSA FLASHCARDS: accessibility/UX ===== */
+.pagination-btn {
+  border-radius: 14px;
+}
+
+@media (max-width: 768px) {
+  .flashcards-header {
+    justify-content: center;
+  }
+
+  .flashcards-nav {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .flashcard-face {
+    padding: 1rem;
+  }
+}
+
 /* ===== SECTIONS ===== */
 .section {
+
   padding: 6rem 2rem;
   position: relative;
   /* Ensure anchor jumps land below the fixed navbar */
