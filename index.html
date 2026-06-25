@@ -1234,9 +1234,9 @@
           <div class="quiz-problem-info">
             <span class="quiz-topic-badge" id="quizTopicBadge"></span>
             <span class="quiz-difficulty" id="quizDifficulty"></span>
+            <h3 id="quizTitle">Problem Title</h3>
+            <button type="button" class="quiz-modal-close" id="quizModalClose" aria-label="Close" onclick="closeQuizEditor()">&times;</button>
           </div>
-          <h3 id="quizTitle">Problem Title</h3>
-          <button class="modal-close" id="quizModalClose">&times;</button>
         </div>
         <div class="quiz-modal-body">
           <div class="quiz-layout">
@@ -1248,6 +1248,10 @@
                   <h5>Examples</h5>
                   <div id="quizExamples"></div>
                 </div>
+              </div>
+              <div class="test-cases-section">
+                <h5 class="test-cases-heading">Test Cases</h5>
+                <div class="test-cases-container" id="quizTestCasesContainer"></div>
               </div>
             </div>
             <div class="quiz-editor-panel">
@@ -1287,19 +1291,16 @@
                     </button>
                   </div>
                 </div>
-                <div class="editor-tabs">
-                  <div class="editor-tab active" data-tab="code">
-                    <i class="fas fa-code"></i> Code
-                  </div>
-                </div>
                 <div class="code-editor">
                   <div class="line-numbers" id="lineNumbers"></div>
                   <textarea
                     id="codeEditor"
                     class="code-textarea"
+                    spellcheck="false"
                     placeholder="// Write your solution here...&#10;&#10;function twoSum(nums, target) {&#10;    // Your code here&#10;}"
                   ></textarea>
                   <div class="syntax-highlight" id="syntaxHighlight"></div>
+                  <div class="current-line-indicator" id="currentLineIndicator"></div>
                 </div>
                 <div class="editor-shortcuts">
                   <span aria-label="Run Code shortcut: Control plus Enter"><kbd>Ctrl</kbd>+<kbd>Enter</kbd><span class="shortcut-label"> Run Code</span></span>
@@ -1315,26 +1316,19 @@
                       Run your code to see output...
                     </p>
                   </div>
-                  <div
-                    class="test-cases-container"
-                    id="quizTestCasesContainer"
-                  ></div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="quiz-modal-footer">
-            <div class="quiz-actions">
-              <button class="btn btn-secondary" onclick="closeQuizEditor()">
-                Close
-              </button>
-              <button class="btn btn-outline" onclick="runQuizCode()">
-                <i class="fas fa-play"></i> Run
-              </button>
-              <button class="btn btn-primary" onclick="submitQuizCode()">
-                <i class="fas fa-paper-plane"></i> Submit
-              </button>
-            </div>
+        </div>
+        <div class="quiz-modal-footer">
+          <div class="quiz-actions">
+            <button class="btn btn-outline" onclick="runQuizCode()">
+              <i class="fas fa-play"></i> Run
+            </button>
+            <button class="btn btn-primary" onclick="submitQuizCode()">
+              <i class="fas fa-paper-plane"></i> Submit
+            </button>
           </div>
         </div>
       </div>

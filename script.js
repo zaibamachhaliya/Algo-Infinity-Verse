@@ -142,43 +142,43 @@ const dsaTopics = [
 // PRACTICE PROBLEMS DATA
 // ============================================
 const practiceProblems = [
-  { id: 1, title: "Two Sum", difficulty: "easy", tags: ["Arrays", "Hash Table"], acceptance: "48.2%", category: "arrays", description: "Given an array of integers nums and an integer target, return indices of the two numbers that add up to target.", constraints: ["2 ≤ nums.length ≤ 10⁴", "-10⁹ ≤ nums[i] ≤ 10⁹", "Only one valid answer exists"], followUp: "Can you solve it in O(n) time complexity?" },
-  { id: 2, title: "Valid Parentheses", difficulty: "easy", tags: ["Strings", "Stack"], acceptance: "40.2%", category: "strings", description: "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.", constraints: ["1 ≤ s.length ≤ 10⁴", "s consists of parentheses only '()[]{}'"], followUp: "Can you solve it in O(n) time and O(n) space?" },
-  { id: 3, title: "Merge Two Sorted Lists", difficulty: "easy", tags: ["Linked List", "Recursion"], acceptance: "58.5%", category: "linkedlist", description: "You are given the heads of two sorted linked lists list1 and list2. Merge the two lists into one sorted list.", constraints: ["The number of nodes in both lists is in the range [0, 50]", "-100 ≤ Node.val ≤ 100", "Both list1 and list2 are sorted in non-decreasing order"], followUp: "Can you solve it iteratively using O(1) extra space, and also recursively?" },
-  { id: 4, title: "Maximum Subarray", difficulty: "medium", tags: ["Arrays", "Divide & Conquer"], acceptance: "46.2%", category: "arrays", description: "Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum.", constraints: ["1 ≤ nums.length ≤ 10⁵", "-10⁴ ≤ nums[i] ≤ 10⁴"], followUp: "Can you solve it in O(n) time using Kadane's Algorithm?" },
+  { id: 1, title: "Two Sum", difficulty: "easy", tags: ["Arrays", "Hash Table"], acceptance: "48.2%", category: "arrays", description: "Given an array of integers nums and an integer target, return indices of the two numbers that add up to target.", constraints: ["2 ≤ nums.length ≤ 10⁴", "-10⁹ ≤ nums[i] ≤ 10⁹", "Only one valid answer exists"], followUp: "Can you solve it in O(n) time complexity?", functionName: "twoSum", params: ["nums", "target"], testCases: [{ input: [[2,7,11,15], 9], expected: [0,1] }, { input: [[3,2,4], 6], expected: [1,2] }, { input: [[3,3], 6], expected: [0,1] }] },
+  { id: 2, title: "Valid Parentheses", difficulty: "easy", tags: ["Strings", "Stack"], acceptance: "40.2%", category: "strings", description: "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.", constraints: ["1 ≤ s.length ≤ 10⁴", "s consists of parentheses only '()[]{}'"], followUp: "Can you solve it in O(n) time and O(n) space?", functionName: "isValid", testCases: [{ input: ["()"], expected: true }, { input: ["()[]{}"], expected: true }, { input: ["(]"], expected: false }, { input: ["([)]"], expected: false }, { input: ["{[]}"], expected: true }] },
+  { id: 3, title: "Merge Two Sorted Lists", difficulty: "easy", tags: ["Linked List", "Recursion"], acceptance: "58.5%", category: "linkedlist", description: "Given two sorted arrays list1 and list2, merge them into one sorted array.", constraints: ["0 ≤ list1.length, list2.length ≤ 50", "-100 ≤ list1[i], list2[i] ≤ 100"], followUp: "Can you solve it iteratively using O(1) extra space, and also recursively?", functionName: "mergeLists", testCases: [{ input: [[1,2,4], [1,3,4]], expected: [1,1,2,3,4,4] }, { input: [[], []], expected: [] }, { input: [[], [0]], expected: [0] }] },
+  { id: 4, title: "Maximum Subarray", difficulty: "medium", tags: ["Arrays", "Divide & Conquer"], acceptance: "46.2%", category: "arrays", description: "Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum.", constraints: ["1 ≤ nums.length ≤ 10⁵", "-10⁴ ≤ nums[i] ≤ 10⁴"], followUp: "Can you solve it in O(n) time using Kadane's Algorithm?", functionName: "maxSubArray", testCases: [{ input: [[-2,1,-3,4,-1,2,1,-5,4]], expected: 6 }, { input: [[1]], expected: 1 }, { input: [[5,4,-1,7,8]], expected: 23 }, { input: [[-1]], expected: -1 }] },
   { id: 5, title: "LRU Cache", difficulty: "medium", tags: ["Design", "Hash Table"], acceptance: "37.5%", category: "arrays", description: "Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.", constraints: ["1 ≤ capacity ≤ 3000", "0 ≤ key, value ≤ 10⁴", "At most 2 × 10⁵ calls"], followUp: "Can you implement both get and put in O(1) time complexity?" },
   { id: 6, title: "Clone Graph", difficulty: "medium", tags: ["Graphs", "DFS", "BFS"], acceptance: "43.2%", category: "graphs", description: "Given a reference to a node in a connected undirected graph, return a deep copy (clone) of the graph.", constraints: ["The number of nodes in the graph is in the range [0, 100]", "1 ≤ Node.val ≤ 100", "Node.val is unique for each node"], followUp: "Can you solve it using both BFS and DFS approaches?" },
-  { id: 7, title: "Longest Increasing Subsequence", difficulty: "hard", tags: ["DP", "Binary Search"], acceptance: "42.1%", category: "dp", description: "Given an integer array nums, return the length of the longest strictly increasing subsequence.", constraints: ["1 ≤ nums.length ≤ 2500", "-10⁴ ≤ nums[i] ≤ 10⁴"], followUp: "Can you improve from O(n²) DP to O(n log n) using binary search?" },
+  { id: 7, title: "Longest Increasing Subsequence", difficulty: "hard", tags: ["DP", "Binary Search"], acceptance: "42.1%", category: "dp", description: "Given an integer array nums, return the length of the longest strictly increasing subsequence.", constraints: ["1 ≤ nums.length ≤ 2500", "-10⁴ ≤ nums[i] ≤ 10⁴"], followUp: "Can you improve from O(n²) DP to O(n log n) using binary search?", functionName: "lengthOfLIS", testCases: [{ input: [[10,9,2,5,3,7,101,18]], expected: 4 }, { input: [[0,1,0,3,2,3]], expected: 4 }, { input: [[7,7,7,7,7,7,7]], expected: 1 }] },
   { id: 8, title: "Word Ladder", difficulty: "hard", tags: ["Graphs", "BFS"], acceptance: "31.4%", category: "graphs", description: "Given two words, beginWord and endWord, and a dictionary wordList, return the number of words in the shortest transformation sequence.", constraints: ["1 ≤ beginWord.length ≤ 10", "endWord.length == beginWord.length", "1 ≤ wordList.length ≤ 5000"], followUp: "Can you find ALL shortest transformation sequences?" },
-  { id: 9, title: "Trapping Rain Water", difficulty: "hard", tags: ["Arrays", "Two Pointers"], acceptance: "48.7%", category: "arrays", description: "Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.", constraints: ["1 ≤ height.length ≤ 2 × 10⁴", "0 ≤ height[i] ≤ 10⁵"], followUp: "Can you solve it in O(n) time and O(1) space using the two-pointer technique?" },
-  { id: 10, title: "Reverse Linked List", difficulty: "easy", tags: ["Linked List"], acceptance: "72.1%", category: "linkedlist", description: "Given the head of a singly linked list, reverse the list, and return the reversed list's head.", constraints: ["The number of nodes in the list is in the range [0, 5000]", "-5000 ≤ Node.val ≤ 5000"], followUp: "Can you solve it both iteratively and recursively?" },
-  { id: 11, title: "Invert Binary Tree", difficulty: "easy", tags: ["Trees", "DFS"], acceptance: "68.5%", category: "trees", description: "Given the root of a binary tree, invert the tree, and return its root.", constraints: ["The number of nodes is in the range [0, 100]", "-100 ≤ Node.val ≤ 100"], followUp: "Can you solve it both recursively and iteratively using a queue or stack?" },
-  { id: 12, title: "Validate BST", difficulty: "medium", tags: ["Trees", "Recursion"], acceptance: "28.4%", category: "trees", description: "Given the root of a binary tree, determine if it is a valid binary search tree (BST).", constraints: ["The number of nodes is in the range [1, 10⁴]", "-2³¹ ≤ Node.val ≤ 2³¹ - 1"], followUp: "Can you solve it without recursion?" },
-  { id: 13, title: "Number of Islands", difficulty: "medium", tags: ["Graphs", "DFS"], acceptance: "54.8%", category: "graphs", description: "Given an m x n 2D binary grid which represents a map of '1's (land) and '0's (water), return the number of islands.", constraints: ["1 ≤ m, n ≤ 300", "grid[i][j] is '0' or '1'"], followUp: "Can you solve it using both DFS and Union-Find?" },
-  { id: 14, title: "House Robber", difficulty: "medium", tags: ["DP", "Arrays"], acceptance: "42.3%", category: "dp", description: "You are a professional robber planning to rob houses along a street. Return the maximum amount of money you can rob without robbing two adjacent houses.", constraints: ["1 ≤ nums.length ≤ 100", "0 ≤ nums[i] ≤ 400"], followUp: "What if the houses are arranged in a circle?" },
-  { id: 15, title: "Course Schedule", difficulty: "medium", tags: ["Graphs", "Topological Sort"], acceptance: "44.7%", category: "graphs", description: "There are numCourses courses. Given prerequisites, return true if you can finish all courses.", constraints: ["1 ≤ numCourses ≤ 2000", "0 ≤ prerequisites.length ≤ 5000", "prerequisites[i].length == 2"], followUp: "Can you return the actual valid course order?" },
-  { id: 16, title: "Best Time to Buy and Sell Stock", difficulty: "easy", tags: ["Arrays", "Greedy"], acceptance: "54.3%", category: "arrays", description: "Given an array prices where prices[i] is the price of a given stock on the iᵗʰ day, return the maximum profit.", constraints: ["1 ≤ prices.length ≤ 10⁵", "0 ≤ prices[i] ≤ 10⁴"], followUp: "Can you solve it in O(n) time and O(1) space?" },
-  { id: 17, title: "Move Zeroes", difficulty: "easy", tags: ["Arrays", "Two Pointers"], acceptance: "60.1%", category: "arrays", description: "Given an integer array nums, move all 0s to the end of it while maintaining the relative order of the non-zero elements.", constraints: ["1 ≤ nums.length ≤ 10⁴", "−2³¹ ≤ nums[i] ≤ 2³¹ − 1"], followUp: "Can you minimize the total number of operations?" },
-  { id: 18, title: "Valid Anagram", difficulty: "easy", tags: ["Strings", "Hash Table"], acceptance: "63.4%", category: "strings", description: "Given two strings s and t, return true if t is an anagram of s.", constraints: ["1 ≤ s.length, t.length ≤ 5 × 10⁴", "s and t consist of lowercase English letters only"], followUp: "What if the inputs contain Unicode characters?" },
-  { id: 19, title: "Single Number", difficulty: "easy", tags: ["Arrays", "Bit Manipulation"], acceptance: "70.2%", category: "arrays", description: "Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.", constraints: ["1 ≤ nums.length ≤ 3 × 10⁴", "-3 × 10⁴ ≤ nums[i] ≤ 3 × 10⁴"], followUp: "Can you solve it using XOR bit manipulation?" },
-  { id: 20, title: "Intersection of Two Arrays", difficulty: "easy", tags: ["Arrays", "Hash Set"], acceptance: "72.8%", category: "arrays", description: "Given two integer arrays nums1 and nums2, return an array of their intersection.", constraints: ["1 ≤ nums1.length, nums2.length ≤ 1000", "0 ≤ nums1[i], nums2[i] ≤ 1000"], followUp: "What if the arrays are already sorted?" },
-  { id: 21, title: "Check If Array Is Sorted", difficulty: "easy", tags: ["Arrays"], acceptance: "78.5%", category: "arrays", description: "Given an array of integers nums, return true if it is sorted in non-decreasing order.", constraints: ["1 ≤ nums.length ≤ 10⁴", "−10⁹ ≤ nums[i] ≤ 10⁹"], followUp: "Can you solve it in O(n) time complexity and O(1) space?" },
-  { id: 22, title: "Fibonacci Number", difficulty: "easy", tags: ["Recursion", "Dynamic Programming"], acceptance: "85.2%", category: "dp", description: "Given n, return the nth Fibonacci number.", constraints: ["0 ≤ n ≤ 30"], followUp: "Can you solve it using recursion, memoization, and bottom-up tabulation?" },
-  { id: 23, title: "Merge Intervals", difficulty: "medium", tags: ["Arrays", "Sorting"], acceptance: "46.4%", category: "arrays", description: "Given an array of intervals, merge all overlapping intervals.", constraints: ["1 ≤ intervals.length ≤ 10⁴", "intervals[i].length == 2", "0 ≤ starti ≤ endi ≤ 10⁴"], followUp: "Can you solve it in O(n log n) time?" },
-  { id: 24, title: "Product Except Self", difficulty: "medium", tags: ["Arrays", "Prefix Sum"], acceptance: "65.2%", category: "arrays", description: "Given an integer array nums, return an array answer such that answer[i] is equal to the product of all elements except nums[i].", constraints: ["2 ≤ nums.length ≤ 10⁵", "-30 ≤ nums[i] ≤ 30"], followUp: "Can you solve it in O(1) extra space?" },
-  { id: 25, title: "Spiral Matrix", difficulty: "medium", tags: ["Arrays", "Matrix"], acceptance: "44.8%", category: "arrays", description: "Given an m x n matrix, return all elements of the matrix in spiral order.", constraints: ["m == matrix.length", "n == matrix[0].length", "1 ≤ m, n ≤ 10", "-100 ≤ matrix[i][j] ≤ 100"], followUp: "Can you solve it without using extra space?" },
-  { id: 26, title: "Longest Substring Without Repeating", difficulty: "medium", tags: ["Strings", "Sliding Window", "Hash Map"], acceptance: "33.8%", category: "strings", description: "Given a string s, find the length of the longest substring without repeating characters.", constraints: ["0 ≤ s.length ≤ 5 × 10⁴"], followUp: "Can you solve it in O(n) using sliding window?" },
-  { id: 27, title: "Group Anagrams", difficulty: "medium", tags: ["Strings", "Hash Map", "Sorting"], acceptance: "67.3%", category: "strings", description: "Given an array of strings strs, group the anagrams together.", constraints: ["1 ≤ strs.length ≤ 10⁴", "0 ≤ strs[i].length ≤ 100"], followUp: "Can you solve it without sorting each string?" },
-  { id: 28, title: "Detect Cycle", difficulty: "easy", tags: ["Linked List", "Two Pointers"], acceptance: "49.2%", category: "linkedlist", description: "Given head, the head of a linked list, determine if the linked list has a cycle in it.", constraints: ["The number of nodes is in range [0, 10⁴]", "-10⁵ ≤ Node.val ≤ 10⁵"], followUp: "Can you solve it using Floyd's cycle detection algorithm?" },
-  { id: 29, title: "Remove Nth From End", difficulty: "medium", tags: ["Linked List", "Two Pointers"], acceptance: "42.5%", category: "linkedlist", description: "Given the head of a linked list, remove the nth node from the end of the list.", constraints: ["The number of nodes in the list is sz", "1 ≤ sz ≤ 30", "0 ≤ Node.val ≤ 100", "1 ≤ n ≤ sz"], followUp: "Can you solve it in one pass using two pointers?" },
-  { id: 30, title: "Intersection of Two Lists", difficulty: "easy", tags: ["Linked List", "Two Pointers"], acceptance: "57.8%", category: "linkedlist", description: "Given the heads of two singly linked-lists, return the node at which the two lists intersect.", constraints: ["1 ≤ m, n ≤ 3 × 10⁴"], followUp: "Can you solve it in O(m+n) time and O(1) space?" },
-  { id: 31, title: "Maximum Depth", difficulty: "easy", tags: ["Trees", "DFS", "BFS"], acceptance: "73.8%", category: "trees", description: "Given the root of a binary tree, return its maximum depth.", constraints: ["The number of nodes is in range [0, 10⁴]", "-100 ≤ Node.val ≤ 100"], followUp: "Can you solve it both recursively and iteratively?" },
-  { id: 32, title: "Lowest Common Ancestor", difficulty: "medium", tags: ["Trees", "DFS"], acceptance: "61.4%", category: "trees", description: "Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes.", constraints: ["The number of nodes is in range [2, 10⁵]", "-10⁹ ≤ Node.val ≤ 10⁹"], followUp: "Can you solve it for a general binary tree?" },
-  { id: 33, title: "Path Sum", difficulty: "easy", tags: ["Trees", "DFS"], acceptance: "49.3%", category: "trees", description: "Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path with the sum equal to targetSum.", constraints: ["The number of nodes is in range [0, 5000]", "-1000 ≤ Node.val ≤ 1000", "-1000 ≤ targetSum ≤ 1000"], followUp: "Can you find all paths that sum to target?" },
-  { id: 34, title: "Network Delay Time", difficulty: "medium", tags: ["Graphs", "Dijkstra"], acceptance: "52.3%", category: "graphs", description: "You are given a network of n nodes. Return the minimum time it takes for all n nodes to receive the signal.", constraints: ["1 ≤ k ≤ n ≤ 100", "1 ≤ times.length ≤ 6000", "times[i].length == 3"], followUp: "Can you solve it using Dijkstra's algorithm?" },
-  { id: 35, title: "Climbing Stairs", difficulty: "easy", tags: ["DP", "Recursion"], acceptance: "51.9%", category: "dp", description: "You are climbing a staircase. It takes n steps to reach the top. In how many distinct ways can you climb to the top?", constraints: ["1 ≤ n ≤ 45"], followUp: "Can you generalize to k steps at a time?" },
-  { id: 36, title: "Coin Change", difficulty: "medium", tags: ["DP", "BFS"], acceptance: "42.6%", category: "dp", description: "You are given coins of different denominations and an amount. Return the fewest number of coins to make that amount.", constraints: ["1 ≤ coins.length ≤ 12", "1 ≤ coins[i] ≤ 2³¹ - 1", "0 ≤ amount ≤ 10⁴"], followUp: "Can you solve it using both top-down and bottom-up DP?" },
-  { id: 37, title: "Edit Distance", difficulty: "hard", tags: ["DP", "Strings"], acceptance: "56.4%", category: "dp", description: "Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2.", constraints: ["0 ≤ word1.length, word2.length ≤ 500", "word1 and word2 consist of lowercase English letters"], followUp: "Can you optimize space from O(m*n) to O(min(m,n))?" },
+  { id: 9, title: "Trapping Rain Water", difficulty: "hard", tags: ["Arrays", "Two Pointers"], acceptance: "48.7%", category: "arrays", description: "Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.", constraints: ["1 ≤ height.length ≤ 2 × 10⁴", "0 ≤ height[i] ≤ 10⁵"], followUp: "Can you solve it in O(n) time and O(1) space using the two-pointer technique?", functionName: "trap", testCases: [{ input: [[0,1,0,2,1,0,1,3,2,1,2,1]], expected: 6 }, { input: [[4,2,0,3,2,5]], expected: 9 }] },
+  { id: 10, title: "Reverse Linked List", difficulty: "easy", tags: ["Linked List"], acceptance: "72.1%", category: "linkedlist", description: "Given an array representing a linked list, reverse it and return the reversed array.", constraints: ["0 ≤ arr.length ≤ 5000", "-5000 ≤ arr[i] ≤ 5000"], followUp: "Can you solve it both iteratively and recursively?", functionName: "reverseList", testCases: [{ input: [[1,2,3,4,5]], expected: [5,4,3,2,1] }, { input: [[1,2]], expected: [2,1] }, { input: [[]], expected: [] }] },
+  { id: 11, title: "Invert Binary Tree", difficulty: "easy", tags: ["Trees", "DFS"], acceptance: "68.5%", category: "trees", description: "Given a binary tree represented as a level-order array, invert it and return the inverted level-order array.", constraints: ["0 ≤ arr.length ≤ 100", "-100 ≤ arr[i] ≤ 100"], followUp: "Can you solve it both recursively and iteratively using a queue or stack?", functionName: "invertTree", testCases: [{ input: [[4,2,7,1,3,6,9]], expected: [4,7,2,9,6,3,1] }, { input: [[2,1,3]], expected: [2,3,1] }, { input: [[]], expected: [] }] },
+  { id: 12, title: "Validate BST", difficulty: "medium", tags: ["Trees", "Recursion"], acceptance: "28.4%", category: "trees", description: "Given a binary tree represented as a level-order array (null for missing children), determine if it is a valid BST.", constraints: ["1 ≤ arr.length ≤ 10⁴", "-2³¹ ≤ arr[i] ≤ 2³¹ - 1"], followUp: "Can you solve it without recursion?", functionName: "isValidBST", testCases: [{ input: [[2,1,3]], expected: true }, { input: [[5,1,4,null,null,3,6]], expected: false }] },
+  { id: 13, title: "Number of Islands", difficulty: "medium", tags: ["Graphs", "DFS"], acceptance: "54.8%", category: "graphs", description: "Given an m x n 2D binary grid which represents a map of '1's (land) and '0's (water), return the number of islands.", constraints: ["1 ≤ m, n ≤ 300", "grid[i][j] is '0' or '1'"], followUp: "Can you solve it using both DFS and Union-Find?", functionName: "numIslands", testCases: [{ input: [[["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]], expected: 1 }, { input: [[["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]]], expected: 3 }, { input: [[["0"]]], expected: 0 }] },
+  { id: 14, title: "House Robber", difficulty: "medium", tags: ["DP", "Arrays"], acceptance: "42.3%", category: "dp", description: "You are a professional robber planning to rob houses along a street. Return the maximum amount of money you can rob without robbing two adjacent houses.", constraints: ["1 ≤ nums.length ≤ 100", "0 ≤ nums[i] ≤ 400"], followUp: "What if the houses are arranged in a circle?", functionName: "rob", testCases: [{ input: [[1,2,3,1]], expected: 4 }, { input: [[2,7,9,3,1]], expected: 12 }, { input: [[2,1,1,2]], expected: 4 }] },
+  { id: 15, title: "Course Schedule", difficulty: "medium", tags: ["Graphs", "Topological Sort"], acceptance: "44.7%", category: "graphs", description: "There are numCourses courses. Given prerequisites, return true if you can finish all courses.", constraints: ["1 ≤ numCourses ≤ 2000", "0 ≤ prerequisites.length ≤ 5000", "prerequisites[i].length == 2"], followUp: "Can you return the actual valid course order?", functionName: "canFinish", testCases: [{ input: [2, [[1,0]]], expected: true }, { input: [2, [[1,0],[0,1]]], expected: false }] },
+  { id: 16, title: "Best Time to Buy and Sell Stock", difficulty: "easy", tags: ["Arrays", "Greedy"], acceptance: "54.3%", category: "arrays", description: "Given an array prices where prices[i] is the price of a given stock on the iᵗʰ day, return the maximum profit.", constraints: ["1 ≤ prices.length ≤ 10⁵", "0 ≤ prices[i] ≤ 10⁴"], followUp: "Can you solve it in O(n) time and O(1) space?", functionName: "maxProfit", testCases: [{ input: [[7,1,5,3,6,4]], expected: 5 }, { input: [[7,6,4,3,1]], expected: 0 }, { input: [[2,4,1]], expected: 2 }] },
+  { id: 17, title: "Move Zeroes", difficulty: "easy", tags: ["Arrays", "Two Pointers"], acceptance: "60.1%", category: "arrays", description: "Given an integer array nums, move all 0s to the end of it while maintaining the relative order of the non-zero elements.", constraints: ["1 ≤ nums.length ≤ 10⁴", "−2³¹ ≤ nums[i] ≤ 2³¹ − 1"], followUp: "Can you minimize the total number of operations?", functionName: "moveZeroes", testCases: [{ input: [[0,1,0,3,12]], expected: [1,3,12,0,0] }, { input: [[0]], expected: [0] }, { input: [[1,0]], expected: [1,0] }] },
+  { id: 18, title: "Valid Anagram", difficulty: "easy", tags: ["Strings", "Hash Table"], acceptance: "63.4%", category: "strings", description: "Given two strings s and t, return true if t is an anagram of s.", constraints: ["1 ≤ s.length, t.length ≤ 5 × 10⁴", "s and t consist of lowercase English letters only"], followUp: "What if the inputs contain Unicode characters?", functionName: "isAnagram", testCases: [{ input: ["anagram", "nagaram"], expected: true }, { input: ["rat", "car"], expected: false }, { input: ["a", "a"], expected: true }] },
+  { id: 19, title: "Single Number", difficulty: "easy", tags: ["Arrays", "Bit Manipulation"], acceptance: "70.2%", category: "arrays", description: "Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.", constraints: ["1 ≤ nums.length ≤ 3 × 10⁴", "-3 × 10⁴ ≤ nums[i] ≤ 3 × 10⁴"], followUp: "Can you solve it using XOR bit manipulation?", functionName: "singleNumber", testCases: [{ input: [[2,2,1]], expected: 1 }, { input: [[4,1,2,1,2]], expected: 4 }, { input: [[1]], expected: 1 }] },
+  { id: 20, title: "Intersection of Two Arrays", difficulty: "easy", tags: ["Arrays", "Hash Set"], acceptance: "72.8%", category: "arrays", description: "Given two integer arrays nums1 and nums2, return an array of their intersection (sorted, unique).", constraints: ["1 ≤ nums1.length, nums2.length ≤ 1000", "0 ≤ nums1[i], nums2[i] ≤ 1000"], followUp: "What if the arrays are already sorted?", functionName: "intersection", testCases: [{ input: [[1,2,2,1], [2,2]], expected: [2] }, { input: [[4,9,5], [9,4,9,8,4]], expected: [4,9] }] },
+  { id: 21, title: "Check If Array Is Sorted", difficulty: "easy", tags: ["Arrays"], acceptance: "78.5%", category: "arrays", description: "Given an array of integers nums, return true if it is sorted in non-decreasing order.", constraints: ["1 ≤ nums.length ≤ 10⁴", "−10⁹ ≤ nums[i] ≤ 10⁹"], followUp: "Can you solve it in O(n) time complexity and O(1) space?", functionName: "isSorted", testCases: [{ input: [[1,2,3,4]], expected: true }, { input: [[5,4,3,2,1]], expected: false }, { input: [[1,1,2,2,3]], expected: true }] },
+  { id: 22, title: "Fibonacci Number", difficulty: "easy", tags: ["Recursion", "Dynamic Programming"], acceptance: "85.2%", category: "dp", description: "Given n, return the nth Fibonacci number (F(0)=0, F(1)=1).", constraints: ["0 ≤ n ≤ 30"], followUp: "Can you solve it using recursion, memoization, and bottom-up tabulation?", functionName: "fib", testCases: [{ input: [2], expected: 1 }, { input: [3], expected: 2 }, { input: [5], expected: 5 }, { input: [0], expected: 0 }] },
+  { id: 23, title: "Merge Intervals", difficulty: "medium", tags: ["Arrays", "Sorting"], acceptance: "46.4%", category: "arrays", description: "Given an array of intervals, merge all overlapping intervals.", constraints: ["1 ≤ intervals.length ≤ 10⁴", "intervals[i].length == 2", "0 ≤ starti ≤ endi ≤ 10⁴"], followUp: "Can you solve it in O(n log n) time?", functionName: "merge", testCases: [{ input: [[[1,3],[2,6],[8,10],[15,18]]], expected: [[1,6],[8,10],[15,18]] }, { input: [[[1,4],[4,5]]], expected: [[1,5]] }] },
+  { id: 24, title: "Product Except Self", difficulty: "medium", tags: ["Arrays", "Prefix Sum"], acceptance: "65.2%", category: "arrays", description: "Given an integer array nums, return an array answer such that answer[i] is equal to the product of all elements except nums[i].", constraints: ["2 ≤ nums.length ≤ 10⁵", "-30 ≤ nums[i] ≤ 30"], followUp: "Can you solve it in O(1) extra space?", functionName: "productExceptSelf", testCases: [{ input: [[1,2,3,4]], expected: [24,12,8,6] }, { input: [[-1,1,0,-3,3]], expected: [0,0,9,0,0] }] },
+  { id: 25, title: "Spiral Matrix", difficulty: "medium", tags: ["Arrays", "Matrix"], acceptance: "44.8%", category: "arrays", description: "Given an m x n matrix, return all elements of the matrix in spiral order.", constraints: ["m == matrix.length", "n == matrix[0].length", "1 ≤ m, n ≤ 10", "-100 ≤ matrix[i][j] ≤ 100"], followUp: "Can you solve it without using extra space?", functionName: "spiralOrder", testCases: [{ input: [[[1,2,3],[4,5,6],[7,8,9]]], expected: [1,2,3,6,9,8,7,4,5] }, { input: [[[1,2,3,4],[5,6,7,8],[9,10,11,12]]], expected: [1,2,3,4,8,12,11,10,9,5,6,7] }] },
+  { id: 26, title: "Longest Substring Without Repeating", difficulty: "medium", tags: ["Strings", "Sliding Window", "Hash Map"], acceptance: "33.8%", category: "strings", description: "Given a string s, find the length of the longest substring without repeating characters.", constraints: ["0 ≤ s.length ≤ 5 × 10⁴"], followUp: "Can you solve it in O(n) using sliding window?", functionName: "lengthOfLongestSubstring", testCases: [{ input: ["abcabcbb"], expected: 3 }, { input: ["bbbbb"], expected: 1 }, { input: ["pwwkew"], expected: 3 }, { input: [""], expected: 0 }] },
+  { id: 27, title: "Group Anagrams", difficulty: "medium", tags: ["Strings", "Hash Map", "Sorting"], acceptance: "67.3%", category: "strings", description: "Given an array of strings strs, group the anagrams together (return sorted groups, sorted internally).", constraints: ["1 ≤ strs.length ≤ 10⁴", "0 ≤ strs[i].length ≤ 100"], followUp: "Can you solve it without sorting each string?", functionName: "groupAnagrams", testCases: [{ input: [["eat","tea","tan","ate","nat","bat"]], expected: [["ate","eat","tea"],["bat"],["nat","tan"]] }, { input: [[""]], expected: [[""]] }, { input: [["a"]], expected: [["a"]] }] },
+  { id: 28, title: "Detect Cycle", difficulty: "easy", tags: ["Linked List", "Two Pointers"], acceptance: "49.2%", category: "linkedlist", description: "Given an array and a cycle position, detect if there is a cycle (use Floyd's algorithm). Represent as an array with the last element linking back to the index at cyclePos, or -1 for no cycle.", constraints: ["arr.length in range [0, 10⁴]", "-10⁵ ≤ arr[i] ≤ 10⁵"], followUp: "Can you solve it using Floyd's cycle detection algorithm?", functionName: "hasCycle", testCases: [{ input: [[3,2,0,-4], 1], expected: true }, { input: [[1,2], 0], expected: true }, { input: [[1], -1], expected: false }] },
+  { id: 29, title: "Remove Nth From End", difficulty: "medium", tags: ["Linked List", "Two Pointers"], acceptance: "42.5%", category: "linkedlist", description: "Given an array and n, remove the nth element from the end and return the new array.", constraints: ["1 ≤ arr.length ≤ 30", "0 ≤ arr[i] ≤ 100", "1 ≤ n ≤ arr.length"], followUp: "Can you solve it in one pass using two pointers?", functionName: "removeNthFromEnd", testCases: [{ input: [[1,2,3,4,5], 2], expected: [1,2,3,5] }, { input: [[1], 1], expected: [] }, { input: [[1,2], 1], expected: [1] }] },
+  { id: 30, title: "Intersection of Two Lists", difficulty: "easy", tags: ["Linked List", "Two Pointers"], acceptance: "57.8%", category: "linkedlist", description: "Given two arrays that intersect at a given index, find the intersection value. Passed as (listA, listB, intersectVal). Returns the intersecting value or null.", constraints: ["1 ≤ m, n ≤ 3 × 10⁴"], followUp: "Can you solve it in O(m+n) time and O(1) space?", functionName: "getIntersection", testCases: [{ input: [[4,1,8,4,5], [5,6,1,8,4,5], 8], expected: 8 }, { input: [[1,9,1,2,4], [3,2,4], 2], expected: 2 }] },
+  { id: 31, title: "Maximum Depth", difficulty: "easy", tags: ["Trees", "DFS", "BFS"], acceptance: "73.8%", category: "trees", description: "Given a binary tree represented as a level-order array (null for missing children), return its maximum depth.", constraints: ["0 ≤ arr.length ≤ 10⁴", "-100 ≤ arr[i] ≤ 100"], followUp: "Can you solve it both recursively and iteratively?", functionName: "maxDepth", testCases: [{ input: [[3,9,20,null,null,15,7]], expected: 3 }, { input: [[1,null,2]], expected: 2 }, { input: [[]], expected: 0 }] },
+  { id: 32, title: "Lowest Common Ancestor", difficulty: "medium", tags: ["Trees", "DFS"], acceptance: "61.4%", category: "trees", description: "Given a BST as a level-order array and two values p and q, find the LCA value. Returns the LCA node value.", constraints: ["2 ≤ arr.length ≤ 10⁵"], followUp: "Can you solve it for a general binary tree?", functionName: "lowestCommonAncestor", testCases: [{ input: [[6,2,8,0,4,7,9,null,null,3,5], 2, 8], expected: 6 }, { input: [[6,2,8,0,4,7,9,null,null,3,5], 2, 4], expected: 2 }] },
+  { id: 33, title: "Path Sum", difficulty: "easy", tags: ["Trees", "DFS"], acceptance: "49.3%", category: "trees", description: "Given a binary tree represented as a level-order array and a target sum, return true if there is a root-to-leaf path with the given sum.", constraints: ["0 ≤ arr.length ≤ 5000", "-1000 ≤ arr[i] ≤ 1000", "-1000 ≤ targetSum ≤ 1000"], followUp: "Can you find all paths that sum to target?", functionName: "hasPathSum", testCases: [{ input: [[5,4,8,11,null,13,4,7,2,null,null,null,1], 22], expected: true }, { input: [[1,2,3], 5], expected: false }, { input: [[], 0], expected: false }] },
+  { id: 34, title: "Network Delay Time", difficulty: "medium", tags: ["Graphs", "Dijkstra"], acceptance: "52.3%", category: "graphs", description: "Given n nodes, a times array of [u, v, w] edges, and source k, return the minimum time for all nodes to receive the signal, or -1 if impossible.", constraints: ["1 ≤ k ≤ n ≤ 100", "1 ≤ times.length ≤ 6000"], followUp: "Can you solve it using Dijkstra's algorithm?", functionName: "networkDelayTime", testCases: [{ input: [[[2,1,1],[3,2,1],[3,4,2]], 4, 3], expected: 2 }, { input: [[[1,2,1]], 2, 1], expected: 1 }] },
+  { id: 35, title: "Climbing Stairs", difficulty: "easy", tags: ["DP", "Recursion"], acceptance: "51.9%", category: "dp", description: "You are climbing a staircase. It takes n steps to reach the top. In how many distinct ways can you climb to the top?", constraints: ["1 ≤ n ≤ 45"], followUp: "Can you generalize to k steps at a time?", functionName: "climbStairs", testCases: [{ input: [2], expected: 2 }, { input: [3], expected: 3 }, { input: [5], expected: 8 }] },
+  { id: 36, title: "Coin Change", difficulty: "medium", tags: ["DP", "BFS"], acceptance: "42.6%", category: "dp", description: "You are given coins of different denominations and an amount. Return the fewest number of coins to make that amount.", constraints: ["1 ≤ coins.length ≤ 12", "1 ≤ coins[i] ≤ 2³¹ - 1", "0 ≤ amount ≤ 10⁴"], followUp: "Can you solve it using both top-down and bottom-up DP?", functionName: "coinChange", testCases: [{ input: [[1,2,5], 11], expected: 3 }, { input: [[2], 3], expected: -1 }, { input: [[1], 0], expected: 0 }] },
+  { id: 37, title: "Edit Distance", difficulty: "hard", tags: ["DP", "Strings"], acceptance: "56.4%", category: "dp", description: "Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2.", constraints: ["0 ≤ word1.length, word2.length ≤ 500", "word1 and word2 consist of lowercase English letters"], followUp: "Can you optimize space from O(m*n) to O(min(m,n))?", functionName: "minDistance", testCases: [{ input: ["horse", "ros"], expected: 3 }, { input: ["intention", "execution"], expected: 5 }, { input: ["", "a"], expected: 1 }] },
 ];
 
 // ============================================
@@ -2075,8 +2075,45 @@ function openQuizEditor(problem) {
   syncScroll();
 }
 
+function mapType(jt, lang) {
+  const m = {
+    'int[]':  { java: 'int[]', cpp: 'vector<int>', c: 'int*', swift: '[Int]' },
+    'string[]': { java: 'String[]', cpp: 'vector<string>', c: 'char**', swift: '[String]' },
+    'bool[]': { java: 'boolean[]', cpp: 'vector<bool>', c: 'int*', swift: '[Bool]' },
+    'int':    { java: 'int', cpp: 'int', c: 'int', swift: 'Int' },
+    'string': { java: 'String', cpp: 'string', c: 'char*', swift: 'String' },
+    'bool':   { java: 'boolean', cpp: 'bool', c: 'int', swift: 'Bool' },
+  };
+  return m[jt]?.[lang] || 'auto';
+}
+
 function getDefaultCode(lang, problem) {
-  const templates = { javascript: `/**\n * @param {*} params\n * @return {*}\n */\nfunction solution(params) {\n    \n    \n}\n\n// Test your solution\n// console.log(solution());`, python: `def solution(params):\n    """\n    :type params:\n    :rtype:\n    """\n    \n    \n\n# Test your solution\n# print(solution())`, java: `class Solution {\n    public ReturnType solution(ParamsType params) {\n        \n    }\n}`, cpp: `class Solution {\npublic:\n    ReturnType solution(ParamsType params) {\n        \n    }\n};` };
+  const fnName = problem.functionName || "solution";
+  const params = problem.params || [];
+  const tc = problem.testCases?.[0];
+
+  const paramTypes = tc?.input ? tc.input.map(v => mapType(j2t(v), lang)) : [];
+  const retType = tc?.expected !== undefined ? mapType(j2t(tc.expected), lang) : 'auto';
+
+  const paramStr = params.length
+    ? params.map((p, i) => {
+        const t = paramTypes[i] || 'auto';
+        if (lang === 'cpp') return t + ' ' + p;
+        if (lang === 'c') return t + ' ' + p;
+        if (lang === 'java') return t + ' ' + p;
+        if (lang === 'swift') return '_ ' + p + ': ' + t;
+        return p;
+      }).join(', ')
+    : 'params';
+
+  const templates = {
+    javascript: "function " + fnName + "(" + (params.join(', ') || 'params') + ") {\n    \n}",
+    python: "def " + fnName + "(" + (params.join(', ') || 'params') + "):\n    pass\n",
+    java: "class Solution {\n    public " + retType + " " + fnName + "(" + paramStr + ") {\n        \n    }\n}",
+    cpp: retType + " " + fnName + "(" + paramStr + ") {\n    \n}",
+    c: retType + " " + fnName + "(" + paramStr + ") {\n    \n}",
+    swift: "func " + fnName + "(" + paramStr + ") -> " + retType + " {\n    \n}"
+  };
   return templates[lang] || templates.javascript;
 }
 
@@ -2086,66 +2123,431 @@ function generateExamples(problem) {
 }
 
 function generateTestCases(problem) {
-  if (problem.id === 21) return [{ input: "nums = [1, 2, 3, 4]", expected: "true", passed: true }, { input: "nums = [5, 4, 3, 2, 1]", expected: "false", passed: true }, { input: "nums = [1, 1, 2, 2, 3]", expected: "true", passed: true }];
-  if (problem.id === 22) return [{ input: "n = 2", expected: "1", passed: true }, { input: "n = 3", expected: "2", passed: true }, { input: "n = 5", expected: "5", passed: true }];
-  return [{ input: "Test input 1", expected: "Expected output", passed: true }, { input: "Test input 2", expected: "Expected output", passed: true }, { input: "Test input 3", expected: "Expected output", passed: false }];
+  return problem.testCases || [];
 }
 
-function renderTestCases(testCases) {
+function renderTestCases(testCases, results) {
   const container = document.getElementById("quizTestCasesContainer");
   if (!container) return;
-  container.innerHTML = testCases.map(tc => `<div class="test-case"><span class="test-case-input">${tc.input}</span><span class="test-case-result ${tc.passed ? 'passed' : 'failed'}">${tc.passed ? '✓ PASS' : '✗ FAIL'}</span></div>`).join("");
+  if (results) {
+    container.innerHTML = testCases.map((tc, i) => {
+      const r = results[i] || {};
+      const passed = r.passed;
+      const statusClass = passed ? 'passed' : 'failed';
+      const icon = passed ? '✓' : '✗';
+      const label = passed ? 'PASS' : 'FAIL';
+      const actualStr = r.actual !== undefined && r.actual !== null ? JSON.stringify(r.actual) : '';
+      const errorStr = r.error || '';
+      return `<div class="test-case ${r.ran ? statusClass : ''}">
+        <div class="test-case-header">
+          <span class="test-case-name">Test ${i + 1}</span>
+          <span class="test-case-result ${r.ran ? statusClass : 'pending'}">
+            ${r.ran ? `${icon} ${label}` : '⏳ Pending'}
+          </span>
+        </div>
+        <div class="test-case-details">
+          <div class="test-case-input">Input: <code>${Array.isArray(tc.input) ? tc.input.map(v => JSON.stringify(v)).join(', ') : JSON.stringify(tc.input)}</code></div>
+          <div class="test-case-expected">Expected: <code>${JSON.stringify(tc.expected)}</code></div>
+          ${r.ran && (passed !== undefined) ? `<div class="test-case-actual">Actual: <code>${actualStr || errorStr}</code></div>` : ''}
+        </div>
+      </div>`;
+    }).join("");
+  } else {
+    container.innerHTML = testCases.map((tc, i) => `
+      <div class="test-case">
+        <div class="test-case-header">
+          <span class="test-case-name">Test ${i + 1}</span>
+          <span class="test-case-result pending">⏳ Pending</span>
+        </div>
+        <div class="test-case-details">
+          <div class="test-case-input">Input: <code>${Array.isArray(tc.input) ? tc.input.map(v => JSON.stringify(v)).join(', ') : JSON.stringify(tc.input)}</code></div>
+          <div class="test-case-expected">Expected: <code>${JSON.stringify(tc.expected)}</code></div>
+        </div>
+      </div>
+    `).join("");
+  }
 }
 
-function clearQuizOutput() { const el = document.getElementById("quizOutputContent"); if (el) el.innerHTML = '<p class="output-placeholder">Run your code to see output...</p>'; }
+function clearQuizOutput() {
+  const el = document.getElementById("quizOutputContent");
+  if (el) el.innerHTML = '<p class="output-placeholder">Run your code to see output...</p>';
+}
 
-function runQuizCode() {
+function buildHarnessCode(code, lang, functionName, testCases) {
+  const tcJson = JSON.stringify(testCases);
+  if (lang === "javascript") {
+    return code + `\n\nconst __TC__ = ${tcJson};\nconst __RES__ = [];\nfor (let i = 0; i < __TC__.length; i++) {\n  const tc = __TC__[i];\n  try {\n    const result = ${functionName}(...tc.input);\n    const passed = JSON.stringify(result) === JSON.stringify(tc.expected);\n    __RES__.push({ index: i, ran: true, passed, actual: result, expected: tc.expected, input: tc.input, error: null });\n  } catch (e) {\n    __RES__.push({ index: i, ran: true, passed: false, actual: null, expected: tc.expected, input: tc.input, error: e.message });\n  }\n}\nconsole.log("__RESULT__:" + JSON.stringify(__RES__));`;
+  }
+  if (lang === "python") {
+    return `${code}\n\nimport json\n__TC__ = ${tcJson}\n__RES__ = []\nfor i, tc in enumerate(__TC__):\n    try:\n        result = ${functionName}(*tc["input"])\n        passed = json.dumps(result, default=str) == json.dumps(tc["expected"], default=str)\n        __RES__.append({"index": i, "ran": True, "passed": passed, "actual": result, "expected": tc["expected"], "input": tc["input"], "error": None})\n    except Exception as e:\n        __RES__.append({"index": i, "ran": True, "passed": False, "actual": None, "expected": tc["expected"], "input": tc["input"], "error": str(e)})\nprint("__RESULT__:" + json.dumps(__RES__, default=str))`;
+  }
+  if (lang === "cpp") {
+    return genCppHarness(code, functionName, testCases);
+  }
+  if (lang === "java") {
+    return genJavaHarness(code, functionName, testCases);
+  }
+  if (lang === "c") {
+    return genCHarness(code, functionName, testCases);
+  }
+  if (lang === "swift") {
+    return genSwiftHarness(code, functionName, testCases);
+  }
+  return code;
+}
+
+function j2t(v) {
+  if (v === null || v === undefined) return 'null';
+  if (Array.isArray(v)) {
+    if (v.length === 0) return 'int[]';
+    const inner = j2t(v[0]);
+    if (inner === 'int') return 'int[]';
+    if (inner === 'string') return 'string[]';
+    if (inner === 'bool') return 'bool[]';
+    return 'int[]';
+  }
+  if (typeof v === 'number') return 'int';
+  if (typeof v === 'string') return 'string';
+  if (typeof v === 'boolean') return 'bool';
+  return 'int';
+}
+
+function valToLit(v, t) {
+  if (t === 'int[]') return '[' + v.map(x => x).join(',') + ']';
+  if (t === 'string') return '"' + String(v).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"';
+  if (t === 'bool') return v ? 'true' : 'false';
+  return String(v);
+}
+
+function genCppHarness(code, fn, tcs) {
+  const outType = j2t(tcs[0].expected);
+  const inTypes = tcs[0].input.map(v => j2t(v));
+  let s = '#include <iostream>\n#include <string>\n#include <vector>\n#include <sstream>\nusing namespace std;\n\n';
+  s += code + '\n\n';
+  s += 'string __j(int v) { return to_string(v); }\n';
+  s += 'string __j(const string& v) { return "\\"" + v + "\\""; }\n';
+  s += 'template<typename T>\nstring __j(const vector<T>& v) {\n  if (v.empty()) return "[]";\n  stringstream ss;\n  ss << "[" << __j(v[0]);\n  for (size_t i=1;i<v.size();i++) ss << "," << __j(v[i]);\n  ss << "]";\n  return ss.str();\n}\n';
+  s += 'int main() {\n  cout << "__RESULT__:";\n  cout << "[";\n';
+  for (let i = 0; i < tcs.length; i++) {
+    if (i > 0) s += '  cout << ",";\n';
+    s += '  try {\n';
+    let callArgs = '';
+    for (let j = 0; j < inTypes.length; j++) {
+      if (j > 0) callArgs += ', ';
+      if (inTypes[j] === 'int[]') callArgs += 'vector<int>{' + tcs[i].input[j].map(x => x).join(',') + '}';
+      else callArgs += valToLit(tcs[i].input[j], inTypes[j]);
+    }
+    s += '    auto __r = ' + fn + '(' + callArgs + ');\n';
+    s += '    cout << "{\\"index\\":' + i + ',\\"ran\\":true,\\"passed\\":";\n';
+    let compExpr = '';
+    if (outType === 'int[]') {
+      compExpr = '(__r == vector<int>{' + tcs[i].expected.map(x => x).join(',') + '} ? "true" : "false")';
+    } else if (outType === 'int') {
+      compExpr = '(__r == ' + valToLit(tcs[i].expected, outType) + ' ? "true" : "false")';
+    } else if (outType === 'string') {
+      compExpr = '(__r == ' + valToLit(tcs[i].expected, outType) + ' ? "true" : "false")';
+    } else if (outType === 'bool') {
+      compExpr = '(__r == ' + valToLit(tcs[i].expected, outType) + ' ? "true" : "false")';
+    } else {
+      compExpr = '"false"';
+    }
+    s += '    cout << ' + compExpr + ';\n';
+    s += '    cout << ",\\"actual\\":" << __j(__r);\n';
+    s += '    cout << "}" << flush;\n';
+    s += '  } catch (...) {\n';
+    s += '    cout << "{\\"index\\":' + i + ',\\"ran\\":true,\\"passed\\":false,\\"error\\":\\"exception\\"}" << flush;\n';
+    s += '  }\n';
+  }
+  s += '  cout << "]" << endl;\n  return 0;\n}\n';
+  return s;
+}
+
+function genJavaHarness(code, fn, tcs) {
+  const outType = j2t(tcs[0].expected);
+  const inTypes = tcs[0].input.map(v => j2t(v));
+  let s = code + '\n\nclass Main {\n';
+  if (outType === 'int[]') {
+    s += '  static String __j(int[] v) {\n    if (v == null) return "null";\n    StringBuilder sb = new StringBuilder("[");\n    for (int i = 0; i < v.length; i++) { if (i > 0) sb.append(","); sb.append(v[i]); }\n    sb.append("]");\n    return sb.toString();\n  }\n';
+    s += '  static boolean __eq(int[] a, int[] b) {\n    if (a == null && b == null) return true;\n    if (a == null || b == null || a.length != b.length) return false;\n    for (int i = 0; i < a.length; i++) if (a[i] != b[i]) return false;\n    return true;\n  }\n';
+  }
+  s += '  public static void main(String[] args) {\n    StringBuilder __res = new StringBuilder("[");\n';
+  for (let i = 0; i < tcs.length; i++) {
+    if (i > 0) s += '    __res.append(",");\n';
+    s += '    try {\n';
+    let callArgs = '';
+    for (let j = 0; j < inTypes.length; j++) {
+      if (j > 0) callArgs += ', ';
+      if (inTypes[j] === 'int[]') callArgs += 'new int[]{' + tcs[i].input[j].map(x => x).join(',') + '}';
+      else callArgs += valToLit(tcs[i].input[j], inTypes[j]);
+    }
+    s += '      int[] __r = new Solution().' + fn + '(' + callArgs + ');\n';
+    if (outType === 'int[]') {
+      s += '      boolean __p = __eq(__r, new int[]{' + tcs[i].expected.map(x => x).join(',') + '});\n';
+    } else {
+      s += '      boolean __p = __r == ' + valToLit(tcs[i].expected, outType) + ';\n';
+    }
+    s += '      __res.append("{\\"index\\":' + i + ',\\"ran\\":true,\\"passed\\":" + __p + ",\\"actual\\":" + __j(__r) + "}");\n';
+    s += '    } catch (Exception e) {\n';
+    s += '      __res.append("{\\"index\\":' + i + ',\\"ran\\":true,\\"passed\\":false,\\"error\\":\\"" + (e.getMessage() != null ? e.getMessage().replace("\\"","\'") : "null") + "\\"}");\n';
+    s += '    }\n';
+  }
+  s += '    __res.append("]");\n    System.out.println("__RESULT__:" + __res.toString());\n  }\n}\n';
+  return s;
+}
+
+function genCHarness(code, fn, tcs) {
+  const outType = j2t(tcs[0].expected);
+  const inTypes = tcs[0].input.map(v => j2t(v));
+  let s = '#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\n';
+  s += code + '\n\n';
+  if (outType === 'int[]') {
+    s += 'void __j(int* v, int n, char* buf) {\n  if (v == NULL) { strcpy(buf, "null"); return; }\n  buf[0] = \'[\'; int pos = 1;\n  for (int i = 0; i < n; i++) { if (i > 0) buf[pos++] = \',\'; pos += sprintf(buf + pos, "%d", v[i]); }\n  buf[pos++] = \']\'; buf[pos] = 0;\n}\n';
+    s += 'int __eq(int* a, int* b, int n) {\n  if (a == NULL && b == NULL) return 1;\n  if (a == NULL || b == NULL) return 0;\n  for (int i = 0; i < n; i++) if (a[i] != b[i]) return 0;\n  return 1;\n}\n';
+  }
+  s += 'int main() {\n  printf("__RESULT__:[");\n';
+  for (let i = 0; i < tcs.length; i++) {
+    if (i > 0) s += '  printf(",");\n';
+    s += '  {\n';
+    s += '  printf("{\\"index\\":' + i + ',\\"ran\\":true,\\"passed\\":");\n';
+    let callArgs = '';
+    for (let j = 0; j < inTypes.length; j++) {
+      if (j > 0) callArgs += ', ';
+      if (inTypes[j] === 'int[]') {
+        const arr = tcs[i].input[j];
+        callArgs += '(int[]){' + arr.map(x => x).join(',') + '}';
+      } else callArgs += valToLit(tcs[i].input[j], inTypes[j]);
+    }
+    const expLen = Array.isArray(tcs[i].expected) ? tcs[i].expected.length : 1;
+    s += '  int* __r = ' + fn + '(' + callArgs + ');\n';
+    s += '  int __p = __eq(__r, (int[]){' + tcs[i].expected.map(x => x).join(',') + '}, ' + expLen + ');\n';
+    s += '  printf(__p ? "true" : "false");\n';
+    s += '  printf(",\\"actual\\":");\n';
+    s += '  char __buf[256]; __j(__r, ' + expLen + ', __buf); printf("%s", __buf);\n';
+    s += '  printf("}");\n';
+    s += '  }\n';
+  }
+  s += '  printf("]\\n");\n  return 0;\n}\n';
+  return s;
+}
+
+function genSwiftHarness(code, fn, tcs) {
+  const outType = j2t(tcs[0].expected);
+  let s = 'import Foundation\n\n';
+  s += code + '\n\n';
+  if (outType === 'int[]') {
+    s += 'func __j(_ v: [Int]) -> String {\n  if v.isEmpty { return "[]" }\n  return "[" + v.map(String.init).joined(separator: ",") + "]"\n}\n';
+  }
+  s += 'var __res = "["\n';
+  for (let i = 0; i < tcs.length; i++) {
+    if (i > 0) s += '__res += ","\n';
+    s += 'do {\n';
+    let callArgs = '';
+    const inTypes = tcs[i].input.map(v => j2t(v));
+    for (let j = 0; j < inTypes.length; j++) {
+      if (j > 0) callArgs += ', ';
+      if (inTypes[j] === 'int[]') callArgs += '[' + tcs[i].input[j].map(x => x).join(',') + '] as [Int]';
+      else callArgs += valToLit(tcs[i].input[j], inTypes[j]);
+    }
+    s += '  let __r = ' + fn + '(' + callArgs + ')\n';
+    if (outType === 'int[]') {
+      s += '  let __p = __r == [' + tcs[i].expected.map(x => x).join(',') + ']\n';
+    } else {
+      s += '  let __p = __r == ' + valToLit(tcs[i].expected, outType) + '\n';
+    }
+    s += '  __res += "{\\"index\\":' + i + ',\\"ran\\":true,\\"passed\\":" + (__p ? "true" : "false") + ",\\"actual\\":" + __j(__r) + "}"\n';
+    s += '} catch {\n';
+    s += '  __res += "{\\"index\\":' + i + ',\\"ran\\":true,\\"passed\\":false,\\"error\\":\\"exception\\"}"\n';
+    s += '}\n';
+  }
+  s += '__res += "]"\nprint("__RESULT__:" + __res)\n';
+  return s;
+}
+
+function createSandboxWorker(harnessCode) {
+  const blob = new Blob([`self.onmessage=function(e){var logs=[],origLog=console.log;console.log=function(){for(var _len=arguments.length,args=new Array(_len),_key=0;_key<_len;_key++)args[_key]=arguments[_key];logs.push(args.map(String).join(" "))};try{eval(e.data);self.postMessage({success:true,logs})}catch(error){self.postMessage({success:false,error:error.message,logs})}finally{console.log=origLog}};`], { type: "application/javascript" });
+  const url = URL.createObjectURL(blob);
+  const worker = new Worker(url);
+  return { worker, url };
+}
+
+function runWorker(harnessCode, timeoutMs) {
+  return new Promise((resolve, reject) => {
+    const { worker, url } = createSandboxWorker(harnessCode);
+    const timer = setTimeout(() => { worker.terminate(); URL.revokeObjectURL(url); reject(new Error("Execution timed out (> " + (timeoutMs / 1000) + "s)")); }, timeoutMs);
+    worker.onmessage = (e) => { clearTimeout(timer); worker.terminate(); URL.revokeObjectURL(url); resolve(e.data); };
+    worker.onerror = (e) => { clearTimeout(timer); worker.terminate(); URL.revokeObjectURL(url); reject(new Error(e.message || "Worker error")); };
+    worker.postMessage(harnessCode);
+  });
+}
+
+const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:3001'
+  : '';
+
+async function executeViaApi(lang, code) {
+  const resp = await fetch(`${API_BASE}/api/execute`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ source_code: code, language: lang, stdin: "" })
+  });
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({ error: "Execution API error (" + resp.status + ")" }));
+    throw new Error(err.error);
+  }
+  const data = await resp.json();
+  if (data.code !== 0) {
+    throw new Error(data.stderr || "Execution failed");
+  }
+  return { stdout: data.stdout || "", stderr: data.stderr || "" };
+}
+
+function parseTestResults(stdout, testCount) {
+  const marker = "__RESULT__:";
+  const markerIdx = stdout.indexOf(marker);
+  if (markerIdx !== -1) {
+    const jsonStart = markerIdx + marker.length;
+    let depth = 0;
+    let jsonEnd = -1;
+    for (let i = jsonStart; i < stdout.length; i++) {
+      if (stdout[i] === "[") depth++;
+      else if (stdout[i] === "]") {
+        depth--;
+        if (depth === 0) { jsonEnd = i + 1; break; }
+      }
+    }
+    if (jsonEnd === -1) jsonEnd = stdout.length;
+    const jsonStr = stdout.substring(jsonStart, jsonEnd);
+    try {
+      const testResults = JSON.parse(jsonStr);
+      const allPassed = testResults.length > 0 && testResults.every(r => r.passed);
+      const cleanOutput = (stdout.substring(0, markerIdx) + stdout.substring(jsonEnd)).trim();
+      return { allPassed, testResults, rawOutput: cleanOutput };
+    } catch (e) {
+      return { allPassed: false, testResults: Array(testCount).fill({ ran: false, passed: false, error: "Failed to parse test results" }), rawOutput: stdout };
+    }
+  }
+  return { allPassed: false, testResults: Array(testCount).fill({ ran: false, passed: false, error: "No test result marker found in output" }), rawOutput: stdout };
+}
+
+async function executeCode(code, lang, problem) {
+  const testCases = generateTestCases(problem);
+  if (!testCases || testCases.length === 0) {
+    return { allPassed: false, testResults: [], rawOutput: "This problem has no automated test cases." };
+  }
+  const fnName = problem.functionName || "solution";
+  const harnessCode = buildHarnessCode(code, lang, fnName, testCases);
+  let stdout = "", stderr = "";
+  if (lang === "javascript") {
+    try {
+      const result = await runWorker(harnessCode, 5000);
+      if (!result.success) {
+        return { allPassed: false, testResults: testCases.map(() => ({ ran: false, passed: false, error: result.error })), rawOutput: (result.logs || []).join("\n") };
+      }
+      stdout = (result.logs || []).join("\n");
+    } catch (e) {
+      return { allPassed: false, testResults: testCases.map(() => ({ ran: false, passed: false, error: e.message })), rawOutput: e.message };
+    }
+  } else {
+    try {
+      const result = await executeViaApi(lang, harnessCode);
+      stdout = result.stdout;
+      stderr = result.stderr;
+    } catch (e) {
+      return { allPassed: false, testResults: testCases.map(() => ({ ran: false, passed: false, error: e.message })), rawOutput: e.message };
+    }
+  }
+  return parseTestResults(stdout, testCases.length);
+}
+
+function setOutput(text, type) {
+  const el = document.getElementById("quizOutputContent");
+  if (!el) return;
+  if (type === "running") el.innerHTML = '<p class="output-running">⏳ Running code...</p>';
+  else if (type === "error") el.innerHTML = '<pre class="output-error">❌ Error:\n' + text + '</pre>';
+  else if (type === "success") el.innerHTML = '<pre class="output-success">✅ ' + text + '</pre>';
+  else el.innerHTML = '<pre>' + text + '</pre>';
+}
+
+async function runQuizCode() {
   const editor = document.getElementById("codeEditor");
   if (!editor) return;
   const code = editor.value;
-  const output = document.getElementById("quizOutputContent");
-  if (!output) return;
-  if (!code.trim()) { output.innerHTML = '<p class="output-error">❌ Error: Please write some code first.</p>'; return; }
-  output.innerHTML = '<p class="output-running">⏳ Running code...</p>';
+  if (!code.trim()) { setOutput("Please write some code first.", "error"); return; }
+  if (!currentProblem) { setOutput("No problem selected.", "error"); return; }
   const langSelect = document.getElementById("languageSelect");
   const lang = langSelect ? langSelect.value : "javascript";
-  setTimeout(() => { try { const result = executeCode(code, lang); output.innerHTML = `<pre class="output-success">✅ Output:\n${result}</pre>`; } catch (e) { output.innerHTML = `<pre class="output-error">❌ Error:\n${e.message}</pre>`; } }, 500);
+  const problem = currentProblem;
+  const testCases = generateTestCases(problem);
+  if (!testCases || testCases.length === 0) {
+    setOutput("This problem doesn't have automated test cases yet.", "error");
+    return;
+  }
+  renderTestCases(testCases);
+  setOutput("", "running");
+  try {
+    const result = await executeCode(code, lang, problem);
+    renderTestCases(testCases, result.testResults);
+    if (result.allPassed) {
+      setOutput("All tests passed!", "success");
+    } else {
+      const failures = result.testResults.filter(r => !r.passed);
+      const failMsg = failures.length + " / " + result.testResults.length + " tests failed";
+      const out = result.rawOutput ? failMsg + "\n\nConsole output:\n" + result.rawOutput : failMsg;
+      setOutput(out, "error");
+    }
+  } catch (e) {
+    renderTestCases(testCases);
+    setOutput(e.message || "Execution failed", "error");
+  }
 }
 
-function executeCode(code, lang) {
-  if (lang === "javascript") { const match = code.match(/function\s+(\w+)/); if (match) return `Executed successfully. Function "${match[1]}" found.`; return "Code executed (simulation)."; }
-  return `Code executed in ${lang.toUpperCase()} (simulation).`;
-}
-
-function submitQuizCode() {
+async function submitQuizCode() {
   const editor = document.getElementById("codeEditor");
   if (!editor) return;
   const code = editor.value;
   if (!code.trim()) { showNotification("Please write some code before submitting!", "error"); return; }
   if (!currentProblem) { showNotification("No problem selected!", "error"); return; }
-  if (userProgress.completedProblems.includes(currentProblem.id)) { showNotification("Already completed!", "info"); return; }
-  if (!userProgress.submittedSolutions) userProgress.submittedSolutions = {};
+  const problem = currentProblem;
+  if (userProgress.completedProblems.includes(problem.id)) { showNotification("Already completed!", "info"); return; }
   const langSelect = document.getElementById("languageSelect");
-  userProgress.submittedSolutions[currentProblem.id] = {
-    code: code,
-    lang: langSelect ? langSelect.value : 'javascript',
-    date: new Date().toISOString()
-  };
-  userProgress.completedProblems.push(currentProblem.id);
-  const difficulty = currentProblem.difficulty;
-  addXP(getXPForDifficulty(difficulty));
-  updateStreak();
-  recordDailyActivity(1);
-  saveUserData();
-  updateDashboard();
-  updateGamification();
-  initRoadmap();
-  initTopicsSection();
-  renderActivityHeatmap();
-  const submittedId = currentProblem.id;
-  closeQuizEditor();
-  clearEditorDraft(submittedId);
-  showNotification(`🎉 Problem solved! +${getXPForDifficulty(difficulty)} XP`, "success");
+  const lang = langSelect ? langSelect.value : "javascript";
+  const testCases = generateTestCases(problem);
+  if (!testCases || testCases.length === 0) {
+    showNotification("This problem doesn't have automated tests. Submit not available.", "error");
+    return;
+  }
+  showNotification("⏳ Running tests...", "info");
+  try {
+    const result = await executeCode(code, lang, problem);
+    renderTestCases(testCases, result.testResults);
+    if (result.allPassed) {
+      if (!userProgress.submittedSolutions) userProgress.submittedSolutions = {};
+      userProgress.submittedSolutions[problem.id] = { code: code, lang: lang, date: new Date().toISOString() };
+      userProgress.completedProblems.push(problem.id);
+      const difficulty = problem.difficulty;
+      addXP(getXPForDifficulty(difficulty));
+      updateStreak();
+      recordDailyActivity(1);
+      saveUserData();
+      updateDashboard();
+      updateGamification();
+      initRoadmap();
+      initTopicsSection();
+      renderActivityHeatmap();
+      const submittedId = problem.id;
+      closeQuizEditor();
+      clearEditorDraft(submittedId);
+      showNotification("Problem solved! +" + getXPForDifficulty(difficulty) + " XP", "success");
+    } else {
+      const failures = result.testResults.filter(r => !r.passed);
+      setOutput(failures.length + " / " + result.testResults.length + " tests failed. Fix the issues and try again.", "error");
+      showNotification(failures.length + " test(s) failed. Keep trying!", "error");
+    }
+  } catch (e) {
+    renderTestCases(testCases);
+    setOutput(e.message || "Execution failed", "error");
+    showNotification("Execution error: " + (e.message || "Unknown error"), "error");
+  }
 }
 
 function getXPForDifficulty(difficulty) { const map = { easy: 100, medium: 250, hard: 500 }; return map[difficulty.toLowerCase()] || 100; }
@@ -2176,6 +2578,7 @@ function syncScroll() {
   const lineNumbers = document.getElementById("lineNumbers");
   const highlight = document.getElementById('syntaxHighlight');
   if (editor) { if (lineNumbers) lineNumbers.scrollTop = editor.scrollTop; if (highlight) { highlight.scrollTop = editor.scrollTop; highlight.scrollLeft = editor.scrollLeft; } }
+  updateCurrentLineHighlight();
 }
 
 function updateEditorDisplayMode() {
@@ -2406,21 +2809,180 @@ function updateSyntaxHighlight() {
   const code = editor.value;
   const lines = code.split("\n");
   const lang = document.getElementById("languageSelect")?.value || "javascript";
-  const highlighted = lines.map(line => { if (lang === "javascript") return highlightJS(line); return escapeHtml(line); }).join("\n");
+  const highlighters = {
+    javascript: highlightJS,
+    python: highlightPython,
+    java: highlightJava,
+    cpp: highlightCpp,
+    c: highlightC,
+    swift: highlightSwift,
+  };
+  const fn = highlighters[lang] || escapeHtml;
+  const highlighted = lines.map(line => fn(line)).join("\n");
   highlight.innerHTML = highlighted + "\n";
 }
 
 function highlightJS(line) {
-  const regex = /(<[^>]+>)|(\/\/.*$)|("[^"]*"|'[^']*'|`[^`]*`)|(\b(function|const|let|var|return|if|else|for|while|do|break|continue|switch|case|default|try|catch|finally|throw|new|this|class|extends|super|import|export|from|as|async|await|yield|typeof|instanceof|void|delete|in|of|with|debugger|true|false|null|undefined)\b)|((?<!\.[a-zA-Z])\b(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?\b(?!\.[a-zA-Z]))/g;
+  const kwType = {
+    function:'decl',const:'decl',let:'decl',var:'decl',class:'decl',extends:'decl',
+    import:'decl',export:'decl',from:'decl',as:'decl',async:'decl',await:'decl',
+    yield:'decl',new:'decl',this:'decl',super:'decl',
+    return:'flow',if:'flow',else:'flow',for:'flow',while:'flow',do:'flow',
+    break:'flow',continue:'flow',switch:'flow',case:'flow',default:'flow',
+    try:'flow',catch:'flow',finally:'flow',throw:'flow',typeof:'flow',
+    instanceof:'flow',void:'flow',delete:'flow',in:'flow',of:'flow',
+    with:'flow',debugger:'flow',
+    true:'literal',false:'literal',null:'literal',undefined:'literal',
+  };
+  const regex = /(<[^>]+>)|(\/\/.*$)|("[^"]*"|'[^']*'|`[^`]*`)|(\b(?:function|const|let|var|return|if|else|for|while|do|break|continue|switch|case|default|try|catch|finally|throw|new|this|class|extends|super|import|export|from|as|async|await|yield|typeof|instanceof|void|delete|in|of|with|debugger|true|false|null|undefined)\b)|((?<!\.[a-zA-Z])\b(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?\b(?!\.[a-zA-Z]))/g;
   let result = escapeHtml(line);
   return result.replace(regex, (m, tag, comment, str, kw, num) => {
     if (tag) return tag;
     if (comment) return '<span class="token comment">' + comment + '</span>';
     if (str) return '<span class="token string">' + str + '</span>';
-    if (kw) return '<span class="token keyword">' + kw + '</span>';
+    if (kw) return '<span class="token keyword keyword-' + (kwType[kw]||'flow') + '">' + kw + '</span>';
     if (num) return '<span class="token number">' + num + '</span>';
     return m;
   });
+}
+
+function highlightPython(line) {
+  const kwType = {
+    class:'decl',def:'decl',lambda:'decl',async:'decl',await:'decl',
+    global:'decl',nonlocal:'decl',with:'decl',as:'decl',from:'decl',import:'decl',
+    break:'flow',continue:'flow',for:'flow',while:'flow',if:'flow',elif:'flow',
+    else:'flow',return:'flow',yield:'flow',raise:'flow',try:'flow',except:'flow',
+    finally:'flow',assert:'flow',pass:'flow',del:'flow',in:'flow',is:'flow',
+    not:'flow',and:'flow',or:'flow',
+    True:'literal',False:'literal',None:'literal',
+  };
+  const regex = /(#[^]*$)|("[^"]*"|'[^']*')|(\b(?:False|None|True|and|as|assert|async|await|break|class|continue|def|del|elif|else|except|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|raise|return|try|while|with|yield)\b)|((?<!\.[a-zA-Z])\b(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?\b(?!\.[a-zA-Z]))/g;
+  let result = escapeHtml(line);
+  return result.replace(regex, (m, comment, str, kw, num) => {
+    if (comment) return '<span class="token comment">' + comment + '</span>';
+    if (str) return '<span class="token string">' + str + '</span>';
+    if (kw) return '<span class="token keyword keyword-' + (kwType[kw]||'flow') + '">' + kw + '</span>';
+    if (num) return '<span class="token number">' + num + '</span>';
+    return m;
+  });
+}
+
+function highlightJava(line) {
+  const kwType = {
+    class:'decl',interface:'decl',enum:'decl',extends:'decl',implements:'decl',
+    abstract:'decl',final:'decl',static:'decl',native:'decl',transient:'decl',
+    volatile:'decl',synchronized:'decl',strictfp:'decl',package:'decl',
+    import:'decl',new:'decl',this:'decl',super:'decl',
+    boolean:'type',byte:'type',char:'type',short:'type',int:'type',
+    long:'type',float:'type',double:'type',void:'type',
+    if:'flow',else:'flow',for:'flow',while:'flow',do:'flow',break:'flow',
+    continue:'flow',switch:'flow',case:'flow',default:'flow',return:'flow',
+    throw:'flow',throws:'flow',try:'flow',catch:'flow',finally:'flow',
+    assert:'flow',instanceof:'flow',goto:'flow',const:'flow',
+    public:'flow',private:'flow',protected:'flow',
+    true:'literal',false:'literal',null:'literal',
+  };
+  const regex = /(\/\/.*$|\/\*[\s\S]*?\*\/)|("[^"]*"|'[^']*')|(\b(?:abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|extends|final|finally|float|for|goto|if|implements|import|instanceof|int|interface|long|native|new|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|void|volatile|while|true|false|null)\b)|(@\w+)|((?<!\.[a-zA-Z])\b(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?[fFLl]?\b(?!\.[a-zA-Z]))/g;
+  let result = escapeHtml(line);
+  return result.replace(regex, (m, comment, str, kw, ann, num) => {
+    if (comment) return '<span class="token comment">' + comment + '</span>';
+    if (str) return '<span class="token string">' + str + '</span>';
+    if (kw) return '<span class="token keyword keyword-' + (kwType[kw]||'flow') + '">' + kw + '</span>';
+    if (ann) return '<span class="token keyword keyword-decl">' + ann + '</span>';
+    if (num) return '<span class="token number">' + num + '</span>';
+    return m;
+  });
+}
+
+function highlightCpp(line) {
+  const kwType = {
+    class:'decl',struct:'decl',enum:'decl',union:'decl',namespace:'decl',
+    using:'decl',template:'decl',typename:'decl',typedef:'decl',new:'decl',
+    this:'decl',friend:'decl',virtual:'decl',override:'decl',explicit:'decl',
+    mutable:'decl',inline:'decl',constexpr:'decl',decltype:'decl',static:'decl',
+    extern:'decl',const:'decl',volatile:'decl',register:'decl',auto:'decl',
+    operator:'decl',export:'decl',
+    bool:'type',char:'type',int:'type',float:'type',double:'type',
+    long:'type',short:'type',signed:'type',unsigned:'type',void:'type',
+    if:'flow',else:'flow',for:'flow',while:'flow',do:'flow',break:'flow',
+    continue:'flow',switch:'flow',case:'flow',default:'flow',return:'flow',
+    throw:'flow',try:'flow',catch:'flow',noexcept:'flow',sizeof:'flow',
+    typeid:'flow',static_cast:'flow',dynamic_cast:'flow',reinterpret_cast:'flow',
+    const_cast:'flow',static_assert:'flow',goto:'flow',
+    public:'flow',private:'flow',protected:'flow',
+    true:'literal',false:'literal',nullptr:'literal',
+  };
+  const regex = /(\/\/.*$|\/\*[\s\S]*?\*\/)|("[^"]*"|'[^']*')|(#.*$)|(\b(?:alignas|alignof|auto|bool|break|case|catch|char|class|const|constexpr|continue|decltype|default|delete|do|double|else|enum|explicit|export|extern|false|float|for|friend|goto|if|include|inline|int|long|mutable|namespace|new|noexcept|nullptr|operator|override|private|protected|public|register|reinterpret_cast|return|short|signed|sizeof|static|static_assert|static_cast|struct|switch|template|this|throw|true|try|typedef|typeid|typename|union|unsigned|using|virtual|void|volatile|while)\b)|((?<!\.[a-zA-Z])\b(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?[uUlLfF]?\b(?!\.[a-zA-Z]))/g;
+  let result = escapeHtml(line);
+  return result.replace(regex, (m, comment, str, pre, kw, num) => {
+    if (comment) return '<span class="token comment">' + comment + '</span>';
+    if (str) return '<span class="token string">' + str + '</span>';
+    if (pre) return '<span class="token comment">' + pre + '</span>';
+    if (kw) return '<span class="token keyword keyword-' + (kwType[kw]||'flow') + '">' + kw + '</span>';
+    if (num) return '<span class="token number">' + num + '</span>';
+    return m;
+  });
+}
+
+function highlightC(line) {
+  const kwType = {
+    struct:'decl',union:'decl',enum:'decl',typedef:'decl',static:'decl',
+    extern:'decl',const:'decl',volatile:'decl',register:'decl',auto:'decl',
+    char:'type',int:'type',float:'type',double:'type',long:'type',
+    short:'type',signed:'type',unsigned:'type',void:'type',
+    if:'flow',else:'flow',for:'flow',while:'flow',do:'flow',break:'flow',
+    continue:'flow',switch:'flow',case:'flow',default:'flow',return:'flow',
+    sizeof:'flow',goto:'flow',
+    NULL:'literal',
+  };
+  const regex = /(\/\/.*$|\/\*[\s\S]*?\*\/)|("[^"]*"|'[^']*')|(#.*$)|(\b(?:auto|break|case|char|const|continue|default|do|double|else|enum|extern|float|for|goto|if|include|int|long|register|return|short|signed|sizeof|static|struct|switch|typedef|union|unsigned|void|volatile|while|NULL)\b)|((?<!\.[a-zA-Z])\b(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?[uUlL]?\b(?!\.[a-zA-Z]))/g;
+  let result = escapeHtml(line);
+  return result.replace(regex, (m, comment, str, pre, kw, num) => {
+    if (comment) return '<span class="token comment">' + comment + '</span>';
+    if (str) return '<span class="token string">' + str + '</span>';
+    if (pre) return '<span class="token comment">' + pre + '</span>';
+    if (kw) return '<span class="token keyword keyword-' + (kwType[kw]||'flow') + '">' + kw + '</span>';
+    if (num) return '<span class="token number">' + num + '</span>';
+    return m;
+  });
+}
+
+function highlightSwift(line) {
+  const kwType = {
+    class:'decl',struct:'decl',enum:'decl',protocol:'decl',extension:'decl',
+    func:'decl',init:'decl',deinit:'decl',subscript:'decl',typealias:'decl',
+    associatedtype:'decl',let:'decl',var:'decl',import:'decl',operator:'decl',
+    open:'decl',public:'decl',internal:'decl',fileprivate:'decl',private:'decl',
+    static:'decl',inout:'decl',
+    if:'flow',else:'flow',for:'flow',while:'flow',repeat:'flow',switch:'flow',
+    case:'flow',default:'flow',break:'flow',continue:'flow',return:'flow',
+    throw:'flow',throws:'flow',rethrows:'flow',try:'flow',catch:'flow',
+    defer:'flow',guard:'flow',where:'flow',in:'flow',as:'flow',is:'flow',
+    fallthrough:'flow',do:'flow',
+    true:'literal',false:'literal',nil:'literal',self:'literal',Self:'literal',super:'literal',
+  };
+  const regex = /(\/\/.*$|\/\*[\s\S]*?\*\/)|("[^"]*"|"""(?:(?!""").)*""")|(\b(?:associatedtype|class|deinit|enum|extension|fileprivate|func|import|init|inout|internal|let|open|operator|private|protocol|public|static|struct|subscript|typealias|var|break|case|continue|default|defer|do|else|fallthrough|for|guard|if|in|repeat|return|switch|where|while|as|catch|false|is|nil|rethrows|super|self|Self|throw|throws|true|try)\b)|((?<!\.[a-zA-Z])\b(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?\b(?!\.[a-zA-Z]))/g;
+  let result = escapeHtml(line);
+  return result.replace(regex, (m, comment, str, kw, num) => {
+    if (comment) return '<span class="token comment">' + comment + '</span>';
+    if (str) return '<span class="token string">' + str + '</span>';
+    if (kw) return '<span class="token keyword keyword-' + (kwType[kw]||'flow') + '">' + kw + '</span>';
+    if (num) return '<span class="token number">' + num + '</span>';
+    return m;
+  });
+}
+
+function updateCurrentLineHighlight() {
+  const editor = document.getElementById('codeEditor');
+  const indicator = document.getElementById('currentLineIndicator');
+  if (!editor || !indicator) return;
+  const textBefore = editor.value.substring(0, editor.selectionStart);
+  const lineNumber = textBefore.split('\n').length;
+  const lineHeight = parseFloat(getComputedStyle(editor).lineHeight) || 22.4;
+  const paddingTop = parseFloat(getComputedStyle(editor).paddingTop) || 16;
+  const scrollTop = editor.scrollTop;
+  indicator.style.top = (paddingTop + (lineNumber - 1) * lineHeight - scrollTop) + 'px';
+  indicator.style.height = lineHeight + 'px';
 }
 
 // Initialize quiz editor
@@ -2432,6 +2994,9 @@ function initializeQuizEditor() {
   const syncEditorState = () => { updateSyntaxHighlight(); updateLineNumbers(); syncScroll(); };
   editor.addEventListener('input', () => { syncEditorState(); if (currentProblem) saveEditorDraft(currentProblem.id, editor.value); });
   editor.addEventListener('scroll', syncScroll);
+  editor.addEventListener('keyup', updateCurrentLineHighlight);
+  editor.addEventListener('click', updateCurrentLineHighlight);
+  editor.addEventListener('focus', updateCurrentLineHighlight);
   editor.addEventListener('keydown', (e) => {
     if (e.key === 'Tab') { e.preventDefault(); const start = editor.selectionStart; const end = editor.selectionEnd; const value = editor.value; editor.value = `${value.slice(0, start)}    ${value.slice(end)}`; editor.selectionStart = editor.selectionEnd = start + 4; syncEditorState(); }
     else if (e.ctrlKey && e.key === 'Enter') { e.preventDefault(); runQuizCode(); }
@@ -2439,6 +3004,33 @@ function initializeQuizEditor() {
   });
   if (languageSelect) languageSelect.addEventListener('change', () => { const editor = document.getElementById('codeEditor'); if (editor && currentProblem) { editor.value = getDefaultCode(languageSelect.value, currentProblem); editor.scrollTop = 0; editor.scrollLeft = 0; } syncEditorState(); updateEditorDisplayMode(); });
   syncEditorState();
+  initEditorZoom(editor);
+}
+
+function initEditorZoom(editor) {
+  const zoomMin = 10, zoomMax = 28;
+  const container = editor.closest('.code-editor-container') || editor.parentElement;
+  let fontSize = parseInt(localStorage.getItem('editorFontSize')) || 14;
+  const applyZoom = (size) => {
+    size = Math.min(zoomMax, Math.max(zoomMin, size));
+    fontSize = size;
+    container.style.setProperty('--editor-font-size', size + 'px');
+    localStorage.setItem('editorFontSize', size);
+    if (typeof updateLineNumbers === 'function') updateLineNumbers();
+  };
+  applyZoom(fontSize);
+  editor.addEventListener('wheel', (e) => {
+    if (!e.ctrlKey && !e.metaKey) return;
+    e.preventDefault();
+    applyZoom(fontSize + (e.deltaY > 0 ? -1 : 1));
+  }, { passive: false });
+  editor.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey) {
+      if (e.key === '=' || e.key === '+') { e.preventDefault(); applyZoom(fontSize + 1); }
+      else if (e.key === '-') { e.preventDefault(); applyZoom(fontSize - 1); }
+      else if (e.key === '0') { e.preventDefault(); applyZoom(14); }
+    }
+  });
 }
 
 if (document.readyState === 'loading') window.addEventListener('DOMContentLoaded', initializeQuizEditor);
