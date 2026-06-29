@@ -3250,13 +3250,12 @@ if (process.env.VERCEL !== "1" && process.env.NODE_ENV !== "test") {
         const url = `http://${host}:${port}`;
         console.log(`Server running at ${url}`);
         if (!process.env.SESSION_SECRET) {
-          if (process.env.NODE_ENV === "production") {
-            console.error("FATAL: SESSION_SECRET is required in production mode.");
-            process.exit(1);
-          }
-          console.warn(
-            "Using a development SESSION_SECRET. Set SESSION_SECRET before deploying.",
+          // Fail closed in every environment — a missing secret means tokens
+          // would be signed with a forgeable, hardcoded fallback.
+          console.error(
+            "FATAL: SESSION_SECRET is required. Set it in the environment before starting the server.",
           );
+          process.exit(1);
         }
       });
 

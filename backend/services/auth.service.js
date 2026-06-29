@@ -84,11 +84,15 @@ function fromBase64Url(input) {
 }
 
 function sessionSecret() {
-  if (process.env.SESSION_SECRET) return process.env.SESSION_SECRET;
-  if (process.env.NODE_ENV === "production") {
-    throw new Error("SESSION_SECRET is required in production.");
+  const secret = process.env.SESSION_SECRET;
+  if (!secret) {
+    // Fail closed: never fall back to a hardcoded secret, regardless of NODE_ENV.
+    // A known fallback would let anyone forge session JWTs.
+    throw new Error(
+      "SESSION_SECRET is required. Set it in the environment before starting the server.",
+    );
   }
-  return "dev-only-change-me-with-SESSION_SECRET-before-deploying";
+  return secret;
 }
 
 function sign(value) {

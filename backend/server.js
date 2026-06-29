@@ -344,11 +344,15 @@ function fromBase64Url(input) {
 }
 
 function sessionSecret() {
-  if (process.env.SESSION_SECRET) return process.env.SESSION_SECRET;
-  if (process.env.NODE_ENV === "production") {
-    throw new Error("SESSION_SECRET is required in production.");
+  const secret = process.env.SESSION_SECRET;
+  if (!secret) {
+    // Fail closed: never fall back to a hardcoded secret, regardless of NODE_ENV.
+    // A known fallback would let anyone forge session JWTs.
+    throw new Error(
+      "SESSION_SECRET is required. Set it in the environment before starting the server.",
+    );
   }
-  return "dev-only-change-me-with-SESSION_SECRET-before-deploying";
+  return secret;
 }
 
 function sign(value) {
@@ -1646,13 +1650,12 @@ if (process.env.VERCEL !== "1") {
         const url = `http://${host}:${port}`;
         console.log(`Server running at ${url}`);
         if (!process.env.SESSION_SECRET) {
-          if (process.env.NODE_ENV === "production") {
-            console.error("FATAL: SESSION_SECRET is required in production mode.");
-            process.exit(1);
-          }
-          console.warn(
-            "Using a development SESSION_SECRET. Set SESSION_SECRET before deploying.",
+          // Fail closed in every environment — a missing secret means tokens
+          // would be signed with a forgeable, hardcoded fallback.
+          console.error(
+            "FATAL: SESSION_SECRET is required. Set it in the environment before starting the server.",
           );
+          process.exit(1);
         }
       });
     })
