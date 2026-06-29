@@ -4,10 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Algo Infinity Verse - Master DSA &amp; Crack Interviews</title>
+
+    <!-- SEO / Social metadata -->
+    <meta
+      name="description"
+      content="Algo Infinity Verse is an interactive DSA learning platform — master data structures and algorithms and crack technical interviews with hands-on visualizers, quizzes, and coding practice."
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Algo Infinity Verse" />
+    <meta property="og:title" content="Algo Infinity Verse - Master DSA &amp; Crack Interviews" />
+    <meta
+      property="og:description"
+      content="Master DSA and crack interviews with interactive visualizers, quizzes, and coding practice."
+    />
+    <meta property="og:image" content="/images/banner.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Algo Infinity Verse - Master DSA &amp; Crack Interviews" />
+    <meta
+      name="twitter:description"
+      content="Master DSA and crack interviews with interactive visualizers, quizzes, and coding practice."
+    />
+    <meta name="twitter:image" content="/images/banner.png" />
+
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#38bdf8" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="/pages/learning/rust-learning.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Poppins:wght@300;400;500;600;700&amp;family=Fira+Code:wght@400;500;600&amp;display=swap"
       rel="stylesheet"
@@ -15,13 +40,6 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css"
-      integrity="sha512-W/zrbCncQnky/EzL+/AYwTtosvrM+YG/V6piQLSe2HuKS6cmbw89kjYkp3tWFn1dkWV7L1ruvJyKbLz73Vlgfg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
     />
     <script type="importmap">
     {
@@ -49,6 +67,9 @@
     </script>
 </head>
   <body data-page="index">
+    <!-- Skip to main content (accessibility) -->
+    <a href="#main" class="skip-link">Skip to content</a>
+
     <!-- Offline Status Banner -->
     <div id="offline-banner" class="offline-banner hidden" aria-live="polite">
       <i class="fas fa-wifi-slash"></i> You are currently offline. Some features may be limited, but cached content is available.
@@ -78,6 +99,8 @@
     <!-- Navigation Bar (loaded from partial) -->
     <div id="navbar-placeholder"></div>
 
+    <!-- Main content landmark -->
+    <main id="main" tabindex="-1">
     <!-- Hero Section -->
     <section id="home" class="hero">
       <div class="hero-background">
@@ -1794,6 +1817,8 @@
         <button id="reset-btn" class="btn btn-secondary">Reset</button>
     </div>
 </section>
+    </main>
+
     <!-- Footer -->
     <div id="footer-placeholder"></div>
 
