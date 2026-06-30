@@ -41,9 +41,38 @@
         
         <!-- Profile Header -->
         <header class="profile-header glass-card" style="position: relative;">
-            <div class="profile-avatar-large">
-                <span class="avatar-icon">🚀</span>
+            <!-- Avatar Container - FIXED for mobile -->
+            <div class="profile-avatar-wrapper">
+                <div class="profile-avatar-large" id="profileAvatarWrapper">
+                    <img 
+                        id="profileAvatarImage" 
+                        class="avatar-preview" 
+                        alt="Profile avatar"
+                        style="display: none;"
+                    >
+                    <span class="avatar-icon" id="profileAvatarEmoji">🚀</span>
+                </div>
+                <!-- Upload Overlay (clickable) -->
+                <button
+                    type="button"
+                    class="avatar-upload-overlay"
+                    id="avatarUploadOverlay"
+                    aria-controls="avatarFileInput"
+                    title="Change avatar"
+                >
+                    <i class="fas fa-camera"></i>
+                    <span>Change</span>
+                </button>
+                <!-- Hidden file input -->
+                <input 
+                    type="file" 
+                    id="avatarFileInput" 
+                    class="avatar-file-input" 
+                    accept="image/*"
+                    aria-label="Upload profile picture"
+                >
             </div>
+            
             <div class="profile-user-info">
                 <h1 id="userName">Learner</h1>
                 <p class="profile-level" id="userLevel">Level 1 - Beginner</p>
