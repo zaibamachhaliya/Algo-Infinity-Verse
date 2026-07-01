@@ -814,6 +814,12 @@ function unlockBodyScroll() {
 let navbarInitialized = false;
 
 function initNavbar() {
+  const homeLink = document.querySelector('.nav-link[href="/index.html#home"]');
+  if (homeLink) {
+    const isHomePage = document.body.getAttribute('data-page') === 'index';
+    homeLink.closest('.nav-item').style.display = isHomePage ? 'none' : '';
+  }
+
   const menuToggle = document.getElementById("menuToggle");
   const navLinks = document.getElementById("navLinks");
   if (!menuToggle || !navLinks || navbarInitialized) return;
