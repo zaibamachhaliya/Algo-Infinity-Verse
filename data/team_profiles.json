@@ -106,5 +106,14 @@
     "members": [],
     "version": 2,
     "updatedAt": "2026-07-04T06:07:30.016Z"
+  },
+  "team-owner-1783147061802": {
+    "id": "team-owner-1783147061802",
+    "ownerId": "userA-1783147061802",
+    "name": "A Team",
+    "description": "secret",
+    "members": [],
+    "version": 2,
+    "updatedAt": "2026-07-04T06:37:41.811Z"
   }
 }

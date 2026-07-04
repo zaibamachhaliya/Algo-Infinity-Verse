@@ -8486,9 +8486,6 @@ html.light-mode .dropdown-menu {
     font-size: 0.75rem;
   }
 
-  .quiz-problem-panel .test-cases-container,
-  .test-cases-container {}
-
   .quiz-problem-panel {
     padding: 1rem 0.75rem;
   }
@@ -8541,9 +8538,6 @@ html.light-mode .dropdown-menu {
   .output-content {
     max-height: 80px;
   }
-
-  .quiz-problem-panel .test-cases-container,
-  .test-cases-container {}
 
   .quiz-problem-panel {
     padding: 0.75rem 1rem;
@@ -10870,4 +10864,112 @@ body.modal-open {
 
 }
 
+}
+
+.contributors-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 0 24px;
+  padding: 16px 20px;
+  background: #1f2937;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.light-mode .contributors-controls {
+  background: #f3f4f6;
+}
+
+.search-section {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px 16px;
+  border: 2px solid #374151;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #111827;
+  color: #f3f4f6;
+  transition: border-color 0.3s;
+}
+
+.light-mode .search-input {
+  background: #ffffff;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.search-input:focus {
+  border-color: #667eea;
+  outline: none;
+}
+
+.clear-btn {
+  padding: 10px 18px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.clear-btn:hover {
+  background: #dc2626;
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-section label {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.light-mode .filter-section label {
+  color: #6b7280;
+}
+
+.filter-select {
+  padding: 10px 16px;
+  border: 2px solid #374151;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #111827;
+  color: #f3f4f6;
+  cursor: pointer;
+}
+
+.light-mode .filter-select {
+  background: #ffffff;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.filter-select:focus {
+  border-color: #667eea;
+  outline: none;
+}
+
+.contributor-card.hidden {
+  display: none;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px;
+  color: #9ca3af;
+  font-size: 16px;
+  grid-column: 1 / -1;
 }

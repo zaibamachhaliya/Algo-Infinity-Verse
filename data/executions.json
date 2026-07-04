@@ -366,5 +366,37 @@
     "error": null,
     "createdAt": "2026-07-04T06:14:56.751Z",
     "variableSnapshots": []
+  },
+  {
+    "id": "efa8ce59-ebf1-4aa8-9783-9bcbede8e2ad",
+    "userId": "guest-1c40a24e-2f61-4cab-8468-55900ab58d43",
+    "sourceCode": "// brackets: string of '()', '{}', '[]' characters\n// returns: true if every opening bracket has a matching closing bracket in the correct order, false otherwise\nfunction isValid(brackets) {\n    \n}\n\nconst __TC__ = [{\"input\":[\"()\"],\"expected\":true},{\"input\":[\"()[]{}\"],\"expected\":true},{\"input\":[\"(]\"],\"expected\":false},{\"input\":[\"([)]\"],\"expected\":false},{\"input\":[\"{[]}\"],\"expected\":true}];\nconst __RES__ = [];\nfor (let i = 0; i < __TC__.length; i++) {\n  const tc = __TC__[i];\n  try {\n    let result;\n    if (false) {\n      const instance = new isValid(...tc.input);\n      if (tc.methods && Array.isArray(tc.methods)) {\n        result = instance;\n        for (const m of tc.methods) {\n          result = instance[m[0]](...m.slice(1));\n        }\n      } else {\n        result = instance;\n      }\n    } else {\n      result = isValid(...tc.input);\n    }\n    const passed = false ? (tc.methods ? JSON.stringify(result) === JSON.stringify(tc.expected) : true) : JSON.stringify(result) === JSON.stringify(tc.expected);\n    __RES__.push({ index: i, ran: true, passed, actual: false ? (tc.methods ? result : \"instance\") : result, expected: tc.expected, input: tc.input, error: null });\n  } catch (e) {\n    __RES__.push({ index: i, ran: true, passed: false, actual: null, expected: tc.expected, input: tc.input, error: e.message });\n  }\n}\nconsole.log(\"__RESULT__:\" + JSON.stringify(__RES__));",
+    "originalCode": "// brackets: string of '()', '{}', '[]' characters\n// returns: true if every opening bracket has a matching closing bracket in the correct order, false otherwise\nfunction isValid(brackets) {\n    \n}",
+    "language": "javascript",
+    "stdin": "",
+    "stdout": "__RESULT__:[{\"index\":0,\"ran\":true,\"passed\":false,\"expected\":true,\"input\":[\"()\"],\"error\":null},{\"index\":1,\"ran\":true,\"passed\":false,\"expected\":true,\"input\":[\"()[]{}\"],\"error\":null},{\"index\":2,\"ran\":true,\"passed\":false,\"expected\":false,\"input\":[\"(]\"],\"error\":null},{\"index\":3,\"ran\":true,\"passed\":false,\"expected\":false,\"input\":[\"([)]\"],\"error\":null},{\"index\":4,\"ran\":true,\"passed\":false,\"expected\":true,\"input\":[\"{[]}\"],\"error\":null}]\n",
+    "stderr": "",
+    "exitCode": 0,
+    "cpuTime": "0.024",
+    "memory": 8088,
+    "error": null,
+    "createdAt": "2026-07-04T06:37:08.612Z",
+    "variableSnapshots": []
+  },
+  {
+    "id": "4dcc5a99-bc03-4514-9fd5-6027a840a53e",
+    "userId": "guest-4bec0c03-a913-4ffe-a00d-71fe6507a88f",
+    "sourceCode": "class LRUCache {\n    constructor(capacity) {\n        \n    }\n\n    get(key) {\n        \n    }\n\n    put(key, value) {\n        \n    }\n}\n\nconst __TC__ = [{\"input\":[2],\"methods\":[[\"put\",1,1],[\"put\",2,2],[\"get\",1]],\"expected\":1},{\"input\":[2],\"methods\":[[\"put\",1,1],[\"put\",2,2],[\"get\",2]],\"expected\":2},{\"input\":[2],\"methods\":[[\"put\",1,1],[\"put\",2,2],[\"put\",3,3],[\"get\",1]],\"expected\":-1},{\"input\":[2],\"methods\":[[\"put\",2,1],[\"put\",2,2],[\"get\",2]],\"expected\":2}];\nconst __RES__ = [];\nfor (let i = 0; i < __TC__.length; i++) {\n  const tc = __TC__[i];\n  try {\n    let result;\n    if (true) {\n      const instance = new LRUCache(...tc.input);\n      if (tc.methods && Array.isArray(tc.methods)) {\n        result = instance;\n        for (const m of tc.methods) {\n          result = instance[m[0]](...m.slice(1));\n        }\n      } else {\n        result = instance;\n      }\n    } else {\n      result = LRUCache(...tc.input);\n    }\n    const passed = true ? (tc.methods ? JSON.stringify(result) === JSON.stringify(tc.expected) : true) : JSON.stringify(result) === JSON.stringify(tc.expected);\n    __RES__.push({ index: i, ran: true, passed, actual: true ? (tc.methods ? result : \"instance\") : result, expected: tc.expected, input: tc.input, error: null });\n  } catch (e) {\n    __RES__.push({ index: i, ran: true, passed: false, actual: null, expected: tc.expected, input: tc.input, error: e.message });\n  }\n}\nconsole.log(\"__RESULT__:\" + JSON.stringify(__RES__));",
+    "originalCode": "class LRUCache {\n    constructor(capacity) {\n        \n    }\n\n    get(key) {\n        \n    }\n\n    put(key, value) {\n        \n    }\n}",
+    "language": "javascript",
+    "stdin": "",
+    "stdout": "__RESULT__:[{\"index\":0,\"ran\":true,\"passed\":false,\"expected\":1,\"input\":[2],\"error\":null},{\"index\":1,\"ran\":true,\"passed\":false,\"expected\":2,\"input\":[2],\"error\":null},{\"index\":2,\"ran\":true,\"passed\":false,\"expected\":-1,\"input\":[2],\"error\":null},{\"index\":3,\"ran\":true,\"passed\":false,\"expected\":2,\"input\":[2],\"error\":null}]\n",
+    "stderr": "",
+    "exitCode": 0,
+    "cpuTime": "0.024",
+    "memory": 7844,
+    "error": null,
+    "createdAt": "2026-07-04T06:44:37.278Z",
+    "variableSnapshots": []
   }
 ]

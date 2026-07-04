@@ -9,6 +9,17 @@ import { extractResumeText } from "./resume-analyzer/parser.js";
 import { calculateATS } from "./resume-analyzer/atsScore.js";
 import { findMissingSkills } from "./resume-analyzer/skills.js";
 import { getSuggestions } from "./resume-analyzer/suggestions.js";
+import { setupApiRoutes } from "./routes/apiRoutes.js";
+import {
+  normalizePathname,
+  sendJson,
+  redirect,
+  getSession,
+  readUsers,
+  isProtectedRoute,
+  validateRequest,
+  clearSessionCookie,
+} from "./utils/helpers.js";
 
 const MAX_RESUME_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 const upload = multer({
@@ -21,7 +32,7 @@ const __dirname = path.dirname(__filename);
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, "data");
 const USERS_FILE = path.join(DATA_DIR, "users.json");
-const CodingPersonalityAnalyzer = require('./personalityAnalyzer.js');
+const CodingPersonalityAnalyzer = require("./personalityAnalyzer.js");
 const MEMORY_FILE = path.join(DATA_DIR, "memory.json");
 const SESSION_COOKIE = "aiv_session";
 const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
@@ -105,9 +116,9 @@ async function normalizeAuthDelay() {
   return new Promise((resolve) => setTimeout(resolve, 500));
 }
 // ── Login Rate Limiting (failed attempts only) ──────────────────────────────
-const LOGIN_RATE_LIMIT = 5;          // max failed attempts before lockout
+const LOGIN_RATE_LIMIT = 5; // max failed attempts before lockout
 const LOGIN_WINDOW_MS = 15 * 60 * 1000; // 15-minute sliding window
-const loginFailures = new Map();     // identifier → [timestamp, ...]
+const loginFailures = new Map(); // identifier → [timestamp, ...]
 
 // Periodic sweeper — mirrors the signup sweeper to prevent unbounded growth.
 const _loginSweeper = setInterval(() => {
@@ -443,14 +454,56 @@ function validateSignup({ name, email, password, confirmPassword }) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
     return "Enter a valid email address.";
   }
-  if (rawPassword.length < 8) return "Password must be at least 8 characters.";
-  if (
-    !/[a-z]/.test(rawPassword) ||
-    !/[A-Z]/.test(rawPassword) ||
-    !/\d/.test(rawPassword)
-  ) {
-    return "Password must include uppercase, lowercase, and a number.";
+
+  // Strong Password Validation
+  if (rawPassword.length < 8) {
+    return "Password must be at least 8 characters long.";
   }
+  if (rawPassword.length > 64) {
+    return "Password must not exceed 64 characters.";
+  }
+  if (!/[a-z]/.test(rawPassword)) {
+    return "Password must include at least one lowercase letter.";
+  }
+  if (!/[A-Z]/.test(rawPassword)) {
+    return "Password must include at least one uppercase letter.";
+  }
+  if (!/\d/.test(rawPassword)) {
+    return "Password must include at least one number.";
+  }
+  if (!/[!@#$%^&*()_+\-=\[\]{};:'"|,.<>?/~`]/.test(rawPassword)) {
+    return "Password must include at least one special character (!@#$%^&* etc.).";
+  }
+
+  // Common weak passwords check
+  const commonPasswords = [
+    "password123",
+    "password1234",
+    "password12345",
+    "12345678",
+    "123456789",
+    "qwerty123",
+    "qwertyuiop",
+    "admin123",
+    "letmein123",
+    "welcome123",
+    "monkey123",
+    "1234567890",
+    "abcdefgh",
+    "abc12345",
+    "password1",
+    "passw0rd",
+    "p@ssw0rd",
+    "P@ssw0rd",
+    "Password123",
+    "Password123!",
+    "Admin@123",
+    "admin@123",
+  ];
+  if (commonPasswords.includes(rawPassword.toLowerCase())) {
+    return "Password is too common or weak. Please choose a stronger password.";
+  }
+
   if (rawPassword !== rawConfirm) return "Passwords do not match.";
   return null;
 }
@@ -509,9 +562,7 @@ async function authorizeRequest(req, pathname) {
   if (!useFirestore && !String(session.sub).startsWith("guest-")) {
     const users = await readUsers();
 
-    const user = users.find(
-      (u) => u.id === session.sub
-    );
+    const user = users.find((u) => u.id === session.sub);
 
     if (!user || user.isDeactivated) {
       return {
@@ -541,468 +592,7 @@ function validateRequest(req) {
   return { valid: true };
 }
 
-async function handleApi(req, res, pathname) {
-  if (pathname === "/api/analyze-resume" && req.method === "POST") {
-    try {
-      await new Promise((resolve, reject) => {
-        upload(req, res, (err) => {
-          if (err) reject(err);
-          else resolve();
-        });
-      });
 
-      if (!req.file) {
-        return sendJson(res, 400, { error: "No resume file uploaded." });
-      }
-
-      const text = await extractResumeText(req.file);
-      const atsScore = calculateATS(text);
-      const missingSkills = findMissingSkills(text);
-      const suggestions = getSuggestions(atsScore);
-
-      return sendJson(res, 200, {
-        atsScore,
-        missingSkills,
-        suggestions,
-      });
-    } catch (error) {
-      console.error("Resume analysis error:", error);
-      return sendJson(res, 500, { error: error.message || "Failed to analyze resume." });
-    }
-  }
-
-  if (pathname === "/api/guest" && req.method === "POST") {
-    try {
-      const guestId = crypto.randomUUID();
-      const guestUser = {
-        id: `guest-${guestId}`,
-        name: "Guest",
-        email: `guest-${guestId}@local`,
-      };
-      const token = createSessionToken(guestUser);
-      return sendJson(
-        res, 200,
-        { authenticated: true, user: { id: guestUser.id, name: guestUser.name, email: guestUser.email } },
-        { "Set-Cookie": sessionCookie(token, req) },
-      );
-    } catch (err) {
-      console.error("[guest] Unexpected error:", err);
-      return sendJson(res, 500, { error: "Guest login failed. Please try again." });
-    }
-  }
-
-  if (pathname === "/api/session" && req.method === "GET") {
-    const session = getSession(req);
-
-    if (session) {
-      const users = await readUsers();
-
-      const user = users.find((u) => u.id === session.sub);
-
-      if (user?.isDeactivated) {
-        return sendJson(res, 200, {
-          authenticated: false,
-          user: null,
-        });
-      }
-    }
-    return sendJson(res, 200, {
-      authenticated: Boolean(session),
-      user: session,
-    });
-  }
-
-  if (pathname === "/api/signup" && req.method === "POST") {
-    // ── Rate limit check ─────────────────────────────────────────────────────
-    const clientId = getClientIdentifier(req);
-
-    if (isSignupRateLimited(clientId)) {
-      await normalizeAuthDelay();
-      return sendJson(res, 429, {
-        error: "Too many signup attempts. Please try again later.",
-      });
-    }
-
-    // Record the attempt before processing so every inbound request counts,
-    // including those that fail validation or find a duplicate email.
-    recordSignupAttempt(clientId);
-    // ─────────────────────────────────────────────────────────────────────────
-
-    const payload = await readJsonBody(req);
-    const validationError = validateSignup(payload);
-    if (validationError) return sendJson(res, 400, { error: validationError });
-
-    const email = String(payload.email).trim().toLowerCase();
-    const existing = useFirestore
-      ? await getUserByEmail(email)
-      : (await readUsers()).find((user) => user.email === email);
-    if (existing) {
-      // Normalize response time so a duplicate is indistinguishable from a
-      // real signup by timing — a real signup always runs PBKDF2 before
-      // responding, so we must delay here to match that latency profile.
-      await normalizeAuthDelay();
-      console.warn("[signup] duplicate email attempt", {
-        email,
-        ip: clientId,
-        at: new Date().toISOString(),
-      });
-      // Return a generic 200 that is indistinguishable from a real signup
-      // success so callers cannot enumerate registered email addresses.
-      // No session cookie is issued — the submitter has not authenticated.
-      return sendJson(res, 200, { ok: true });
-    }
-
-    const user = {
-      id: crypto.randomUUID(),
-      name: String(payload.name).trim(),
-      email,
-      password: hashPassword(String(payload.password)),
-      createdAt: new Date().toISOString(),
-      isDeactivated: false,
-      deactivatedAt: null,
-    };
-    await createUser(user);
-
-    const token = createSessionToken(user);
-    return sendJson(
-      res,
-      201,
-      { user: { id: user.id, name: user.name, email: user.email } },
-      { "Set-Cookie": sessionCookie(token, req) },
-    );
-  }
-
-  if (pathname === "/api/login" && req.method === "POST") {
-    // ── Rate-limit check (failed attempts only) ───────────────────────────────
-    const clientId = getClientIdentifier(req);
-
-    if (isLoginRateLimited(clientId)) {
-      console.warn("[login] rate limited", {
-        ip: clientId,
-        at: new Date().toISOString(),
-      });
-      await normalizeAuthDelay();
-      return sendJson(
-        res,
-        429,
-        {
-          error:
-            "Too many failed login attempts. " +
-            "Please wait 15 minutes before trying again.",
-          retryAfterSeconds: Math.ceil(LOGIN_WINDOW_MS / 1000),
-        },
-        // Inform standards-compliant clients how long to back off.
-        { "Retry-After": String(Math.ceil(LOGIN_WINDOW_MS / 1000)) },
-      );
-    }
-    // ─────────────────────────────────────────────────────────────────────────
-
-    const payload = await readJsonBody(req);
-    const email = String(payload.email || "")
-      .trim()
-      .toLowerCase();
-    const password = String(payload.password || "");
-    const user = useFirestore
-      ? await getUserByEmail(email)
-      : (await readUsers()).find((candidate) => candidate.email === email);
-
-    if (!user || !passwordMatches(password, user.password)) {
-      // Record the failure ONLY when credentials are wrong, not for every request.
-      recordLoginFailure(clientId);
-      await normalizeAuthDelay();
-      return sendJson(res, 401, { error: "Invalid email or password." });
-    }
-    if (user.isDeactivated) {
-      user.isDeactivated = false;
-      user.deactivatedAt = null;
-    }
-    if (!useFirestore) {
-      const users = await readUsers();
-
-      const index = users.findIndex((u) => u.id === user.id);
-
-      if (index !== -1) {
-        users[index] = user;
-        await writeUsers(users);
-      }
-    }
-
-    // Successful login — clear any accumulated failure count so a legitimate
-    // user who mistyped their password earlier is not locked out.
-    clearLoginFailures(clientId);
-
-    const token = createSessionToken(user);
-    return sendJson(
-      res,
-      200,
-      { user: { id: user.id, name: user.name, email: user.email } },
-      { "Set-Cookie": sessionCookie(token, req) },
-    );
-  }
-
-  if (pathname === "/api/deactivate-account" && req.method === "POST") {
-    const session = getSession(req);
-
-    if (!session) {
-      return sendJson(res, 401, {
-        error: "Login required.",
-      });
-    }
-
-    const users = await readUsers();
-
-    const user = users.find((u) => u.id === session.sub);
-
-    if (!user) {
-      return sendJson(res, 404, {
-        error: "User not found.",
-      });
-    }
-
-    user.isDeactivated = true;
-    user.deactivatedAt = new Date().toISOString();
-
-    await writeUsers(users);
-
-    return sendJson(
-      res,
-      200,
-      {
-        success: true,
-      },
-      {
-        "Set-Cookie": clearSessionCookie(),
-      },
-    );
-  }
-
-  if (pathname === "/api/logout" && req.method === "POST") {
-    return sendJson(
-      res,
-      200,
-      { ok: true },
-      { "Set-Cookie": clearSessionCookie() },
-    );
-  }
-
-  if (pathname === "/api/feedback" && req.method === "POST") {
-    const session = getSession(req);
-    let payload;
-    try {
-      payload = await readJsonBody(req);
-    } catch (err) {
-      return sendJson(res, 400, { error: "Invalid JSON body." });
-    }
-
-    const { feedbackType, subject, message } = payload;
-    if (!feedbackType || !subject || !message) {
-      return sendJson(res, 400, {
-        error: "Feedback type, subject, and message are required.",
-      });
-    }
-
-    const allowedTypes = [
-      "Suggestion",
-      "Bug Report",
-      "Feature Request",
-      "General Feedback",
-    ];
-    if (!allowedTypes.includes(feedbackType)) {
-      return sendJson(res, 400, { error: "Invalid feedback type." });
-    }
-
-    if (subject.trim().length < 3) {
-      return sendJson(res, 400, {
-        error: "Subject must be at least 3 characters long.",
-      });
-    }
-
-    if (message.trim().length < 10) {
-      return sendJson(res, 400, {
-        error: "Message must be at least 10 characters long.",
-      });
-    }
-
-    const feedbackData = {
-      userId: session ? session.sub : null,
-      userName: session ? session.name : null,
-      userEmail: session ? session.email : null,
-      feedbackType,
-      subject: subject.trim(),
-      message: message.trim(),
-      status: "new",
-      createdAt: new Date().toISOString(),
-    };
-
-    try {
-      if (useFirestore) {
-        const docRef = await db.collection("feedback").add(feedbackData);
-        feedbackData.id = docRef.id;
-      } else {
-        const feedbackFile = path.join(DATA_DIR, "feedback.json");
-        await fs.mkdir(DATA_DIR, { recursive: true });
-        let feedbackList = [];
-        try {
-          const raw = await fs.readFile(feedbackFile, "utf8");
-          feedbackList = JSON.parse(raw || "[]");
-        } catch (err) {
-          if (err.code !== "ENOENT") throw err;
-        }
-        feedbackData.id = crypto.randomUUID();
-        feedbackList.push(feedbackData);
-        await fs.writeFile(
-          feedbackFile,
-          JSON.stringify(feedbackList, null, 2) + "\n",
-        );
-      }
-
-      return sendJson(res, 201, { success: true, feedback: feedbackData });
-    } catch (err) {
-      console.error("Error saving feedback:", err);
-      return sendJson(res, 500, { error: "Failed to save feedback." });
-    }
-  }
-
-  if (pathname === "/api/interview-experiences" && req.method === "POST") {
-    const session = getSession(req);
-    let payload;
-    try {
-      payload = await readJsonBody(req);
-    } catch {
-      return sendJson(res, 400, { error: "Invalid JSON body." });
-    }
-
-    const {
-      company,
-      role,
-      difficulty,
-      rating,
-      title,
-      content,
-      topics,
-      rounds,
-      offerStatus,
-    } = payload;
-    if (!company || !role || !difficulty || !rating || !title || !content) {
-      return sendJson(res, 400, {
-        error:
-          "Company, role, difficulty, rating, title, and content are required.",
-      });
-    }
-
-    const experienceData = {
-      id: crypto.randomUUID(),
-      userId: session ? session.sub : null,
-      userName: session ? session.name : null,
-      company: company.trim(),
-      role: role.trim(),
-      difficulty,
-      rating,
-      title: title.trim(),
-      content: content.trim(),
-      topics: Array.isArray(topics) ? topics : [],
-      rounds: rounds || null,
-      offerStatus: offerStatus || null,
-      upvotes: 0,
-      createdAt: new Date().toISOString(),
-    };
-
-    try {
-      if (useFirestore) {
-        const docRef = await db
-          .collection("interviewExperiences")
-          .add(experienceData);
-        experienceData.id = docRef.id;
-      } else {
-        const filePath = path.join(DATA_DIR, "interview-experiences.json");
-        await fs.mkdir(DATA_DIR, { recursive: true });
-        let list = [];
-        try {
-          const raw = await fs.readFile(filePath, "utf8");
-          list = JSON.parse(raw || "[]");
-        } catch (err) {
-          if (err.code !== "ENOENT") throw err;
-        }
-        list.push(experienceData);
-        await fs.writeFile(filePath, JSON.stringify(list, null, 2) + "\n");
-      }
-      return sendJson(res, 201, { success: true, experience: experienceData });
-    } catch (err) {
-      console.error("Error saving interview experience:", err);
-      return sendJson(res, 500, {
-        error: "Failed to save interview experience.",
-      });
-    }
-  }
-
-  if (pathname === "/api/memory/log" && req.method === "POST") {
-    const session = getSession(req);
-    if (!session) return sendJson(res, 401, { error: "Login required." });
-
-    let payload;
-    try {
-      payload = await readJsonBody(req);
-    } catch {
-      return sendJson(res, 400, { error: "Invalid JSON body." });
-    }
-
-    const { topic, quality } = payload;
-    if (!topic || typeof topic !== "string" || topic.trim().length < 1) {
-      return sendJson(res, 400, { error: "Topic is required." });
-    }
-    if (
-      quality === undefined ||
-      isNaN(Number(quality)) ||
-      Number(quality) < 0 ||
-      Number(quality) > 5
-    ) {
-      return sendJson(res, 400, {
-        error: "Quality must be a number between 0 and 5.",
-      });
-    }
-
-    const trimmedTopic = topic.trim();
-    const updatedCard = await updateMemoryStore((store) => {
-      const userCards = store[session.sub] || {};
-      const existing = userCards[trimmedTopic] || { topic: trimmedTopic };
-      const updated = applySM2(existing, quality);
-      userCards[trimmedTopic] = updated;
-      store[session.sub] = userCards;
-      return updated;
-    });
-
-    return sendJson(res, 200, { success: true, card: updatedCard });
-  }
-
-  if (pathname === "/api/memory/due" && req.method === "GET") {
-    const session = getSession(req);
-    if (!session) return sendJson(res, 401, { error: "Login required." });
-
-    const store = await readMemoryStore();
-    const userCards = store[session.sub] || {};
-    const now = new Date();
-    const due = Object.values(userCards).filter(
-      (card) => new Date(card.nextReviewDate) <= now,
-    );
-
-    return sendJson(res, 200, { success: true, due });
-  }
-
-  if (pathname === "/api/memory/all" && req.method === "GET") {
-    const session = getSession(req);
-    if (!session) return sendJson(res, 401, { error: "Login required." });
-
-    const store = await readMemoryStore();
-    const userCards = store[session.sub] || {};
-
-    return sendJson(res, 200, {
-      success: true,
-      cards: Object.values(userCards),
-    });
-  }
-
-  return sendJson(res, 404, { error: "Not found." });
-}
 
 function resolveStaticPath(pathname) {
   const routes = {
@@ -1108,9 +698,12 @@ const server = http.createServer(async (req, res) => {
         error: requestValidation.message,
       });
     }
-
     if (pathname.startsWith("/api/")) {
-      return await handleApi(req, res, pathname);
+      const routeResult = setupApiRoutes(req, res, pathname);
+      if (routeResult !== null) {
+        return routeResult;
+      }
+      return sendJson(res, 404, { error: "Not found." });
     }
 
     if (pathname === "/logout") {
@@ -1143,36 +736,36 @@ if (process.env.VERCEL !== "1") {
       useFirestore = !!db;
       const port = Number(process.env.PORT || 3000);
       const host = process.env.HOST || "127.0.0.1";
-       
+
       // ===== CODING PERSONALITY =====
-     app.get('/api/user/personality', (req, res) => {
-     try {
-     const userId = req.user?.id || req.query.userId;
-    
-      if (!userId) {
-       return res.status(401).json({ error: 'User not authenticated' });
-      }
-    
-     // Get user data - replace with actual DB fetch
-     const userData = {
-      problems: [], 
-      submissions: [], 
-      topics: [], 
-      streak: 0 
-    };
-    
-     const analyzer = new CodingPersonalityAnalyzer(userData);
-     const personality = analyzer.analyze();
-    
-      res.json({
-       success: true,
-       data: personality
+      app.get("/api/user/personality", (req, res) => {
+        try {
+          const userId = req.user?.id || req.query.userId;
+
+          if (!userId) {
+            return res.status(401).json({ error: "User not authenticated" });
+          }
+
+          // Get user data - replace with actual DB fetch
+          const userData = {
+            problems: [],
+            submissions: [],
+            topics: [],
+            streak: 0,
+          };
+
+          const analyzer = new CodingPersonalityAnalyzer(userData);
+          const personality = analyzer.analyze();
+
+          res.json({
+            success: true,
+            data: personality,
+          });
+        } catch (error) {
+          console.error("Personality analysis error:", error);
+          res.status(500).json({ error: "Failed to analyze personality" });
+        }
       });
-    } catch (error) {
-     console.error('Personality analysis error:', error);
-     res.status(500).json({ error: 'Failed to analyze personality' });
-   }
-  });
 
       server.listen(port, host, () => {
         const url = `http://${host}:${port}`;
