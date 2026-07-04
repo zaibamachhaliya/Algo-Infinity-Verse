@@ -517,10 +517,23 @@ function updateEditorDisplayMode() {
   const editor = document.getElementById('codeEditor');
   const highlight = document.getElementById('syntaxHighlight');
   if (!editor) return;
+
+  // If syntax highlighter isn't loaded/available, keep textarea readable.
+  const hasSyntaxHighlighter = typeof updateSyntaxHighlight === 'function' && highlight;
+
+  if (!hasSyntaxHighlighter) {
+    editor.style.setProperty('color', 'var(--text-primary)', 'important');
+    editor.style.setProperty('-webkit-text-fill-color', 'var(--text-primary)', 'important');
+    if (highlight) highlight.hidden = true;
+    return;
+  }
+
+  // Default rendering: hide textarea text and rely on syntax-highlight layer.
   editor.style.setProperty('color', 'transparent', 'important');
   editor.style.setProperty('-webkit-text-fill-color', 'transparent', 'important');
   if (highlight) highlight.hidden = false;
 }
+
 
 function insertSnippet(type) {
   const editor = document.getElementById("codeEditor");

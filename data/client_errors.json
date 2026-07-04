@@ -346,5 +346,77 @@
     "timestamp": 1783146288095,
     "stack": "TypeError: Cannot read properties of undefined (reading 'some')\n    at isRoadmapStepCompleted (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:17:24)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:109:25\n    at Array.forEach (<anonymous>)\n    at renderBasicRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:107:17)\n    at initRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:63:3)\n    at initializeApp (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/init.js:55:3)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/init.js:79:3",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+  },
+  {
+    "message": "Uncaught TypeError: Cannot read properties of undefined (reading 'some')",
+    "source": "https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js",
+    "lineno": 17,
+    "colno": 24,
+    "pageName": "index",
+    "feature": "general",
+    "lastActionTimestamp": 1783147139651,
+    "timestamp": 1783147139804,
+    "stack": "TypeError: Cannot read properties of undefined (reading 'some')\n    at isRoadmapStepCompleted (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:17:24)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:109:25\n    at Array.forEach (<anonymous>)\n    at renderBasicRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:107:17)\n    at initRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:63:3)\n    at initializeApp (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/init.js:55:3)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/init.js:79:3",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+  },
+  {
+    "message": "Uncaught TypeError: Cannot read properties of undefined (reading 'some')",
+    "source": "https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js",
+    "lineno": 17,
+    "colno": 24,
+    "pageName": "index",
+    "feature": "general",
+    "lastActionTimestamp": 1783147378835,
+    "timestamp": 1783147379127,
+    "stack": "TypeError: Cannot read properties of undefined (reading 'some')\n    at isRoadmapStepCompleted (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:17:24)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:109:25\n    at Array.forEach (<anonymous>)\n    at renderBasicRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:107:17)\n    at initRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:63:3)\n    at initializeApp (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/init.js:55:3)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/init.js:79:3",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+  },
+  {
+    "message": "Uncaught TypeError: Cannot read properties of undefined (reading 'some')",
+    "source": "https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js",
+    "lineno": 17,
+    "colno": 24,
+    "pageName": "index",
+    "feature": "general",
+    "lastActionTimestamp": 1783147392653,
+    "timestamp": 1783147392782,
+    "stack": "TypeError: Cannot read properties of undefined (reading 'some')\n    at isRoadmapStepCompleted (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:17:24)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:109:25\n    at Array.forEach (<anonymous>)\n    at renderBasicRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:107:17)\n    at initRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:63:3)\n    at initializeApp (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/init.js:55:3)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/init.js:79:3",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+  },
+  {
+    "message": "Uncaught TypeError: Cannot read properties of undefined (reading 'some')",
+    "source": "https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js",
+    "lineno": 17,
+    "colno": 24,
+    "pageName": "index",
+    "feature": "general",
+    "lastActionTimestamp": 1783147444856,
+    "timestamp": 1783147445250,
+    "stack": "TypeError: Cannot read properties of undefined (reading 'some')\n    at isRoadmapStepCompleted (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:17:24)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:109:25\n    at Array.forEach (<anonymous>)\n    at renderBasicRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:107:17)\n    at initRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:63:3)\n    at HTMLDocument.initializeApp (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/init.js:55:3)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/:450:16",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+  },
+  {
+    "message": "Uncaught TypeError: Cannot read properties of undefined (reading 'some')",
+    "source": "https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js",
+    "lineno": 17,
+    "colno": 24,
+    "pageName": "index",
+    "feature": "general",
+    "lastActionTimestamp": 1783147450875,
+    "timestamp": 1783147451020,
+    "stack": "TypeError: Cannot read properties of undefined (reading 'some')\n    at isRoadmapStepCompleted (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:17:24)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:109:25\n    at Array.forEach (<anonymous>)\n    at renderBasicRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:107:17)\n    at initRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:63:3)\n    at initializeApp (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/init.js:55:3)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/init.js:79:3",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+  },
+  {
+    "message": "Uncaught TypeError: Cannot read properties of undefined (reading 'some')",
+    "source": "https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js",
+    "lineno": 17,
+    "colno": 24,
+    "pageName": "index",
+    "feature": "general",
+    "lastActionTimestamp": 1783147468880,
+    "timestamp": 1783147468995,
+    "stack": "TypeError: Cannot read properties of undefined (reading 'some')\n    at isRoadmapStepCompleted (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:17:24)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:109:25\n    at Array.forEach (<anonymous>)\n    at renderBasicRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:107:17)\n    at initRoadmap (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/roadmap.js:63:3)\n    at initializeApp (https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/init.js:55:3)\n    at https://silver-space-fiesta-jjjj5999p57v3q47v-3000.app.github.dev/modules/init.js:79:3",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
   }
 ]
