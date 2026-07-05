@@ -4824,6 +4824,373 @@ window.addEventListener('load', () => {
 });
 
 // ============================================
+// ACTIVITY FEED
+// ============================================
+
+const ACTIVITY_STORAGE_KEY = 'userActivities';
+const MAX_ACTIVITIES = 50;
+
+/**
+ * Get all activities from localStorage
+ * @returns {Array} List of activities
+ */
+function getActivities() {
+    try {
+        const data = localStorage.getItem(ACTIVITY_STORAGE_KEY);
+        return data ? JSON.parse(data) : [];
+    } catch (e) {
+        console.warn('Could not load activities:', e);
+        return [];
+    }
+}
+
+/**
+ * Get recent activities
+ * @param {number} limit - Number of activities to return
+ * @returns {Array} Recent activities
+ */
+function getRecentActivities(limit = 10) {
+    const activities = getActivities();
+    return activities.slice(0, limit);
+}
+
+/**
+ * Add a new activity
+ * @param {string} type - Activity type (solved, quiz, badge, streak, level, xp, practice)
+ * @param {Object} data - Activity data
+ * @param {string} data.message - Main message
+ * @param {string} data.detail - Additional detail (optional)
+ */
+function addActivity(type, data) {
+    const activities = getActivities();
+    
+    const activity = {
+        id: Date.now(),
+        type: type,
+        message: data.message || '',
+        detail: data.detail || '',
+        timestamp: new Date().toISOString(),
+        data: data
+    };
+    
+    activities.unshift(activity);
+    
+    // Keep only last MAX_ACTIVITIES
+    if (activities.length > MAX_ACTIVITIES) {
+        activities.length = MAX_ACTIVITIES;
+    }
+    
+    localStorage.setItem(ACTIVITY_STORAGE_KEY, JSON.stringify(activities));
+    
+    // Re-render activity feed
+    renderActivityFeed();
+}
+
+/**
+ * Clear all activities
+ */
+function clearActivities() {
+    if (confirm('Are you sure you want to clear all activity history?')) {
+        localStorage.removeItem(ACTIVITY_STORAGE_KEY);
+        renderActivityFeed();
+        showNotification('Activity history cleared', 'info');
+    }
+}
+
+/**
+ * Get icon for activity type
+ * @param {string} type - Activity type
+ * @returns {string} Icon HTML
+ */
+function getActivityIcon(type) {
+    const icons = {
+        solved: '✅',
+        quiz: '📝',
+        badge: '🏆',
+        streak: '🔥',
+        level: '⬆️',
+        xp: '⭐',
+        practice: '💻'
+    };
+    return icons[type] || '📌';
+}
+
+/**
+ * Get CSS class for activity type
+ * @param {string} type - Activity type
+ * @returns {string} CSS class
+ */
+function getActivityClass(type) {
+    const classes = {
+        solved: 'solved',
+        quiz: 'quiz',
+        badge: 'badge',
+        streak: 'streak',
+        level: 'level',
+        xp: 'xp',
+        practice: 'practice'
+    };
+    return classes[type] || 'practice';
+}
+
+/**
+ * Format time for display
+ * @param {string} timestamp - ISO timestamp
+ * @returns {string} Formatted time
+ */
+function formatActivityTime(timestamp) {
+    const now = new Date();
+    const date = new Date(timestamp);
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays < 7) return `${diffDays}d ago`;
+    
+    return date.toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric'
+    });
+}
+
+/**
+ * Render activity feed
+ */
+function renderActivityFeed() {
+    const container = document.getElementById('activityFeed');
+    if (!container) return;
+    
+    const activities = getRecentActivities(10);
+    const countEl = document.getElementById('activityCount');
+    
+    if (countEl) {
+        const total = getActivities().length;
+        countEl.textContent = `${total} activity${total !== 1 ? 'ies' : ''}`;
+    }
+    
+    if (activities.length === 0) {
+        container.innerHTML = `
+            <div class="activity-empty">
+                <i class="fas fa-inbox"></i>
+                <p>No recent activity yet. Start solving problems!</p>
+            </div>
+        `;
+        return;
+    }
+    
+    container.innerHTML = activities.map((activity, index) => {
+        const icon = getActivityIcon(activity.type);
+        const typeClass = getActivityClass(activity.type);
+        const time = formatActivityTime(activity.timestamp);
+        const isNew = index === 0;
+        
+        return `
+            <div class="activity-item ${isNew ? 'new' : ''}">
+                <div class="activity-icon ${typeClass}">${icon}</div>
+                <div class="activity-content">
+                    <p class="activity-message">${activity.message}</p>
+                    ${activity.detail ? `<p class="activity-detail">${activity.detail}</p>` : ''}
+                </div>
+                <span class="activity-time">${time}</span>
+            </div>
+        `;
+    }).join('');
+}
+
+/**
+ * Track problem solved activity
+ * @param {string} problemName - Name of the problem
+ * @param {string} difficulty - Difficulty level
+ */
+function trackProblemSolved(problemName, difficulty = '') {
+    addActivity('solved', {
+        message: `Solved <strong>${problemName}</strong>`,
+        detail: difficulty ? `Difficulty: ${difficulty}` : '',
+        problem: problemName,
+        difficulty: difficulty
+    });
+}
+
+/**
+ * Track quiz completed activity
+ * @param {string} topic - Topic name
+ * @param {number} score - Score percentage
+ */
+function trackQuizCompleted(topic, score) {
+    addActivity('quiz', {
+        message: `Completed <strong>${topic}</strong> quiz`,
+        detail: `Score: ${score}%`,
+        topic: topic,
+        score: score
+    });
+}
+
+/**
+ * Track badge earned activity
+ * @param {string} badgeName - Name of the badge
+ */
+function trackBadgeEarned(badgeName) {
+    addActivity('badge', {
+        message: `Earned <strong>${badgeName}</strong> badge 🏆`,
+        detail: '',
+        badge: badgeName
+    });
+}
+
+/**
+ * Track streak milestone activity
+ * @param {number} streak - Current streak count
+ */
+function trackStreakMilestone(streak) {
+    addActivity('streak', {
+        message: `Achieved <strong>${streak}-day</strong> streak 🔥`,
+        detail: 'Keep going!',
+        streak: streak
+    });
+}
+
+/**
+ * Track level up activity
+ * @param {number} level - New level
+ * @param {string} levelName - Level name
+ */
+function trackLevelUp(level, levelName) {
+    addActivity('level', {
+        message: `Reached <strong>Level ${level}</strong> - ${levelName} ⬆️`,
+        detail: 'Keep climbing!',
+        level: level
+    });
+}
+
+/**
+ * Track XP earned activity
+ * @param {number} xp - XP earned
+ * @param {string} source - Source of XP
+ */
+function trackXPEarned(xp, source = '') {
+    addActivity('xp', {
+        message: `Earned <strong>+${xp} XP</strong>`,
+        detail: source ? `From: ${source}` : '',
+        xp: xp,
+        source: source
+    });
+}
+
+/**
+ * Track practice activity
+ * @param {string} action - Action performed
+ */
+function trackPractice(action) {
+    addActivity('practice', {
+        message: `Practiced: <strong>${action}</strong>`,
+        detail: '',
+        action: action
+    });
+}
+
+// --- Initialize Activity Feed ---
+
+/**
+ * Initialize activity feed
+ */
+function initActivityFeed() {
+    renderActivityFeed();
+    
+    // Clear activity button
+    const clearBtn = document.getElementById('clearActivityBtn');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', clearActivities);
+    }
+    
+    // View all button
+    const viewAllBtn = document.getElementById('viewAllActivityBtn');
+    if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', () => {
+            // Scroll to activity section or open modal
+            const activityCard = document.querySelector('.activity-feed-card');
+            if (activityCard) {
+                activityCard.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+}
+
+// --- Override existing tracking functions ---
+
+// If you have existing functions, override them
+const originalAddXP = window.addXP || function() {};
+window.addXP = function(amount, source = '', meta = {}) {
+    originalAddXP(amount, source, meta);
+    trackXPEarned(amount, source);
+};
+
+// Track when problem is solved
+const originalProblemSolved = window.handleProblemSolved || function() {};
+window.handleProblemSolved = function(problemName, difficulty) {
+    originalProblemSolved(problemName, difficulty);
+    trackProblemSolved(problemName, difficulty);
+};
+
+// --- Initialize on page load ---
+
+document.addEventListener('DOMContentLoaded', function() {
+    initActivityFeed();
+});
+
+// Export functions
+export {
+    getActivities,
+    getRecentActivities,
+    addActivity,
+    clearActivities,
+    renderActivityFeed,
+    trackProblemSolved,
+    trackQuizCompleted,
+    trackBadgeEarned,
+    trackStreakMilestone,
+    trackLevelUp,
+    trackXPEarned,
+    trackPractice,
+    initActivityFeed
+};
+
+// In your quiz completion function
+function completeQuiz(topic, score) {
+    // ... existing code ...
+    trackQuizCompleted(topic, score);
+    // ... existing code ...
+}
+
+// In your badge earning function
+function earnBadge(badgeName) {
+    // ... existing code ...
+    trackBadgeEarned(badgeName);
+    // ... existing code ...
+}
+
+// In your level up function
+function checkLevelUp() {
+    // ... existing code ...
+    if (newLevel > userProgress.level) {
+        trackLevelUp(newLevel, levelNames[newLevel - 1]);
+    }
+    // ... existing code ...
+}
+
+// In your streak update function
+function updateStreak() {
+    // ... existing code ...
+    if (userProgress.streak > 0 && userProgress.streak % 7 === 0) {
+        trackStreakMilestone(userProgress.streak);
+    }
+    // ... existing code ...
+
+
+// ============================================
 // PROBLEM FILTERING WITH CORRECT COUNT
 // ============================================
 
@@ -5038,4 +5405,8 @@ function updateProblemCount(filteredProblems) {
     if (countElement) {
         countElement.textContent = `${total} problem${total !== 1 ? 's' : ''}`;
     }
+
+
+}
+
 }
