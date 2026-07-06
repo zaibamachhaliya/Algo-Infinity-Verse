@@ -225,7 +225,7 @@ function openCodingProblem(problemId) {
 function submitRoadmapQuiz(stepIndex, type = 'basic') {
   const roadmapSteps = window.roadmapSteps || [];
   const advancedRoadmapSteps = window.advancedRoadmapSteps || [];
-  const userProgress = window.userProgress || [];
+  const userProgress = window.userProgress || {};
   const steps = type === 'basic' ? roadmapSteps : advancedRoadmapSteps;
   const step = steps[stepIndex];
   const container = document.getElementById("roadmapStepQuizContent");
