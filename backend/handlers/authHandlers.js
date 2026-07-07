@@ -64,8 +64,9 @@ export async function handleSignup(req, res) {
 
   if (existing) {
     await normalizeAuthDelay();
-    void 0;
-    return sendJson(res, 200, { ok: true });
+    return sendJson(res, 200, { 
+      message: "If this email is registered, you will receive a verification email."
+    });
   }
 
   const user = {
