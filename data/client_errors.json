@@ -490,5 +490,53 @@
     "stack": "SyntaxError: Failed to execute 'querySelectorAll' on 'Document': '`#ag2GridA` .ag2-algo-card' is not a valid selector.\n    at ag2UpdateGridHighlights (http://127.0.0.1:3000/pages/visualizers/algorithm-genome/algorithm-genome.js:136:12)\n    at ag2SelectA (http://127.0.0.1:3000/pages/visualizers/algorithm-genome/algorithm-genome.js:121:3)\n    at ag2Init (http://127.0.0.1:3000/pages/visualizers/algorithm-genome/algorithm-genome.js:580:3)\n    at HTMLDocument.<anonymous> (http://127.0.0.1:3000/pages/visualizers/algorithm-genome/algorithm-genome.js:6:3)",
     "url": "http://127.0.0.1:3000/pages/visualizers/algorithm-genome/algorithm-genome.html",
     "timestamp": "2026-07-07T09:57:55.850Z"
+  },
+  {
+    "message": "Uncaught SyntaxError: Unexpected token 'export'",
+    "source": "http://localhost:3000/utils/spacedRepetition.js",
+    "lineno": 9,
+    "colno": 1,
+    "pageName": "index",
+    "feature": "general",
+    "lastActionTimestamp": 1783431695876,
+    "timestamp": 1783431696329,
+    "stack": "SyntaxError: Unexpected token 'export'",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"
+  },
+  {
+    "message": "Uncaught SyntaxError: Unexpected token 'export'",
+    "source": "http://localhost:3000/utils/spacedRepetition.js",
+    "lineno": 9,
+    "colno": 1,
+    "pageName": "index",
+    "feature": "general",
+    "lastActionTimestamp": 1783431702326,
+    "timestamp": 1783431703028,
+    "stack": "SyntaxError: Unexpected token 'export'",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"
+  },
+  {
+    "message": "Uncaught SyntaxError: Unexpected token 'export'",
+    "source": "http://localhost:3000/utils/spacedRepetition.js",
+    "lineno": 9,
+    "colno": 1,
+    "pageName": "index",
+    "feature": "general",
+    "lastActionTimestamp": 1783431757847,
+    "timestamp": 1783431758012,
+    "stack": "SyntaxError: Unexpected token 'export'",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"
+  },
+  {
+    "message": "Uncaught SyntaxError: Unexpected token 'export'",
+    "source": "http://localhost:3000/utils/spacedRepetition.js",
+    "lineno": 9,
+    "colno": 1,
+    "pageName": "index",
+    "feature": "general",
+    "lastActionTimestamp": 1783431769633,
+    "timestamp": 1783431769690,
+    "stack": "SyntaxError: Unexpected token 'export'",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"
   }
 ]
