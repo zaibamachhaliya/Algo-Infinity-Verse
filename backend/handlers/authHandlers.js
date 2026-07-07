@@ -5,7 +5,7 @@ import {
   readUsers, writeUsers, getUserByEmail, createUser,
   hashPassword, passwordMatches, normalizeAuthDelay
 } from "../utils/helpers.js";
-import { getClientIdentifier } from "../services/auth.service.js";
+import { getClientIdentifier, isLoginRateLimited, LOGIN_WINDOW_MS } from "../services/auth.service.js";
 import { applyRateLimit, signupLimiter, loginLimiter } from "../utils/rateLimiter.js";
 import { initializeFirebase, COLLECTIONS } from "../../firebase.js";
 
