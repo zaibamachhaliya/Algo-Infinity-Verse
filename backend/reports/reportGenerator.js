@@ -1,194 +1,16 @@
 import puppeteer from 'puppeteer';
 
-// ============================================
-// CONFIGURABLE SETTINGS
-// ============================================
+let browserPromise = null;
 
-const BROWSER_CONFIG = {
-  IDLE_TIMEOUT: parseInt(process.env.BROWSER_IDLE_TIMEOUT) || 30000,
-  MAX_PAGES: parseInt(process.env.BROWSER_MAX_PAGES) || 10,
-  PAGE_TIMEOUT: parseInt(process.env.BROWSER_PAGE_TIMEOUT) || 60000,
-};
-
-// ============================================
-// BROWSER MANAGER CLASS
-// ============================================
-
-class BrowserManager {
-  constructor() {
-    this.browserInstance = null;
-    this.isClosing = false;
-    this.activePages = 0;
-    this.timeoutId = null;
-    this.idleTimeout = BROWSER_CONFIG.IDLE_TIMEOUT;
-    this.maxPages = BROWSER_CONFIG.MAX_PAGES;
-    this.pageTimeout = BROWSER_CONFIG.PAGE_TIMEOUT;
+async function getBrowser() {
+  if (!browserPromise) {
+    browserPromise = puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+    });
   }
-
-  async getBrowser() {
-    if (this.isClosing) {
-      throw new Error('Browser is currently closing');
-    }
-
-    if (!this.browserInstance) {
-      console.log('Launching new browser instance...');
-      this.browserInstance = await puppeteer.launch({
-        headless: true,
-        args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-gpu',
-          '--disable-software-rasterizer',
-          '--disable-extensions'
-        ],
-        timeout: 30000
-      });
-
-      this.browserInstance.on('disconnected', () => {
-        console.log('Browser disconnected');
-        this.browserInstance = null;
-        this.activePages = 0;
-      });
-    }
-
-    return this.browserInstance;
-  }
-
-  async createPage() {
-    if (this.activePages >= this.maxPages) {
-      throw new Error(`Max pages (${this.maxPages}) reached`);
-    }
-
-    const browser = await this.getBrowser();
-    const page = await browser.newPage();
-    this.activePages++;
-    this.resetIdleTimer();
-
-    page.setDefaultTimeout(this.pageTimeout);
-    page.setDefaultNavigationTimeout(this.pageTimeout);
-
-    page._createdAt = Date.now();
-
-    return page;
-  }
-
-  async closePage(page) {
-    if (!page || page.isClosed()) return;
-
-    try {
-      await page.close();
-      this.activePages = Math.max(0, this.activePages - 1);
-      console.log(`Page closed (${this.activePages} pages active)`);
-      
-      if (this.activePages === 0) {
-        this.startIdleTimer();
-      }
-    } catch (error) {
-      console.error('Error closing page:', error);
-    }
-  }
-
-  resetIdleTimer() {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-      this.timeoutId = null;
-    }
-  }
-
-  startIdleTimer() {
-    this.resetIdleTimer();
-    this.timeoutId = setTimeout(async () => {
-      if (this.activePages === 0 && this.browserInstance) {
-        console.log('Browser idle, closing...');
-        await this.closeBrowser();
-      }
-    }, this.idleTimeout);
-  }
-
-  async closeBrowser() {
-    if (this.isClosing) return;
-    this.isClosing = true;
-    this.resetIdleTimer();
-
-    try {
-      if (this.browserInstance) {
-        console.log('Closing browser instance...');
-        await this.browserInstance.close();
-        this.browserInstance = null;
-        this.activePages = 0;
-        console.log('Browser closed successfully');
-      }
-    } catch (error) {
-      console.error('Error closing browser:', error);
-    } finally {
-      this.isClosing = false;
-    }
-  }
-
-  async forceClose() {
-    console.log('Force closing browser...');
-    
-    if (this.browserInstance) {
-      try {
-        const pages = await this.browserInstance.pages();
-        for (const page of pages) {
-          if (!page.isClosed()) {
-            await page.close();
-          }
-        }
-      } catch (error) {
-        // Ignore errors during force close
-      }
-    }
-
-    await this.closeBrowser();
-  }
-
-  isBrowserActive() {
-    return this.browserInstance !== null && this.browserInstance.isConnected();
-  }
-
-  getStatus() {
-    return {
-      isConnected: this.isBrowserActive(),
-      activePages: this.activePages,
-      isClosing: this.isClosing,
-      idleTimeout: this.idleTimeout,
-      maxPages: this.maxPages
-    };
-  }
+  return browserPromise;
 }
-
-// ============================================
-// SINGLETON INSTANCE
-// ============================================
-
-const browserManager = new BrowserManager();
-
-// ============================================
-// GRACEFUL SHUTDOWN
-// ============================================
-
-const shutdownHandler = async (signal) => {
-  console.log(`\nReceived ${signal}, closing browser...`);
-  await browserManager.forceClose();
-  process.exit(0);
-};
-
-process.on('SIGINT', shutdownHandler);
-process.on('SIGTERM', shutdownHandler);
-process.on('SIGQUIT', shutdownHandler);
-
-process.on('uncaughtException', async (error) => {
-  console.error('Uncaught exception:', error);
-  await browserManager.forceClose();
-  process.exit(1);
-});
-
-// ============================================
-// REPORT GENERATION FUNCTIONS
-// ============================================
 
 function buildHtmlTemplate(user, data) {
   return `
@@ -235,9 +57,11 @@ export async function handleReportRequest(req, res, pathname, session) {
 
   const type = pathname === '/api/reports/export/pdf' ? 'pdf' : 'image';
   let page = null;
+  let browser = null;
   
   try {
-    page = await browserManager.createPage();
+    browser = await getBrowser();
+    page = await browser.newPage();
     
     const mockData = {};
     const html = buildHtmlTemplate(session, mockData);
@@ -278,15 +102,10 @@ export async function handleReportRequest(req, res, pathname, session) {
     return res.end(JSON.stringify({ error: 'Failed to generate report' }));
     
   } finally {
+    // ✅ FIX: Always close page, even on error
     if (page && !page.isClosed()) {
-      await browserManager.closePage(page);
+      await page.close();
+      console.log('Page closed (including error path)');
     }
   }
 }
-
-// ============================================
-// EXPORTS
-// ============================================
-
-export default browserManager;
-export { BrowserManager, browserManager };
