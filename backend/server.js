@@ -12,7 +12,6 @@ import { setupApiRoutes } from './routes/apiRoutes.js';
 import { CodingPersonalityAnalyzer } from './personalityAnalyzer.js';
 import { applySM2 } from './utils/sm2.js';
 import { getSession, clearSessionCookie } from './utils/sessionToken.js';
-import { commonPasswords } from './config/passwordBlacklist.js';
 import { validateAndNormalizeEmail } from './utils/emailValidation.js';
 import securityConfig from './config/security.js';
 import { commonPasswords, isPasswordBlacklisted } from './config/passwordBlacklist.js';
