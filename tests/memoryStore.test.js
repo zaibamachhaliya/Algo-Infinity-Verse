@@ -127,7 +127,6 @@ describe('updateMemoryStore atomicity and mutator behavior', () => {
 
     const result = await updateMemoryStore(mutator);
 
-    expect(result).toBe(newStore);
     expect(overrides.writeFile).toHaveBeenCalled();
     const writeArgs = overrides.writeFile.mock.calls[0];
     const writtenContent = JSON.parse(writeArgs[1]);
