@@ -14,7 +14,7 @@ const overrides = {
 
 jest.unstable_mockModule('fs/promises', () => {
   const actual = jest.requireActual('fs/promises');
-  
+
   const handler = {
     get(target, prop) {
       if (prop === 'default') return proxy;
@@ -38,7 +38,7 @@ jest.unstable_mockModule('fs/promises', () => {
         };
       }
       return Reflect.getOwnPropertyDescriptor(target, prop);
-    }
+    },
   };
 
   const proxy = new Proxy(actual, handler);
@@ -55,15 +55,17 @@ jest.unstable_mockModule('../backend/jobs/queue.js', () => ({
     add: jest.fn(),
     on: jest.fn(),
   },
-  default: {}
+  redisAvailable: false,
+  redisClient: null,
+  redisReady: Promise.resolve(),
+  default: {},
 }));
 
 jest.unstable_mockModule('../backend/jobs/worker.js', () => ({
-  default: {}
+  default: {},
 }));
 
 // Static imports will receive the mocked modules
-import fs from 'fs/promises';
 const { updateMemoryStore } = await import('../server.js');
 
 describe('updateMemoryStore atomicity and mutator behavior', () => {
@@ -119,7 +121,7 @@ describe('updateMemoryStore atomicity and mutator behavior', () => {
     overrides.readFile.mockResolvedValueOnce(JSON.stringify(originalStore));
 
     const newStore = { user1: { card1: { topic: 'React', interval: 10 } }, user2: {} };
-    const mutator = (store) => {
+    const mutator = () => {
       return newStore; // returns a new store object
     };
 
