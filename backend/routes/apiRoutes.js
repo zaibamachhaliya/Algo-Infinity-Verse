@@ -158,6 +158,7 @@ function wrapHandler(handler, tier = 'default', requiresAuth = true) {
         return sendError(res, 401, 'Unauthorized', 'SESSION_INVALID');
       }
 
+      // Check primary rate limit tier
       if (!checkRateLimit(req, res, tier)) {
         addSecurityLogging(req, 'RATE_LIMIT_EXCEEDED', { tier });
         const config = RATE_LIMITS[tier] || RATE_LIMITS.default;
@@ -169,17 +170,20 @@ function wrapHandler(handler, tier = 'default', requiresAuth = true) {
         );
       }
 
+      // Secondary critical limit check (Only applies if the primary tier isn't already 'critical')
       const isCritical = req.pathname?.includes('/reset') || req.pathname?.includes('/delete');
       if (isCritical) {
-        if (!checkRateLimit(req, res, 'critical')) {
-          addSecurityLogging(req, 'CRITICAL_RATE_LIMIT_EXCEEDED', { path: req.pathname });
-          const config = RATE_LIMITS.critical;
-          return sendError(
-            res,
-            429,
-            `Critical rate limit exceeded. Maximum ${config.maxRequests} requests per minute.`,
-            'CRITICAL_RATE_LIMIT_EXCEEDED'
-          );
+        if (tier !== 'critical') {
+          if (!checkRateLimit(req, res, 'critical')) {
+            addSecurityLogging(req, 'CRITICAL_RATE_LIMIT_EXCEEDED', { path: req.pathname });
+            const config = RATE_LIMITS.critical;
+            return sendError(
+              res,
+              429,
+              `Critical rate limit exceeded. Maximum ${config.maxRequests} requests per minute.`,
+              'CRITICAL_RATE_LIMIT_EXCEEDED'
+            );
+          }
         }
         addSecurityLogging(req, 'CRITICAL_OPERATION', { path: req.pathname, method: req.method });
       }
