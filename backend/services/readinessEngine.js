@@ -410,9 +410,17 @@ async function getBatchReadiness(userIds) {
     throw new Error('Maximum 50 user IDs per batch request');
   }
 
-  const results = await Promise.all(userIds.map((id) => calculateReadiness(id)));
+  const settled = await Promise.allSettled(userIds.map((id) => calculateReadiness(id)));
 
-  return results;
+  return settled.map((result, index) => {
+    if (result.status === 'fulfilled') {
+      return result.value;
+    }
+    return {
+      userId: userIds[index],
+      error: result.reason?.message || 'Failed to calculate readiness',
+    };
+  });
 }
 
 function invalidateCache() {
