@@ -57,7 +57,7 @@ function getCacheStats() {
 
 function validateMetrics(metrics) {
   if (!metrics || typeof metrics !== 'object') {
-    return { valid: false, error: 'Metrics object is required' };
+    return { valid: false, errors: ['Metrics object is required'] };
   }
 
   const validations = [
