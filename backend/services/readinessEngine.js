@@ -378,7 +378,7 @@ async function calculateReadiness(userId, metrics = null) {
       suggestions,
       goals,
       timestamp: new Date().toISOString(),
-      careerTrackRecommendations: getCareerTrack('fullstack'),
+      careerTrackRecommendations: getCareerTrack(user?.careerTrack || metrics?.careerTrack || 'fullstack'),
     };
 
     if (!cache.data) {
