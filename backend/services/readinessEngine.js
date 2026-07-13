@@ -422,13 +422,19 @@ function invalidateCache() {
 }
 
 function getConfig() {
-  return { ...CONFIG };
+  return structuredClone(CONFIG);
 }
 
 function updateConfig(newConfig) {
-  Object.assign(CONFIG, newConfig);
+  for (const [key, value] of Object.entries(newConfig)) {
+    if (value && typeof value === 'object' && !Array.isArray(value) && CONFIG[key]) {
+      Object.assign(CONFIG[key], value);
+    } else {
+      CONFIG[key] = value;
+    }
+  }
   invalidateCache();
-  return { ...CONFIG };
+  return structuredClone(CONFIG);
 }
 
 export {
