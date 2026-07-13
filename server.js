@@ -655,10 +655,6 @@ function isCsrfRequestTrusted(req) {
   return verifyCsrfToken(req) || isSameOriginRequest(req);
 }
 
-let leaderboardCache = null;
-let leaderboardCacheTime = 0;
-const LEADERBOARD_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
-
 async function handleApi(req, res, pathname) {
   // Reject state-changing requests that cannot prove a same-site origin.
   if (!CSRF_SAFE_METHODS.has(req.method) && !isCsrfRequestTrusted(req)) {
@@ -3028,33 +3024,29 @@ async function handleApi(req, res, pathname) {
   if (pathname === '/api/leaderboard' && req.method === 'GET') {
     try {
       let leaders = [];
-      if (leaderboardCache && Date.now() - leaderboardCacheTime < LEADERBOARD_CACHE_TTL) {
-        leaders = leaderboardCache;
+      if (useFirestore) {
+        const usersSnap = await db.collection('users').orderBy('xp', 'desc').limit(50).get();
+        leaders = usersSnap.docs.map((doc) => {
+          const d = doc.data();
+          return {
+            id: doc.id,
+            name: d.name || 'Learner',
+            xp: d.xp || 0,
+            level: d.level || 1,
+            avatar: d.avatar || '🚀',
+          };
+        });
       } else {
-        if (useFirestore) {
-          const usersSnap = await db.collection('users').get();
-          leaders = usersSnap.docs.map((doc) => {
-            const d = doc.data();
-            return {
-              id: doc.id,
-              name: d.name || 'Learner',
-              xp: d.xp || 0,
-              level: d.level || 1,
-              avatar: d.avatar || '🚀',
-            };
-          });
-        } else {
-          const users = await readUsers();
-          leaders = users.map((u) => ({
-            id: u.id || u.email,
-            name: u.name || 'Learner',
-            xp: u.xp || 0,
-            level: u.level || 1,
-            avatar: u.avatar || '🚀',
-          }));
-        }
-        leaderboardCache = leaders;
-        leaderboardCacheTime = Date.now();
+        const users = await readUsers();
+        leaders = users.map((u) => ({
+          id: u.id || u.email,
+          name: u.name || 'Learner',
+          xp: u.xp || 0,
+          level: u.level || 1,
+          avatar: u.avatar || '🚀',
+        }));
+        leaders.sort((a, b) => b.xp - a.xp);
+        leaders = leaders.slice(0, 50);
       }
       const session = getSession(req);
       return sendJson(res, 200, { leaders, currentUserId: session?.sub || null });
