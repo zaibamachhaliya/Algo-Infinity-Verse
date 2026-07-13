@@ -330,21 +330,23 @@ async function calculateReadiness(userId, metrics = null) {
 
     cache.misses++;
 
-    const users = await readUsersFile();
-    const user = users.find((u) => u.id === userId);
-
-    const userMetrics = metrics || {
-      easySolved: user?.easySolved || 0,
-      mediumSolved: user?.mediumSolved || 0,
-      hardSolved: user?.hardSolved || 0,
-      streak: user?.streak || 0,
-      completionRate: user?.completionRate || 0,
-      topicsCovered: user?.topicsCovered || [],
-      lastActivity: user?.lastActivity || new Date().toISOString(),
-      confidence: user?.confidence || 0.5,
-      regularity: user?.regularity || 0.5,
-      totalTopics: user?.totalTopics || 50,
-    };
+    let userMetrics = metrics;
+    if (!userMetrics) {
+      const users = await readUsersFile();
+      const user = users.find((u) => u.id === userId);
+      userMetrics = {
+        easySolved: user?.easySolved || 0,
+        mediumSolved: user?.mediumSolved || 0,
+        hardSolved: user?.hardSolved || 0,
+        streak: user?.streak || 0,
+        completionRate: user?.completionRate || 0,
+        topicsCovered: user?.topicsCovered || [],
+        lastActivity: user?.lastActivity || new Date().toISOString(),
+        confidence: user?.confidence || 0.5,
+        regularity: user?.regularity || 0.5,
+        totalTopics: user?.totalTopics || 50,
+      };
+    }
 
     const validation = validateMetrics(userMetrics);
     if (!validation.valid) {
