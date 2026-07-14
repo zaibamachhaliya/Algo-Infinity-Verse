@@ -29,7 +29,7 @@ import lockfile from 'proper-lockfile';
 import { fileTypeFromBuffer } from 'file-type';
 
 import { handleReportRequest } from './backend/reports/reportGenerator.js';
-import { getUserBenchmark } from './backend/benchmarking/percentileService.js';
+import { getBenchmark as getUserBenchmark } from './backend/benchmarking/percentileService.js';
 import { Server as SocketIOServer } from 'socket.io';
 import {
   ACCESS_TOKEN_MAX_AGE_SECONDS,
