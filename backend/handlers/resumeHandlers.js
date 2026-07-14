@@ -46,11 +46,15 @@ export async function handleAnalyzeResume(req, res) {
 
     return sendJson(res, 200, {
       atsScore,
-      missingSkills,
-      suggestions,
-    });
-  } catch (error) {
     console.error('Resume analysis error:', error);
+
+    if (error.code === 'LIMIT_FILE_SIZE') {
+      return sendJson(res, 413, { error: 'File size exceeds the allowed limit.' });
+    }
+
+    if (error.message === 'Invalid file type uploaded.') {
+      return sendJson(res, 400, { error: error.message });
+    }
 
     if (error.message === 'Resume text extraction timed out.') {
       return sendJson(res, 408, {
