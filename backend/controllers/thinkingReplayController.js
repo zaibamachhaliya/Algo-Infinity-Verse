@@ -13,6 +13,9 @@ async function saveEditorEvent(data) {
 exports.logEditorEvent = async (req, res) => {
   try {
     const { problemId, type } = req.body;
+    if (!problemId || !type) {
+      return res.status(400).json({ error: 'problemId and type are required' });
+    }
     const userId = req.user?.id || 'anonymous';
 
     await saveEditorEvent({ userId, problemId, type });
