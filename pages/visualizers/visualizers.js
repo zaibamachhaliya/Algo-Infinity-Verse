@@ -862,7 +862,14 @@ const visualizers = [
     icon: 'fa-table-cells',
     desc: 'Guaranteed O(1) worst-case lookup via two tables and eviction chains.',
   },
-    {
+  {
+    name: 'LSH Visualizer',
+    path: '/pages/visualizers/lsh-visualizer/lsh-visualizer.html',
+    category: 'Algorithms',
+    icon: 'fa-fingerprint',
+    desc: 'Locality-Sensitive Hashing — MinHash signatures, banding, and approximate nearest-neighbor search without comparing all pairs.',
+  },
+  {
     name: 'Rope Data Structure Visualizer',
     path: '/pages/visualizers/rope-data-structure-visualizer/rope-data-structure-visualizer.html',
     category: 'Data Structures',
